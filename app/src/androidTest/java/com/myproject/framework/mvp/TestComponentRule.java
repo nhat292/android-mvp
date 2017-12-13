@@ -27,7 +27,7 @@ import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
 
 /**
- * Created by amitshekhar on 03/02/17.
+ * Created by Nhat on 12/13/17.
  */
 
 public class TestComponentRule implements TestRule {

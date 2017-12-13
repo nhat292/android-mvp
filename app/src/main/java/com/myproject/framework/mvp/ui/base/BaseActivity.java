@@ -31,10 +31,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.myproject.framework.mvp.MvpApp;
 import com.mindorks.framework.mvp.R;
+import com.myproject.framework.mvp.MvpApp;
 import com.myproject.framework.mvp.di.component.ActivityComponent;
-import com.mindorks.framework.mvp.di.component.DaggerActivityComponent;
+import com.myproject.framework.mvp.di.component.DaggerActivityComponent;
 import com.myproject.framework.mvp.di.module.ActivityModule;
 import com.myproject.framework.mvp.ui.login.LoginActivity;
 import com.myproject.framework.mvp.utils.CommonUtils;

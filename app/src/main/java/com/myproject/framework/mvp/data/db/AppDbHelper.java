@@ -15,8 +15,8 @@
 
 package com.myproject.framework.mvp.data.db;
 
-import com.mindorks.framework.mvp.data.db.model.DaoMaster;
-import com.mindorks.framework.mvp.data.db.model.DaoSession;
+import com.myproject.framework.mvp.data.db.model.DaoMaster;
+import com.myproject.framework.mvp.data.db.model.DaoSession;
 import com.myproject.framework.mvp.data.db.model.Option;
 import com.myproject.framework.mvp.data.db.model.Question;
 import com.myproject.framework.mvp.data.db.model.User;

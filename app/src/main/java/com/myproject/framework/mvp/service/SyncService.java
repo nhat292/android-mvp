@@ -23,7 +23,7 @@ import android.support.annotation.Nullable;
 
 import com.myproject.framework.mvp.MvpApp;
 import com.myproject.framework.mvp.data.DataManager;
-import com.mindorks.framework.mvp.di.component.DaggerServiceComponent;
+import com.myproject.framework.mvp.di.component.DaggerServiceComponent;
 import com.myproject.framework.mvp.di.component.ServiceComponent;
 import com.myproject.framework.mvp.utils.AppLogger;
 

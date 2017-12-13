@@ -17,9 +17,6 @@ package com.myproject.framework.mvp.data.db.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.mindorks.framework.mvp.data.db.model.DaoSession;
-import com.mindorks.framework.mvp.data.db.model.OptionDao;
-import com.mindorks.framework.mvp.data.db.model.QuestionDao;
 
 import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.Entity;

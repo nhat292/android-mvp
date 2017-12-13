@@ -22,7 +22,7 @@ import com.androidnetworking.interceptors.HttpLoggingInterceptor.Level;
 import com.mindorks.framework.mvp.BuildConfig;
 import com.myproject.framework.mvp.data.DataManager;
 import com.myproject.framework.mvp.di.component.ApplicationComponent;
-import com.mindorks.framework.mvp.di.component.DaggerApplicationComponent;
+import com.myproject.framework.mvp.di.component.DaggerApplicationComponent;
 import com.myproject.framework.mvp.di.module.ApplicationModule;
 import com.myproject.framework.mvp.utils.AppLogger;
 
