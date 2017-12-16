@@ -15,7 +15,7 @@
 
 package com.myproject.framework.mvp.ui.splash;
 
-import com.mindorks.framework.mvp.R;
+import com.myproject.framework.mvp.R;
 import com.myproject.framework.mvp.data.DataManager;
 import com.myproject.framework.mvp.ui.base.BasePresenter;
 import com.myproject.framework.mvp.utils.rx.SchedulerProvider;
@@ -32,7 +32,7 @@ import io.reactivex.functions.Function;
  */
 
 
-public class SplashPresenter<V extends SplashMvpView> extends BasePresenter<V>
+public class SplashPresenter<V extends SplashBaseView> extends BasePresenter<V>
         implements SplashMvpPresenter<V> {
 
     @Inject

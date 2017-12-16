@@ -19,8 +19,8 @@ import android.content.Context;
 
 import com.myproject.framework.mvp.data.DataManager;
 import com.mindorks.framework.mvp.di.component.DaggerTestComponent;
-import com.myproject.framework.mvp.di.component.TestComponent;
-import com.myproject.framework.mvp.di.module.ApplicationTestModule;
+import com.myproject.framework.mvp.dagger.component.TestComponent;
+import com.myproject.framework.mvp.dagger.module.ApplicationTestModule;
 
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
@@ -48,7 +48,7 @@ public class TestComponentRule implements TestRule {
     }
 
     private void setupDaggerTestComponentInApplication() {
-        MvpApp application = ((MvpApp) mContext.getApplicationContext());
+        App application = ((App) mContext.getApplicationContext());
         mTestComponent = DaggerTestComponent.builder()
                 .applicationTestModule(new ApplicationTestModule(application))
                 .build();

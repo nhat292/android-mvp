@@ -25,7 +25,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import com.mindorks.framework.mvp.R;
+import com.myproject.framework.mvp.R;
 import com.myproject.framework.mvp.ui.base.BaseActivity;
 
 import javax.inject.Inject;
@@ -38,10 +38,10 @@ import butterknife.ButterKnife;
  */
 
 
-public class FeedActivity extends BaseActivity implements FeedMvpView {
+public class FeedActivity extends BaseActivity implements FeedBaseView {
 
     @Inject
-    FeedMvpPresenter<FeedMvpView> mPresenter;
+    FeedMvpPresenter<FeedBaseView> mPresenter;
 
     @Inject
     FeedPagerAdapter mPagerAdapter;

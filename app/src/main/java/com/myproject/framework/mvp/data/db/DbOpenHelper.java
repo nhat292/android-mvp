@@ -18,8 +18,8 @@ package com.myproject.framework.mvp.data.db;
 import android.content.Context;
 
 import com.myproject.framework.mvp.data.db.model.DaoMaster;
-import com.myproject.framework.mvp.di.ApplicationContext;
-import com.myproject.framework.mvp.di.DatabaseInfo;
+import com.myproject.framework.mvp.dagger.ApplicationContext;
+import com.myproject.framework.mvp.dagger.DatabaseInfo;
 import com.myproject.framework.mvp.utils.AppLogger;
 
 import org.greenrobot.greendao.database.Database;

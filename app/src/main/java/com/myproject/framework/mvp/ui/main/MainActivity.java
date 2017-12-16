@@ -37,8 +37,11 @@ import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.TextView;
 
-import com.mindorks.framework.mvp.BuildConfig;
-import com.mindorks.framework.mvp.R;
+import com.mindorks.placeholderview.SwipeDecor;
+import com.mindorks.placeholderview.SwipePlaceHolderView;
+import com.mindorks.placeholderview.listeners.ItemRemovedListener;
+import com.myproject.framework.mvp.BuildConfig;
+import com.myproject.framework.mvp.R;
 import com.myproject.framework.mvp.data.db.model.Question;
 import com.myproject.framework.mvp.ui.about.AboutFragment;
 import com.myproject.framework.mvp.ui.base.BaseActivity;
@@ -47,9 +50,6 @@ import com.myproject.framework.mvp.ui.feed.FeedActivity;
 import com.myproject.framework.mvp.ui.login.LoginActivity;
 import com.myproject.framework.mvp.ui.main.rating.RateUsDialog;
 import com.myproject.framework.mvp.utils.ScreenUtils;
-import com.mindorks.placeholderview.SwipeDecor;
-import com.mindorks.placeholderview.SwipePlaceHolderView;
-import com.mindorks.placeholderview.listeners.ItemRemovedListener;
 
 import java.util.List;
 
@@ -63,10 +63,10 @@ import butterknife.ButterKnife;
  */
 
 
-public class MainActivity extends BaseActivity implements MainMvpView {
+public class MainActivity extends BaseActivity implements MainBaseView {
 
     @Inject
-    MainMvpPresenter<MainMvpView> mPresenter;
+    MainMvpPresenter<MainBaseView> mPresenter;
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;

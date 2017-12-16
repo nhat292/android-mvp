@@ -21,10 +21,10 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
-import com.myproject.framework.mvp.MvpApp;
+import com.myproject.framework.mvp.App;
 import com.myproject.framework.mvp.data.DataManager;
-import com.myproject.framework.mvp.di.component.DaggerServiceComponent;
-import com.myproject.framework.mvp.di.component.ServiceComponent;
+import com.myproject.framework.mvp.dagger.component.DaggerServiceComponent;
+import com.myproject.framework.mvp.dagger.component.ServiceComponent;
 import com.myproject.framework.mvp.utils.AppLogger;
 
 import javax.inject.Inject;
@@ -58,7 +58,7 @@ public class SyncService extends Service {
     public void onCreate() {
         super.onCreate();
         ServiceComponent component = DaggerServiceComponent.builder()
-                .applicationComponent(((MvpApp) getApplication()).getComponent())
+                .applicationComponent(((App) getApplication()).getComponent())
                 .build();
         component.inject(this);
     }

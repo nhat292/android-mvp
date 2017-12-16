@@ -19,7 +19,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
-import com.mindorks.framework.mvp.R;
+import com.myproject.framework.mvp.R;
 
 
 /**

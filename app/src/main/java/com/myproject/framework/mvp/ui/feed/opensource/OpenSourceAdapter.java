@@ -26,7 +26,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.mindorks.framework.mvp.R;
+import com.myproject.framework.mvp.R;
 import com.myproject.framework.mvp.data.network.model.OpenSourceResponse;
 import com.myproject.framework.mvp.ui.base.BaseViewHolder;
 

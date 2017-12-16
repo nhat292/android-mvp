@@ -22,7 +22,7 @@ import com.myproject.framework.mvp.ui.base.MvpPresenter;
  */
 
 
-public interface RatingDialogMvpPresenter<V extends RatingDialogMvpView> extends MvpPresenter<V> {
+public interface RatingDialogMvpPresenter<V extends RatingDialogBaseView> extends MvpPresenter<V> {
 
     void onRatingSubmitted(float rating, String message);
 

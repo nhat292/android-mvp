@@ -16,7 +16,7 @@
 package com.myproject.framework.mvp.ui.splash;
 
 
-import com.myproject.framework.mvp.di.PerActivity;
+import com.myproject.framework.mvp.dagger.PerActivity;
 import com.myproject.framework.mvp.ui.base.MvpPresenter;
 
 /**
@@ -25,6 +25,6 @@ import com.myproject.framework.mvp.ui.base.MvpPresenter;
 
 
 @PerActivity
-public interface SplashMvpPresenter<V extends SplashMvpView> extends MvpPresenter<V> {
+public interface SplashMvpPresenter<V extends SplashBaseView> extends MvpPresenter<V> {
 
 }

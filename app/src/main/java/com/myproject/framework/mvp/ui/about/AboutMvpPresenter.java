@@ -16,7 +16,7 @@
 package com.myproject.framework.mvp.ui.about;
 
 
-import com.myproject.framework.mvp.di.PerActivity;
+import com.myproject.framework.mvp.dagger.PerActivity;
 import com.myproject.framework.mvp.ui.base.MvpPresenter;
 
 /**
@@ -25,6 +25,6 @@ import com.myproject.framework.mvp.ui.base.MvpPresenter;
 
 
 @PerActivity
-public interface AboutMvpPresenter<V extends AboutMvpView> extends MvpPresenter<V> {
+public interface AboutMvpPresenter<V extends AboutBaseView> extends MvpPresenter<V> {
 
 }

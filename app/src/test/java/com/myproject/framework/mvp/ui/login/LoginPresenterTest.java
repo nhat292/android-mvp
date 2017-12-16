@@ -42,11 +42,11 @@ import static org.mockito.Mockito.verify;
 public class LoginPresenterTest {
 
     @Mock
-    LoginMvpView mMockLoginMvpView;
+    LoginBaseView mMockLoginMvpView;
     @Mock
     DataManager mMockDataManager;
 
-    private LoginPresenter<LoginMvpView> mLoginPresenter;
+    private LoginPresenter<LoginBaseView> mLoginPresenter;
     private TestScheduler mTestScheduler;
 
     @BeforeClass

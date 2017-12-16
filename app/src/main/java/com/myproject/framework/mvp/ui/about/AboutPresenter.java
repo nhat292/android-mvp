@@ -28,7 +28,7 @@ import io.reactivex.disposables.CompositeDisposable;
  */
 
 
-public class AboutPresenter<V extends AboutMvpView> extends BasePresenter<V>
+public class AboutPresenter<V extends AboutBaseView> extends BasePresenter<V>
         implements AboutMvpPresenter<V> {
 
     @Inject

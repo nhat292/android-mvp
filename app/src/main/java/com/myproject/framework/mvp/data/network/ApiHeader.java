@@ -17,7 +17,7 @@ package com.myproject.framework.mvp.data.network;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.myproject.framework.mvp.di.ApiInfo;
+import com.myproject.framework.mvp.dagger.ApiInfo;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

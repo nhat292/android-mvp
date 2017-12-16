@@ -15,7 +15,8 @@
 
 package com.myproject.framework.mvp.data.network;
 
-import com.mindorks.framework.mvp.BuildConfig;
+
+import com.myproject.framework.mvp.BuildConfig;
 
 /**
  * Created by Nhat on 12/13/17.

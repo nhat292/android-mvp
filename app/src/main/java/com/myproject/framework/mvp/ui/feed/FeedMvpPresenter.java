@@ -15,14 +15,14 @@
 
 package com.myproject.framework.mvp.ui.feed;
 
+import com.myproject.framework.mvp.ui.base.BaseView;
 import com.myproject.framework.mvp.ui.base.MvpPresenter;
-import com.myproject.framework.mvp.ui.base.MvpView;
 
 /**
  * Created by Nhat on 12/13/17.
  */
 
 
-public interface FeedMvpPresenter<V extends MvpView> extends MvpPresenter<V> {
+public interface FeedMvpPresenter<V extends BaseView> extends MvpPresenter<V> {
 
 }

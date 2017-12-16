@@ -20,14 +20,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.androidnetworking.widget.ANImageView;
-import com.mindorks.framework.mvp.R;
-import com.myproject.framework.mvp.data.db.model.Option;
-import com.myproject.framework.mvp.data.db.model.Question;
 import com.mindorks.placeholderview.annotations.Click;
 import com.mindorks.placeholderview.annotations.Layout;
 import com.mindorks.placeholderview.annotations.NonReusable;
 import com.mindorks.placeholderview.annotations.Resolve;
 import com.mindorks.placeholderview.annotations.View;
+import com.myproject.framework.mvp.R;
+import com.myproject.framework.mvp.data.db.model.Option;
+import com.myproject.framework.mvp.data.db.model.Question;
 
 /**
  * Created by Nhat on 12/13/17.

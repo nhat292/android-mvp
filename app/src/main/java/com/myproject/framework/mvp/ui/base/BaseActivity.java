@@ -31,11 +31,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.mindorks.framework.mvp.R;
-import com.myproject.framework.mvp.MvpApp;
-import com.myproject.framework.mvp.di.component.ActivityComponent;
-import com.myproject.framework.mvp.di.component.DaggerActivityComponent;
-import com.myproject.framework.mvp.di.module.ActivityModule;
+import com.myproject.framework.mvp.App;
+import com.myproject.framework.mvp.R;
+import com.myproject.framework.mvp.dagger.component.ActivityComponent;
+import com.myproject.framework.mvp.dagger.component.DaggerActivityComponent;
+import com.myproject.framework.mvp.dagger.module.ActivityModule;
 import com.myproject.framework.mvp.ui.login.LoginActivity;
 import com.myproject.framework.mvp.utils.CommonUtils;
 import com.myproject.framework.mvp.utils.NetworkUtils;
@@ -49,7 +49,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
 public abstract class BaseActivity extends AppCompatActivity
-        implements MvpView, BaseFragment.Callback {
+        implements BaseView, BaseFragment.Callback {
 
     private ProgressDialog mProgressDialog;
 
@@ -62,7 +62,7 @@ public abstract class BaseActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         mActivityComponent = DaggerActivityComponent.builder()
                 .activityModule(new ActivityModule(this))
-                .applicationComponent(((MvpApp) getApplication()).getComponent())
+                .applicationComponent(((App) getApplication()).getComponent())
                 .build();
 
     }

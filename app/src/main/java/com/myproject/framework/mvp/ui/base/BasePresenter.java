@@ -26,7 +26,7 @@ import com.androidnetworking.error.ANError;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
-import com.mindorks.framework.mvp.R;
+import com.myproject.framework.mvp.R;
 import com.myproject.framework.mvp.data.DataManager;
 import com.myproject.framework.mvp.data.network.model.ApiError;
 import com.myproject.framework.mvp.utils.AppConstants;
@@ -42,7 +42,7 @@ import io.reactivex.disposables.CompositeDisposable;
  * onAttach() and onDetach(). It also handles keeping a reference to the mvpView that
  * can be accessed from the children classes by calling getMvpView().
  */
-public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
+public class BasePresenter<V extends BaseView> implements MvpPresenter<V> {
 
     private static final String TAG = "BasePresenter";
 

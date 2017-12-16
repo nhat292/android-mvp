@@ -27,8 +27,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
 
-import com.mindorks.framework.mvp.R;
-import com.myproject.framework.mvp.di.component.ActivityComponent;
+import com.myproject.framework.mvp.R;
+import com.myproject.framework.mvp.dagger.component.ActivityComponent;
 import com.myproject.framework.mvp.ui.base.BaseDialog;
 import com.myproject.framework.mvp.utils.AppUtils;
 
@@ -43,12 +43,12 @@ import butterknife.OnClick;
  */
 
 
-public class RateUsDialog extends BaseDialog implements RatingDialogMvpView {
+public class RateUsDialog extends BaseDialog implements RatingDialogBaseView {
 
     private static final String TAG = "RateUsDialog";
 
     @Inject
-    RatingDialogMvpPresenter<RatingDialogMvpView> mPresenter;
+    RatingDialogMvpPresenter<RatingDialogBaseView> mPresenter;
 
     @BindView(R.id.rating_bar_feedback)
     RatingBar mRatingBar;

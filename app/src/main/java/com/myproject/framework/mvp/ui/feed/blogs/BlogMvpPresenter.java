@@ -22,7 +22,7 @@ import com.myproject.framework.mvp.ui.base.MvpPresenter;
  */
 
 
-public interface BlogMvpPresenter<V extends BlogMvpView>
+public interface BlogMvpPresenter<V extends BlogBaseView>
         extends MvpPresenter<V> {
 
     void onViewPrepared();

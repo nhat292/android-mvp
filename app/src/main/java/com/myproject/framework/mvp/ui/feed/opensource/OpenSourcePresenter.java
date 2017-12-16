@@ -32,7 +32,7 @@ import io.reactivex.functions.Consumer;
  */
 
 
-public class OpenSourcePresenter<V extends OpenSourceMvpView> extends BasePresenter<V>
+public class OpenSourcePresenter<V extends OpenSourceBaseView> extends BasePresenter<V>
         implements OpenSourceMvpPresenter<V> {
 
     @Inject

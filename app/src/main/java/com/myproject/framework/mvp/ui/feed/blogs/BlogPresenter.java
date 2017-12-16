@@ -32,7 +32,7 @@ import io.reactivex.functions.Consumer;
  */
 
 
-public class BlogPresenter<V extends BlogMvpView> extends BasePresenter<V>
+public class BlogPresenter<V extends BlogBaseView> extends BasePresenter<V>
         implements BlogMvpPresenter<V> {
 
     @Inject

@@ -16,7 +16,7 @@
 package com.myproject.framework.mvp.ui.main;
 
 
-import com.myproject.framework.mvp.di.PerActivity;
+import com.myproject.framework.mvp.dagger.PerActivity;
 import com.myproject.framework.mvp.ui.base.MvpPresenter;
 
 /**
@@ -25,7 +25,7 @@ import com.myproject.framework.mvp.ui.base.MvpPresenter;
 
 
 @PerActivity
-public interface MainMvpPresenter<V extends MainMvpView> extends MvpPresenter<V> {
+public interface MainMvpPresenter<V extends MainBaseView> extends MvpPresenter<V> {
 
     void onDrawerOptionAboutClick();
 

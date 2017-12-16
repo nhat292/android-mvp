@@ -24,9 +24,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.mindorks.framework.mvp.R;
+import com.myproject.framework.mvp.R;
 import com.myproject.framework.mvp.data.network.model.BlogResponse;
-import com.myproject.framework.mvp.di.component.ActivityComponent;
+import com.myproject.framework.mvp.dagger.component.ActivityComponent;
 import com.myproject.framework.mvp.ui.base.BaseFragment;
 
 import java.util.List;
@@ -42,12 +42,12 @@ import butterknife.ButterKnife;
 
 
 public class BlogFragment extends BaseFragment implements
-        BlogMvpView, BlogAdapter.Callback {
+        BlogBaseView, BlogAdapter.Callback {
 
     private static final String TAG = "BlogFragment";
 
     @Inject
-    BlogMvpPresenter<BlogMvpView> mPresenter;
+    BlogMvpPresenter<BlogBaseView> mPresenter;
 
     @Inject
     BlogAdapter mBlogAdapter;

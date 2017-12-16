@@ -16,7 +16,7 @@
 package com.myproject.framework.mvp.ui.login;
 
 import com.androidnetworking.error.ANError;
-import com.mindorks.framework.mvp.R;
+import com.myproject.framework.mvp.R;
 import com.myproject.framework.mvp.data.DataManager;
 import com.myproject.framework.mvp.data.network.model.LoginRequest;
 import com.myproject.framework.mvp.data.network.model.LoginResponse;
@@ -34,7 +34,7 @@ import io.reactivex.functions.Consumer;
  */
 
 
-public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V>
+public class LoginPresenter<V extends LoginBaseView> extends BasePresenter<V>
         implements LoginMvpPresenter<V> {
 
     private static final String TAG = "LoginPresenter";

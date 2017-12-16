@@ -34,7 +34,7 @@ import com.myproject.framework.mvp.data.network.model.LoginResponse;
 import com.myproject.framework.mvp.data.network.model.LogoutResponse;
 import com.myproject.framework.mvp.data.network.model.OpenSourceResponse;
 import com.myproject.framework.mvp.data.prefs.PreferencesHelper;
-import com.myproject.framework.mvp.di.ApplicationContext;
+import com.myproject.framework.mvp.dagger.ApplicationContext;
 import com.myproject.framework.mvp.utils.AppConstants;
 import com.myproject.framework.mvp.utils.CommonUtils;
 

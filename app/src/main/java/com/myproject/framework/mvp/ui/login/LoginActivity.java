@@ -21,7 +21,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-import com.mindorks.framework.mvp.R;
+import com.myproject.framework.mvp.R;
 import com.myproject.framework.mvp.ui.base.BaseActivity;
 import com.myproject.framework.mvp.ui.main.MainActivity;
 
@@ -37,10 +37,10 @@ import butterknife.OnClick;
  */
 
 
-public class LoginActivity extends BaseActivity implements LoginMvpView {
+public class LoginActivity extends BaseActivity implements LoginBaseView {
 
     @Inject
-    LoginMvpPresenter<LoginMvpView> mPresenter;
+    LoginMvpPresenter<LoginBaseView> mPresenter;
 
     @BindView(R.id.et_email)
     EditText mEmailEditText;

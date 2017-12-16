@@ -15,7 +15,8 @@
 
 package com.myproject.framework.mvp.utils;
 
-import com.mindorks.framework.mvp.BuildConfig;
+
+import com.myproject.framework.mvp.BuildConfig;
 
 import timber.log.Timber;
 

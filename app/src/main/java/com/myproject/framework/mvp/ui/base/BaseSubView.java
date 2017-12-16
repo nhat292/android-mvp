@@ -26,9 +26,9 @@ import android.view.ViewGroup;
  */
 
 
-public abstract class BaseSubView extends ViewGroup implements SubMvpView {
+public abstract class BaseSubView extends ViewGroup implements SubBaseView {
 
-    private MvpView mParentMvpView;
+    private BaseView mParentBaseView;
 
     public BaseSubView(Context context) {
         super(context);
@@ -48,71 +48,71 @@ public abstract class BaseSubView extends ViewGroup implements SubMvpView {
     }
 
     @Override
-    public void attachParentMvpView(MvpView mvpView) {
-        mParentMvpView = mvpView;
+    public void attachParentMvpView(BaseView baseView) {
+        mParentBaseView = baseView;
     }
 
     @Override
     public void showLoading() {
-        if (mParentMvpView != null) {
-            mParentMvpView.showLoading();
+        if (mParentBaseView != null) {
+            mParentBaseView.showLoading();
         }
     }
 
     @Override
     public void hideLoading() {
-        if (mParentMvpView != null) {
-            mParentMvpView.hideLoading();
+        if (mParentBaseView != null) {
+            mParentBaseView.hideLoading();
         }
     }
 
     @Override
     public void onError(@StringRes int resId) {
-        if (mParentMvpView != null) {
-            mParentMvpView.onError(resId);
+        if (mParentBaseView != null) {
+            mParentBaseView.onError(resId);
         }
     }
 
     @Override
     public void onError(String message) {
-        if (mParentMvpView != null) {
-            mParentMvpView.onError(message);
+        if (mParentBaseView != null) {
+            mParentBaseView.onError(message);
         }
     }
 
     @Override
     public void showMessage(String message) {
-        if (mParentMvpView != null) {
-            mParentMvpView.showMessage(message);
+        if (mParentBaseView != null) {
+            mParentBaseView.showMessage(message);
         }
     }
 
     @Override
     public void showMessage(@StringRes int resId) {
-        if (mParentMvpView != null) {
-            mParentMvpView.showMessage(resId);
+        if (mParentBaseView != null) {
+            mParentBaseView.showMessage(resId);
         }
     }
 
     @Override
     public void hideKeyboard() {
-        if (mParentMvpView != null) {
-            mParentMvpView.hideKeyboard();
+        if (mParentBaseView != null) {
+            mParentBaseView.hideKeyboard();
         }
     }
 
     @Override
     public boolean isNetworkConnected() {
-        if (mParentMvpView != null) {
-            return mParentMvpView.isNetworkConnected();
+        if (mParentBaseView != null) {
+            return mParentBaseView.isNetworkConnected();
         }
         return false;
     }
 
     @Override
     public void openActivityOnTokenExpire() {
-        if (mParentMvpView != null) {
-            mParentMvpView.openActivityOnTokenExpire();
+        if (mParentBaseView != null) {
+            mParentBaseView.openActivityOnTokenExpire();
         }
     }
 

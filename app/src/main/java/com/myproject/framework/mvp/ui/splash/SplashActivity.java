@@ -19,7 +19,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.mindorks.framework.mvp.R;
+import com.myproject.framework.mvp.R;
 import com.myproject.framework.mvp.ui.base.BaseActivity;
 import com.myproject.framework.mvp.ui.login.LoginActivity;
 import com.myproject.framework.mvp.ui.main.MainActivity;
@@ -34,10 +34,10 @@ import butterknife.ButterKnife;
  */
 
 
-public class SplashActivity extends BaseActivity implements SplashMvpView {
+public class SplashActivity extends BaseActivity implements SplashBaseView {
 
     @Inject
-    SplashMvpPresenter<SplashMvpView> mPresenter;
+    SplashMvpPresenter<SplashBaseView> mPresenter;
 
     public static Intent getStartIntent(Context context) {
         Intent intent = new Intent(context, SplashActivity.class);

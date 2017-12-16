@@ -21,8 +21,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.mindorks.framework.mvp.R;
-import com.myproject.framework.mvp.di.component.ActivityComponent;
+import com.myproject.framework.mvp.R;
+import com.myproject.framework.mvp.dagger.component.ActivityComponent;
 import com.myproject.framework.mvp.ui.base.BaseFragment;
 
 import javax.inject.Inject;
@@ -36,12 +36,12 @@ import butterknife.OnClick;
  */
 
 
-public class AboutFragment extends BaseFragment implements AboutMvpView {
+public class AboutFragment extends BaseFragment implements AboutBaseView {
 
     public static final String TAG = "AboutFragment";
 
     @Inject
-    AboutMvpPresenter<AboutMvpView> mPresenter;
+    AboutMvpPresenter<AboutBaseView> mPresenter;
 
     public static AboutFragment newInstance() {
         Bundle args = new Bundle();

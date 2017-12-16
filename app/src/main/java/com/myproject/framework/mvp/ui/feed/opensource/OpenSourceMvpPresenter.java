@@ -22,7 +22,7 @@ import com.myproject.framework.mvp.ui.base.MvpPresenter;
  */
 
 
-public interface OpenSourceMvpPresenter<V extends OpenSourceMvpView>
+public interface OpenSourceMvpPresenter<V extends OpenSourceBaseView>
         extends MvpPresenter<V> {
 
     void onViewPrepared();

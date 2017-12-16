@@ -32,7 +32,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.RelativeLayout;
 
-import com.myproject.framework.mvp.di.component.ActivityComponent;
+import com.myproject.framework.mvp.dagger.component.ActivityComponent;
 
 import butterknife.Unbinder;
 
@@ -41,7 +41,7 @@ import butterknife.Unbinder;
  */
 
 
-public abstract class BaseDialog extends DialogFragment implements DialogMvpView {
+public abstract class BaseDialog extends DialogFragment implements DialogBaseView {
 
     private BaseActivity mActivity;
     private Unbinder mUnBinder;

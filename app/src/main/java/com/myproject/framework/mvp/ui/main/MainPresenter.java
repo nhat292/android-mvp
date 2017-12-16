@@ -35,7 +35,7 @@ import io.reactivex.functions.Consumer;
  */
 
 
-public class MainPresenter<V extends MainMvpView> extends BasePresenter<V>
+public class MainPresenter<V extends MainBaseView> extends BasePresenter<V>
         implements MainMvpPresenter<V> {
 
     private static final String TAG = "MainPresenter";

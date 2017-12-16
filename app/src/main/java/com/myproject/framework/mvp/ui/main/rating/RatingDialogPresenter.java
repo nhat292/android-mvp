@@ -16,7 +16,7 @@
 package com.myproject.framework.mvp.ui.main.rating;
 
 
-import com.mindorks.framework.mvp.R;
+import com.myproject.framework.mvp.R;
 import com.myproject.framework.mvp.data.DataManager;
 import com.myproject.framework.mvp.ui.base.BasePresenter;
 import com.myproject.framework.mvp.utils.rx.SchedulerProvider;
@@ -30,7 +30,7 @@ import io.reactivex.disposables.CompositeDisposable;
  */
 
 
-public class RatingDialogPresenter<V extends RatingDialogMvpView> extends BasePresenter<V>
+public class RatingDialogPresenter<V extends RatingDialogBaseView> extends BasePresenter<V>
         implements RatingDialogMvpPresenter<V> {
 
     public static final String TAG = "RatingDialogPresenter";

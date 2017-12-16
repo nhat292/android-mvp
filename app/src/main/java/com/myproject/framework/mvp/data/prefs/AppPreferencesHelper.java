@@ -19,8 +19,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.myproject.framework.mvp.data.DataManager;
-import com.myproject.framework.mvp.di.ApplicationContext;
-import com.myproject.framework.mvp.di.PreferenceInfo;
+import com.myproject.framework.mvp.dagger.ApplicationContext;
+import com.myproject.framework.mvp.dagger.PreferenceInfo;
 import com.myproject.framework.mvp.utils.AppConstants;
 
 import javax.inject.Inject;

@@ -21,7 +21,7 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 
-import com.mindorks.framework.mvp.R;
+import com.myproject.framework.mvp.R;
 
 /**
  * Created by Nhat on 12/13/17.

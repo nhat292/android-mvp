@@ -23,7 +23,7 @@ import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
-import com.myproject.framework.mvp.di.component.ActivityComponent;
+import com.myproject.framework.mvp.dagger.component.ActivityComponent;
 import com.myproject.framework.mvp.utils.CommonUtils;
 
 import butterknife.Unbinder;
@@ -33,7 +33,7 @@ import butterknife.Unbinder;
  */
 
 
-public abstract class BaseFragment extends Fragment implements MvpView {
+public abstract class BaseFragment extends Fragment implements BaseView {
 
     private BaseActivity mActivity;
     private Unbinder mUnBinder;

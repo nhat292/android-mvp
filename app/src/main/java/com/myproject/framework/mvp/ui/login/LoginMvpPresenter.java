@@ -16,7 +16,7 @@
 package com.myproject.framework.mvp.ui.login;
 
 
-import com.myproject.framework.mvp.di.PerActivity;
+import com.myproject.framework.mvp.dagger.PerActivity;
 import com.myproject.framework.mvp.ui.base.MvpPresenter;
 
 /**
@@ -25,7 +25,7 @@ import com.myproject.framework.mvp.ui.base.MvpPresenter;
 
 
 @PerActivity
-public interface LoginMvpPresenter<V extends LoginMvpView> extends MvpPresenter<V> {
+public interface LoginMvpPresenter<V extends LoginBaseView> extends MvpPresenter<V> {
 
     void onServerLoginClick(String email, String password);
 
