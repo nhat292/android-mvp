@@ -1,48 +1,88 @@
-<resources>
-    <string name="app_name">MvpApp</string>
+<resources xmlns:android="http://schemas.android.com/tools">
 
-    <!--Toolbar menus-->
-    <string name="clear">Clear</string>
-    <string name="cut">Cut</string>
-    <string name="copy">Copy</string>
-    <string name="paste">Paste</string>
-    <string name="delete">Delete</string>
-    <string name="share">Share</string>
+    <!--Facebook Login-->
+    <string name="facebook_app_id">497778373927201</string>
+    <string name="fb_login_protocol_scheme">fb497778373927201</string>
+    <!--Twitter Login-->
+    <string name="twitter_consumer_key">hUzSjhnKc4NslYutnrOQH78tD</string>
+    <string name="twitter_consumer_secret_key">1V33UUxeWMYJdCIYswOqLSFgUt4DuS9WrIVWNNjApk9pNthsva</string>
 
-    <!--Drawer-->
-    <string name="open_drawer">Drawer Open</string>
-    <string name="close_drawer">Drawer Close</string>
 
-    <!--Drawer Menus-->
-    <string name="about">About</string>
-    <string name="logout">Logout</string>
-    <string name="feed">My Feed</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <!--App Message-->
-    <string name="api_retry_error">Please retry!</string>
-    <string name="api_default_error">Something wrong happened!</string>
-    <string name="some_error">Some Error Occurred!</string>
-    <string name="connection_error">Internet connection lost!</string>
+    <!--Common-->
+    <string name="message_no_internet_connection">No internet connection. Please check connection and try again</string>
+    <string name="message_unknown_error">Something errors happened. Please try again</string>
+    <string name="message_connection_timeout">Connection time out</string>
+    <string name="error_title">ERROR</string>
+    <string name="confirm_title">Confirm</string>
+
+    <!--Main-->
+    <string name="guest_text">Guest</string>
+    <string name="show_map">Show map</string>
+    <string name="change_nation">CHANGE NATION</string>
+    <!--Left Menu-->
+    <string name="menu_info">Info</string>
+    <string name="menu_mytrip">MyTrip</string>
+    <string name="menu_experiences">Experiences</string>
+    <string name="menu_favorites">Favorites</string>
+    <string name="menu_support">Support</string>
+    <string name="menu_login">Log in</string>
+    <string name="menu_logout">Log out</string>
+    <string name="message_ask_logout">Are you sure to log out?</string>
+    <!--Right Menu-->
+    <string name="no_nation_text">No nations</string>
 
     <!--Login-->
-    <string name="login_dummy">Login Dummy</string>
-    <string name="login">Login</string>
-    <string name="email">Email</string>
-    <string name="password">Password</string>
+    <string name="username_or_email_text">Username Or Email</string>
+    <string name="password_text">Password</string>
+    <string name="login_text">log in</string>
+    <string name="forgot_your_password_text">forgot your password</string>
+    <string name="register_text">Register</string>
+    <string name="login_facebook_text">log in with Facebook</string>
+    <string name="login_twitter_text">log in with Twitter</string>
+    <string name="message_empty_username_email">Please enter a username or email</string>
+    <string name="message_empty_password">Please enter a password</string>
+    <string name="message_password_incorrect">Password is incorrect</string>
+    <string name="message_account_does_not_exist">Account does not exist</string>
 
-    <!--Login Validation-->
-    <string name="empty_email">Please provide a non empty email.</string>
-    <string name="invalid_email">Please provide a valid email.</string>
-    <string name="empty_password">Please provide a non empty password.</string>
+    <!--Register-->
+    <string name="submit_text">submit</string>
+    <string name="male_text">Male</string>
+    <string name="female_text">Female</string>
+    <string name="username_text">Username</string>
+    <string name="email_text">Email</string>
+    <string name="full_name_text">Full name</string>
+    <string name="repassword_text">Re-enter password</string>
+    <string name="message_empty_username">Please enter a username</string>
+    <string name="message_empty_email">Please enter an email address</string>
+    <string name="message_email_invalid">Email address is incorrect</string>
+    <string name="message_password_does_not_match">Confirm password does not match</string>
+    <string name="message_username_password_exists">Username or Email already exists</string>
 
-    <!--about fragment-->
-    <string name="project_info">This sample app implements MVP architecture using Dagger2, GreenDao, RxJava, FastAndroidNetworking and PlaceholderView</string>
-    <string name="link_mvp_blog">1. https://blog.mindorks.com</string>
-    <string name="link_mvp_repo">2. https://github.com/MindorksOpenSource/android-mvp-architecture</string>
-    <string name="link_mindorks_blog">3. https://blog.mindorks.com</string>
-    <string name="link_mindorks_repo">4. https://github.com/MindorksOpenSource</string>
-    <string name="version">"version"</string>
 
+    <!--Info-->
+    <string name="phone">PHONE</string>
+    <string name="email">EMAIL</string>
+    <string name="full_name">FULL NAME</string>
+    <string name="birthday">BIRTHDAY</string>
+    <string name="address">ADDRESS</string>
+    <string name="gender">GENDER</string>
+    <string name="account_type">ACCOUNT TYPE</string>
+    <string name="update_text">update</string>
+    <string name="change_password_text">change password</string>
+
+    <!--Change Password-->
+    <string name="current_password">Current password</string>
+    <string name="new_password">New password</string>
+
+
+    <!--Production-->
+    <string name="app_market_link"></string>
+    <string name="app_google_play_store_link"></string>
+
+    <!--Temporary-->
     <!--rating dialog-->
     <string name="rate_us">Rate Us</string>
     <string name="rating_message">Please let us know, how can we improve ourselves?</string>
@@ -51,23 +91,8 @@
     <string name="rating_play_store_text">Rate us on Play Store</string>
     <string name="rating_not_provided_error">Please provide us stars.</string>
     <string name="rating_thanks">Thank you!</string>
-
-    <!--play store-->
-    <string name="app_google_play_store_link">"https://play.google.com/store/apps/details?id="</string>
-    <string name="app_market_link">"market://details?id="</string>
-
     <!--button-->
     <string name="later">Later</string>
     <string name="submit">Submit</string>
-
-    <!--feed-->
-    <string name="title">My Feed</string>
-    <string name="open_source">Open Source</string>
-    <string name="blog">Blog</string>
-
-    <!--empty state-->
-    <string name="empty_screen">We do not have anything\nhere right now.</string>
-    <string name="please_retry">Please Retry</string>
-    <string name="retry">Retry</string>
 
 </resources>

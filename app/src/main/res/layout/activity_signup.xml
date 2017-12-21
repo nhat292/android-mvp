@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_background_launch">
+
+    <include
+        android:id="@+id/navBar"
+        layout="@layout/nav_layout" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/navBar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_padding_large"
+            android:layout_marginStart="@dimen/margin_padding_large"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/editUsername"
+                style="@style/EditText"
+                android:layout_marginTop="50dp"
+                android:hint="@string/username_text"
+                android:imeOptions="actionNext"
+                android:inputType="textEmailAddress" />
+
+            <EditText
+                android:id="@+id/editEmail"
+                style="@style/EditText"
+                android:layout_marginTop="@dimen/margin_padding_large"
+                android:hint="@string/email_text"
+                android:imeOptions="actionNext"
+                android:inputType="textEmailAddress" />
+
+            <EditText
+                android:id="@+id/editFullname"
+                style="@style/EditText"
+                android:layout_marginTop="@dimen/margin_padding_large"
+                android:hint="@string/full_name_text"
+                android:imeOptions="actionNext"
+                android:inputType="textEmailAddress"
+                android:padding="@dimen/margin_padding_small" />
+
+            <EditText
+                android:id="@+id/editPassword"
+                style="@style/EditText"
+                android:layout_marginTop="@dimen/margin_padding_large"
+                android:hint="@string/password_text"
+                android:imeOptions="actionNext"
+                android:inputType="textPassword" />
+
+            <EditText
+                android:id="@+id/editRePassword"
+                style="@style/EditText"
+                android:layout_marginTop="@dimen/margin_padding_large"
+                android:hint="@string/repassword_text"
+                android:imeOptions="actionNext"
+                android:inputType="textPassword" />
+
+            <LinearLayout
+                android:layout_width="@dimen/segment_gender_width"
+                android:layout_height="@dimen/segment_gender_height"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/margin_padding_large"
+                android:background="@drawable/bg_gender"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txtMale"
+                    style="@style/Button.Secondary"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_gender_male"
+                    android:gravity="center"
+                    android:padding="0dp"
+                    android:text="@string/male_text"
+                    android:textColor="@color/accent_brown"
+                    android:textSize="@dimen/text_size_normal" />
+
+                <TextView
+                    android:id="@+id/txtFemale"
+                    style="@style/Button.Secondary"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="0dp"
+                    android:text="@string/female_text"
+                    android:textColor="@color/accent_white"
+                    android:textSize="@dimen/text_size_normal" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnSubmit"
+                style="@style/Button.Primary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_padding_very_large"
+                android:paddingEnd="@dimen/margin_padding_very_large"
+                android:paddingStart="@dimen/margin_padding_very_large"
+                android:text="@string/submit_text"
+                android:textSize="@dimen/text_size_large" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

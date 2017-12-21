@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/menuColor"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingEnd="@dimen/margin_padding_large"
+        android:paddingStart="@dimen/margin_padding_large">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imgUser"
+            android:layout_width="@dimen/img_avatar_size"
+            android:layout_height="@dimen/img_avatar_size"
+            android:background="@drawable/bg_avatar" />
+
+        <TextView
+            android:id="@+id/txtUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_padding_normal"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="@string/guest_text"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size_normal" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnMenuInfo"
+        style="@style/Button.Menu"
+        android:layout_marginTop="@dimen/margin_padding_very_large"
+        android:text="@string/menu_info" />
+
+    <Button
+        android:id="@+id/btnMenuMyTrip"
+        style="@style/Button.Menu"
+        android:text="@string/menu_mytrip" />
+
+    <Button
+        android:id="@+id/btnMenuExperiences"
+        style="@style/Button.Menu"
+        android:text="@string/menu_experiences" />
+
+    <Button
+        android:id="@+id/btnMenuFavorites"
+        style="@style/Button.Menu"
+        android:text="@string/menu_favorites" />
+
+    <Button
+        android:id="@+id/btnMenuSupport"
+        style="@style/Button.Menu"
+        android:text="@string/menu_support" />
+
+    <Button
+        android:id="@+id/btnMenuLogin"
+        style="@style/Button.Menu"
+        android:text="@string/menu_login" />
+
+
+</LinearLayout>

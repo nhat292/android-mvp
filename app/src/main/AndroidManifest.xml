@@ -1,22 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.myproject.framework.mvp">
+    package="com.techco.igotrip"
+    android:installLocation="auto">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
-        android:name="com.myproject.framework.mvp.App"
+        android:name="com.techco.igotrip.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <service android:name="com.myproject.framework.mvp.service.SyncService" />
+        <service android:name="com.techco.igotrip.service.SyncService" />
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
 
         <activity
-            android:name="com.myproject.framework.mvp.ui.splash.SplashActivity"
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.facebook.CustomTabActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="@string/fb_login_protocol_scheme" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.techco.igotrip.ui.launch.LaunchActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen">
@@ -27,26 +50,37 @@
         </activity>
 
         <activity
-            android:name="com.myproject.framework.mvp.ui.login.LoginActivity"
+            android:name="com.techco.igotrip.ui.menu.MenuActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.myproject.framework.mvp.ui.main.MainActivity"
+            android:name="com.techco.igotrip.ui.login.LoginActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+
+        <activity
+            android:name="com.techco.igotrip.ui.signup.SignUpActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+
+        <activity
+            android:name="com.techco.igotrip.ui.main.MainActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.myproject.framework.mvp.ui.feed.FeedActivity"
+            android:name="com.techco.igotrip.ui.provincedetail.ProvinceDetailActivity"
             android:launchMode="singleTop"
-            android:parentActivityName="com.myproject.framework.mvp.ui.main.MainActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" />
 
-            <!-- Parent activity meta-data to support 4.0 and lower -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.myproject.framework.mvp.ui.main.MainActivity" />
-        </activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="b1b1c634e84f884d1e7536228da192e390266076" />
 
     </application>
 

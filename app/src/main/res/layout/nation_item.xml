@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llItem"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/nation_item_height"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/txtNationName"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginEnd="@dimen/margin_padding_small"
+        android:layout_marginStart="@dimen/margin_padding_small"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:text="Viet nam"
+        android:textColor="@color/accent_black" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="@dimen/margin_padding_small"
+        android:background="@color/accent_black" />
+
+</LinearLayout>

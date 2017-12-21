@@ -1,6 +1,7 @@
 buildscript {
     repositories {
         jcenter()
+        google()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
@@ -8,12 +9,14 @@ buildscript {
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
         classpath 'org.greenrobot:greendao-gradle-plugin:3.2.1'
+        classpath 'me.tatarka:gradle-retrolambda:3.2.4'
     }
 }
 
 allprojects {
     repositories {
         jcenter()
+        google()
     }
 }
 
@@ -24,13 +27,13 @@ task clean(type: Delete) {
 // Define versions in a single place
 ext {
     // Sdk and tools
-    minSdkVersion = 16
+    minSdkVersion = 19
     targetSdkVersion = 26
     compileSdkVersion = 26
     buildToolsVersion = '26.0.2'
 
     // App dependencies
-    supportLibraryVersion = '25.3.1'
+    supportLibraryVersion = '26.1.0'
     gsonVersion = '2.8.0'
     calligraphyVersion = '2.2.0'
     glideVersion = '3.7.0'
@@ -51,5 +54,8 @@ ext {
     espressoVersion = '2.2.2'
     mockitoVersion = '2.7.1'
 
-    dexterVersion = '4.2.0';
+    dexterVersion = '4.2.0'
+    circleImageVersion = '2.1.0'
+    facebookSDKVersion = '4.29.0'
+    twitterSDKVersion = '3.1.1'
 }

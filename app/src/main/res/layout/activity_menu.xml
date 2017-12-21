@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/ic_background_menu_top">
+
+        <ImageView
+            android:id="@+id/imgLogin"
+            style="@style/Button.Secondary"
+            android:layout_width="@dimen/img_login_size"
+            android:layout_height="@dimen/img_login_size"
+            android:layout_marginStart="@dimen/margin_padding_normal"
+            android:layout_marginTop="@dimen/text_size_very_large"
+            android:padding="@dimen/margin_padding_tiny"
+            android:src="@drawable/ic_add_user" />
+
+        <ImageView
+            android:id="@+id/imgYouAreHere"
+            style="@style/Button.Secondary"
+            android:layout_width="@dimen/img_you_are_here_width"
+            android:layout_height="@dimen/img_you_are_here_height"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="@dimen/margin_padding_normal"
+            android:src="@drawable/ic_you_here" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlExplore"
+        style="@style/Button.Secondary"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/ic_background_menu_bottom"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground" />
+
+</LinearLayout>

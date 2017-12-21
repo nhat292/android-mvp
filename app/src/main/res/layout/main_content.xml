@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayoutMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerMainList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:overScrollMode="ifContentScrolls"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            tools:listitem="@layout/main_province_item" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <LinearLayout
+        android:id="@+id/llEmpty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="@dimen/img_earth_empty_size"
+            android:layout_height="@dimen/img_earth_empty_size"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_global"
+            android:tint="@color/accent_grey" />
+
+        <Button
+            android:id="@+id/btnChangeNation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_padding_very_small"
+            android:background="?attr/selectableItemBackground"
+            android:paddingEnd="@dimen/margin_padding_small"
+            android:paddingStart="@dimen/margin_padding_small"
+            android:text="@string/change_nation"
+            android:textColor="@color/accent_grey"
+            android:textSize="@dimen/text_size_normal" />
+    </LinearLayout>
+</RelativeLayout>
