@@ -34,6 +34,9 @@ public final class ApiEndPoint {
     public static String ENDPOINT_LOGIN_SOCIAL = BASE_URL
             + "api/v1/login-social";
 
+    public static String ENDPOINT_CHANGE_PASSWORD = BASE_URL
+            + "api/v1/change-password";
+
     public static void changeBaseUrl(String baseUrl) {
         BASE_URL = baseUrl;
         ENDPOINT_FIRST_DATA = BASE_URL + "api/v1/first-data";
@@ -43,6 +46,7 @@ public final class ApiEndPoint {
         ENDPOINT_LOGIN = BASE_URL + "api/v1/login";
         ENDPOINT_SIGNUP = BASE_URL + "api/v1/register";
         ENDPOINT_LOGIN_SOCIAL = BASE_URL + "api/v1/login-social";
+        ENDPOINT_CHANGE_PASSWORD = BASE_URL + "api/v1/change-password";
     }
 
     private ApiEndPoint() {

@@ -17,6 +17,7 @@
     <string name="message_connection_timeout">Connection time out</string>
     <string name="error_title">ERROR</string>
     <string name="confirm_title">Confirm</string>
+    <string name="success">SUCCESS</string>
 
     <!--Main-->
     <string name="guest_text">Guest</string>
@@ -63,6 +64,7 @@
 
 
     <!--Info-->
+    <string name="info">INFO</string>
     <string name="phone">PHONE</string>
     <string name="email">EMAIL</string>
     <string name="full_name">FULL NAME</string>
@@ -72,10 +74,22 @@
     <string name="account_type">ACCOUNT TYPE</string>
     <string name="update_text">update</string>
     <string name="change_password_text">change password</string>
+    <string name="add_your_phone_number">Add your phone number</string>
+    <string name="add_your_email_address">Add your email address</string>
+    <string name="add_your_full_name">Add your full name</string>
+    <string name="add_your_birthday">Add your birthday</string>
+    <string name="add_your_address">Add your address</string>
 
     <!--Change Password-->
+    <string name="change_password">CHANGE PASSWORD</string>
     <string name="current_password">Current password</string>
     <string name="new_password">New password</string>
+    <string name="message_enter_current_password">Please enter the current password</string>
+    <string name="message_enter_new_password">Please enter a new password</string>
+    <string name="message_change_password_success">Password changed successfully</string>
+
+    <!--Support-->
+    <string name="support">SUPPORT</string>
 
 
     <!--Production-->
@@ -94,5 +108,8 @@
     <!--button-->
     <string name="later">Later</string>
     <string name="submit">Submit</string>
+
+    <!--URLs-->
+    <string name="support_url">http://kapategi.com/apps/api/v1/guide</string>
 
 </resources>

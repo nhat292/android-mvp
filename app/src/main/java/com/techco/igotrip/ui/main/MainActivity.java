@@ -31,6 +31,7 @@ import com.techco.igotrip.ui.adapter.ProvinceMainAdapter;
 import com.techco.igotrip.ui.base.BaseActivity;
 import com.techco.igotrip.ui.dialog.DialogCallback;
 import com.techco.igotrip.ui.dialog.appdialog.AppDialog;
+import com.techco.igotrip.ui.info.InfoActivity;
 import com.techco.igotrip.ui.login.LoginActivity;
 import com.techco.igotrip.ui.provincedetail.ProvinceDetailActivity;
 import com.techco.igotrip.ui.viewholder.ProvinceMainViewHolder;
@@ -96,7 +97,6 @@ public class MainActivity extends BaseActivity implements MainBaseView, SwipeRef
     private List<Nation> nations = new ArrayList<>();
     private int nationId = 0;
     private boolean isUserLogged = false;
-
     private List<Province> provinces = new ArrayList<>();
     private ProvinceMainAdapter provinceMainAdapter;
 
@@ -159,7 +159,8 @@ public class MainActivity extends BaseActivity implements MainBaseView, SwipeRef
     @OnClick(R.id.btnMenuInfo)
     public void onMenuInfoClick() {
         if (isUserLogged()) {
-
+            startActivity(InfoActivity.getStartIntent(this));
+            drawer.closeDrawer(Gravity.START);
         }
     }
 
@@ -167,6 +168,7 @@ public class MainActivity extends BaseActivity implements MainBaseView, SwipeRef
     public void onMenuMyTripClick() {
         if (isUserLogged()) {
 
+            drawer.closeDrawer(Gravity.START);
         }
     }
 
@@ -174,6 +176,7 @@ public class MainActivity extends BaseActivity implements MainBaseView, SwipeRef
     public void onMenuExperiencesClick() {
         if (isUserLogged()) {
 
+            drawer.closeDrawer(Gravity.START);
         }
     }
 
@@ -181,12 +184,14 @@ public class MainActivity extends BaseActivity implements MainBaseView, SwipeRef
     public void onMenuFavoritesClick() {
         if (isUserLogged()) {
 
+            drawer.closeDrawer(Gravity.START);
         }
     }
 
     @OnClick(R.id.btnMenuSupport)
     public void onMenuSupportClick() {
-
+        startActivity(com.techco.igotrip.ui.support.SupportActivity.getStartIntent(this));
+        drawer.closeDrawer(Gravity.START);
     }
 
     @OnClick(R.id.btnMenuLogin)

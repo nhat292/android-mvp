@@ -127,5 +127,19 @@ public class AppApiHelper implements ApiHelper {
                 .build()
                 .getObjectObservable(LoginResponse.class);
     }
+
+    /**
+     * id: int value
+     * old_pass: string value
+     * new_pass: string value
+     */
+    @Override
+    public Observable<LoginResponse> changePassword(Map<String, String> params) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_CHANGE_PASSWORD)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .addBodyParameter(params)
+                .build()
+                .getObjectObservable(LoginResponse.class);
+    }
 }
 

@@ -7,9 +7,15 @@ import android.support.v7.widget.LinearLayoutManager;
 
 import com.techco.igotrip.dagger.ActivityContext;
 import com.techco.igotrip.dagger.PerActivity;
+import com.techco.igotrip.ui.changepassword.ChangePasswordBaseView;
+import com.techco.igotrip.ui.changepassword.ChangePasswordMvpPresenter;
+import com.techco.igotrip.ui.changepassword.ChangePasswordPresenter;
 import com.techco.igotrip.ui.dialog.rating.RatingDialogBaseView;
 import com.techco.igotrip.ui.dialog.rating.RatingDialogMvpPresenter;
 import com.techco.igotrip.ui.dialog.rating.RatingDialogPresenter;
+import com.techco.igotrip.ui.info.InfoBaseView;
+import com.techco.igotrip.ui.info.InfoMvpPresenter;
+import com.techco.igotrip.ui.info.InfoPresenter;
 import com.techco.igotrip.ui.launch.LaunchBaseView;
 import com.techco.igotrip.ui.launch.LaunchMvpPresenter;
 import com.techco.igotrip.ui.launch.LaunchPresenter;
@@ -109,6 +115,20 @@ public class ActivityModule {
     @PerActivity
     ProvinceDetailMvpPresenter<ProvinceDetailBaseView> provideProvinceDetailPresenter(
             ProvinceDetailPresenter<ProvinceDetailBaseView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    InfoMvpPresenter<InfoBaseView> provideInfoPresenter(
+            InfoPresenter<InfoBaseView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    ChangePasswordMvpPresenter<ChangePasswordBaseView> provideChangePasswordPresenter(
+            ChangePasswordPresenter<ChangePasswordBaseView> presenter) {
         return presenter;
     }
 

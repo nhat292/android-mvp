@@ -33,4 +33,6 @@ public interface ApiHelper {
     Observable<LoginResponse> signUp(Map<String, String> params);
 
     Observable<LoginResponse> loginSocial(Map<String, String> params);
+
+    Observable<LoginResponse> changePassword(Map<String, String> params);
 }

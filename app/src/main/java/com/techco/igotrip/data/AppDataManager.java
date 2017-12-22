@@ -85,6 +85,11 @@ public class AppDataManager implements DataManager {
         return mApiHelper.loginSocial(params);
     }
 
+    @Override
+    public Observable<LoginResponse> changePassword(Map<String, String> params) {
+        return mApiHelper.changePassword(params);
+    }
+
 
     @Override
     public void setUserInfo(User user) {
