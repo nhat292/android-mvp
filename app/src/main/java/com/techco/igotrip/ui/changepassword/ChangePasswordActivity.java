@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.techco.igotrip.R;
 import com.techco.igotrip.ui.base.BaseActivity;
 import com.techco.igotrip.ui.dialog.DialogCallback;
-import com.techco.igotrip.ui.dialog.appdialog.AppDialog;
+import com.techco.igotrip.ui.dialog.app.AppDialog;
 
 import javax.inject.Inject;
 
@@ -73,16 +73,14 @@ public class ChangePasswordActivity extends BaseActivity implements ChangePasswo
 
     @Override
     public void onChangePasswordSuccess() {
-        AppDialog dialog = AppDialog.newInstance();
-        dialog.show(getSupportFragmentManager(), getString(R.string.success), getString(R.string.message_change_password_success), false, null, null);
-        dialog.setCallback(new DialogCallback<AppDialog>() {
+        showConfirmDialog(getString(R.string.success), getString(R.string.message_change_password_success), null, null, new DialogCallback<AppDialog>() {
             @Override
             public void onNegative(AppDialog dialog) {
                 dialog.dismissDialog(AppDialog.TAG);
             }
 
             @Override
-            public void onPositive(AppDialog dialog) {
+            public void onPositive(AppDialog dialog, Object o) {
                 dialog.dismissDialog(AppDialog.TAG);
                 ChangePasswordActivity.this.finish();
             }

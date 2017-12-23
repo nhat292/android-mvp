@@ -92,7 +92,7 @@ public abstract class BaseDialog extends DialogFragment implements DialogBaseVie
     }
 
     @Override
-    public void showConfirmDialog(String title, String message, DialogCallback callback) {
+    public void showConfirmDialog(String title, String message, String okText, String cancelText, DialogCallback callback) {
 
     }
 

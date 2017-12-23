@@ -12,6 +12,8 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="nav_header_vertical_spacing">8dp</dimen>
     <dimen name="nav_header_height">176dp</dimen>
+    <dimen name="dialog_min_width">300dp</dimen>
+    <dimen name="dialog_simple_item_height">40dp</dimen>
 
     <dimen name="text_size_very_large">25sp</dimen>
     <dimen name="text_size_large">20sp</dimen>

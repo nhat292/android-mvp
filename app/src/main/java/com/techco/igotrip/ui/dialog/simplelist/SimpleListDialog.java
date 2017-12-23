@@ -1,17 +1,20 @@
 
-package com.techco.igotrip.ui.dialog.appdialog;
+package com.techco.igotrip.ui.dialog.simplelist;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.techco.igotrip.R;
 import com.techco.igotrip.dagger.component.ActivityComponent;
+import com.techco.igotrip.ui.adapter.SimpleListDialogAdapter;
 import com.techco.igotrip.ui.base.BaseDialog;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,21 +25,17 @@ import butterknife.OnClick;
  */
 
 
-public class AppDialog extends BaseDialog {
+public class SimpleListDialog extends BaseDialog {
 
     public static final String TAG = "AppDialog";
 
     @BindView(R.id.txtTitle)
     TextView txtTitle;
-    @BindView(R.id.txtMessage)
-    TextView txtMessage;
-    @BindView(R.id.btnCancel)
-    Button btnCancel;
-    @BindView(R.id.btnOk)
-    Button btnOk;
+    @BindView(R.id.recyclerList)
+    RecyclerView recyclerList;
 
-    public static AppDialog newInstance() {
-        AppDialog fragment = new AppDialog();
+    public static SimpleListDialog newInstance() {
+        SimpleListDialog fragment = new SimpleListDialog();
         Bundle bundle = new Bundle();
         fragment.setArguments(bundle);
         return fragment;
@@ -46,7 +45,7 @@ public class AppDialog extends BaseDialog {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.dialog_app, container, false);
+        View view = inflater.inflate(R.layout.dialog_simple_list, container, false);
 
         ActivityComponent component = getActivityComponent();
         if (component != null) {
@@ -57,18 +56,12 @@ public class AppDialog extends BaseDialog {
     }
 
     private String title;
-    private String message;
-    private String okText;
-    private String cancelText;
-    private boolean showCancel;
+    private List<String> datas;
 
-    public void show(FragmentManager fragmentManager, String title, String message, boolean showCancel, String okText, String cancelText) {
+    public void show(FragmentManager fragmentManager, String title,  List<String> datas) {
         super.show(fragmentManager, TAG);
         this.title = title;
-        this.message = message;
-        this.showCancel = showCancel;
-        this.okText = okText;
-        this.cancelText = cancelText;
+        this.datas = datas;
     }
 
     @Override
@@ -78,33 +71,18 @@ public class AppDialog extends BaseDialog {
         } else {
             txtTitle.setVisibility(View.GONE);
         }
-        if (message != null) {
-            txtMessage.setText(message);
-        } else {
-            txtMessage.setVisibility(View.GONE);
-        }
-        if (!showCancel) {
-            btnCancel.setVisibility(View.GONE);
-        }
-        if(okText != null) {
-            btnOk.setText(okText);
-        }
-        if(cancelText != null) {
-            btnCancel.setText(cancelText);
-        }
+
+        SimpleListDialogAdapter adapter = new SimpleListDialogAdapter(datas, ((object, position) -> {
+            callback.onPositive(this, position);
+        }));
+        recyclerList.setAdapter(adapter);
+
     }
 
     @OnClick(R.id.btnCancel)
     public void onCancelClick(View v) {
         if (callback != null) {
             callback.onNegative(this);
-        }
-    }
-
-    @OnClick(R.id.btnOk)
-    public void onOkClick(View v) {
-        if (callback != null) {
-            callback.onPositive(this);
         }
     }
 }

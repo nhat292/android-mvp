@@ -10,7 +10,7 @@ import com.techco.igotrip.data.network.ApiHelper;
 import com.techco.igotrip.data.network.model.object.User;
 import com.techco.igotrip.data.network.model.response.ExploreDataResponse;
 import com.techco.igotrip.data.network.model.response.FirstDataResponse;
-import com.techco.igotrip.data.network.model.response.LoginResponse;
+import com.techco.igotrip.data.network.model.response.UserResponse;
 import com.techco.igotrip.data.network.model.response.SelectNationResponse;
 import com.techco.igotrip.data.network.model.response.SelectTypeResponse;
 import com.techco.igotrip.data.prefs.PreferencesHelper;
@@ -71,25 +71,29 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Observable<LoginResponse> login(Map<String, String> params) {
+    public Observable<UserResponse> login(Map<String, String> params) {
         return mApiHelper.login(params);
     }
 
     @Override
-    public Observable<LoginResponse> signUp(Map<String, String> params) {
+    public Observable<UserResponse> signUp(Map<String, String> params) {
         return mApiHelper.signUp(params);
     }
 
     @Override
-    public Observable<LoginResponse> loginSocial(Map<String, String> params) {
+    public Observable<UserResponse> loginSocial(Map<String, String> params) {
         return mApiHelper.loginSocial(params);
     }
 
     @Override
-    public Observable<LoginResponse> changePassword(Map<String, String> params) {
+    public Observable<UserResponse> changePassword(Map<String, String> params) {
         return mApiHelper.changePassword(params);
     }
 
+    @Override
+    public Observable<UserResponse> updateInfo(Map<String, String> params) {
+        return mApiHelper.updateInfo(params);
+    }
 
     @Override
     public void setUserInfo(User user) {

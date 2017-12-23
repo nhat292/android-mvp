@@ -18,6 +18,13 @@
     <string name="error_title">ERROR</string>
     <string name="confirm_title">Confirm</string>
     <string name="success">SUCCESS</string>
+    <string name="permission">PERMISSION</string>
+
+    <!--Permission-->
+    <string name="setting">SETTING</string>
+    <string name="message_permission_rational">We need permissions to do some functions so that better for your experience</string>
+    <string name="message_camera_permission_denied">Please allow app using camera by click on setting</string>
+    <string name="message_external_storage_permission_denied">Please allow app access storage by click on setting</string>
 
     <!--Main-->
     <string name="guest_text">Guest</string>
@@ -79,6 +86,20 @@
     <string name="add_your_full_name">Add your full name</string>
     <string name="add_your_birthday">Add your birthday</string>
     <string name="add_your_address">Add your address</string>
+    <string name="edit_your_phone_number">Edit your phone number</string>
+    <string name="enter_your_phone_number">Enter your phone number</string>
+    <string name="edit_your_email">Edit your email</string>
+    <string name="enter_your_email">Enter your email</string>
+    <string name="edit_your_name">Edit your name</string>
+    <string name="enter_your_name">Enter your name</string>
+    <string name="edit_your_address">Edit your address</string>
+    <string name="enter_your_address">Enter your address</string>
+    <string name="view_image">View image</string>
+    <string name="choose_from_library">Choose from gallery</string>
+    <string name="take_a_picture">Take a picture</string>
+    <string name="options">Options</string>
+    <string name="message_account_update_success">Account updated successfully</string>
+
 
     <!--Change Password-->
     <string name="change_password">CHANGE PASSWORD</string>

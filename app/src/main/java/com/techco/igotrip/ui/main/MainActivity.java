@@ -30,7 +30,7 @@ import com.techco.igotrip.ui.adapter.NationAdapter;
 import com.techco.igotrip.ui.adapter.ProvinceMainAdapter;
 import com.techco.igotrip.ui.base.BaseActivity;
 import com.techco.igotrip.ui.dialog.DialogCallback;
-import com.techco.igotrip.ui.dialog.appdialog.AppDialog;
+import com.techco.igotrip.ui.dialog.app.AppDialog;
 import com.techco.igotrip.ui.info.InfoActivity;
 import com.techco.igotrip.ui.login.LoginActivity;
 import com.techco.igotrip.ui.provincedetail.ProvinceDetailActivity;
@@ -160,7 +160,7 @@ public class MainActivity extends BaseActivity implements MainBaseView, SwipeRef
     public void onMenuInfoClick() {
         if (isUserLogged()) {
             startActivity(InfoActivity.getStartIntent(this));
-            drawer.closeDrawer(Gravity.START);
+            closeLeftMenu();
         }
     }
 
@@ -168,7 +168,7 @@ public class MainActivity extends BaseActivity implements MainBaseView, SwipeRef
     public void onMenuMyTripClick() {
         if (isUserLogged()) {
 
-            drawer.closeDrawer(Gravity.START);
+            closeLeftMenu();
         }
     }
 
@@ -176,7 +176,7 @@ public class MainActivity extends BaseActivity implements MainBaseView, SwipeRef
     public void onMenuExperiencesClick() {
         if (isUserLogged()) {
 
-            drawer.closeDrawer(Gravity.START);
+            closeLeftMenu();
         }
     }
 
@@ -184,32 +184,30 @@ public class MainActivity extends BaseActivity implements MainBaseView, SwipeRef
     public void onMenuFavoritesClick() {
         if (isUserLogged()) {
 
-            drawer.closeDrawer(Gravity.START);
+            closeLeftMenu();
         }
     }
 
     @OnClick(R.id.btnMenuSupport)
     public void onMenuSupportClick() {
         startActivity(com.techco.igotrip.ui.support.SupportActivity.getStartIntent(this));
-        drawer.closeDrawer(Gravity.START);
+        closeLeftMenu();
     }
 
     @OnClick(R.id.btnMenuLogin)
     public void onMenuLoginClick() {
         if (isUserLogged()) {
-            AppDialog dialog = AppDialog.newInstance();
-            dialog.show(getSupportFragmentManager(), getString(R.string.confirm_title), getString(R.string.message_ask_logout),
-                    true, getString(R.string.menu_logout), null);
-            dialog.setCallback(new DialogCallback<AppDialog>() {
+            showConfirmDialog(getString(R.string.confirm_title), getString(R.string.message_ask_logout), null, getString(android.R.string.cancel), new DialogCallback<AppDialog>() {
                 @Override
                 public void onNegative(AppDialog dialog) {
                     dialog.dismissDialog(AppDialog.TAG);
                 }
 
                 @Override
-                public void onPositive(AppDialog dialog) {
+                public void onPositive(AppDialog dialog, Object o) {
                     dialog.dismissDialog(AppDialog.TAG);
                     mPresenter.logout();
+                    closeLeftMenu();
                 }
             });
         }
@@ -326,5 +324,9 @@ public class MainActivity extends BaseActivity implements MainBaseView, SwipeRef
         }
         startActivity(LoginActivity.getStartIntent(this));
         return false;
+    }
+
+    private void closeLeftMenu() {
+        drawer.closeDrawer(Gravity.START);
     }
 }

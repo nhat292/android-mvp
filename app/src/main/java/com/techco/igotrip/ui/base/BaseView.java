@@ -33,7 +33,7 @@ public interface BaseView {
 
     void showSimpleDialog(String title, String message);
 
-    void showConfirmDialog(String title, String message, DialogCallback callback);
+    void showConfirmDialog(String title, String message, String okText, String cancelText, DialogCallback callback);
 
     boolean isNetworkConnected();
 

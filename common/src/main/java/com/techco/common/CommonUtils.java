@@ -4,8 +4,10 @@ package com.techco.common;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.AssetManager;
+import android.graphics.Bitmap;
 import android.provider.Settings;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.DecimalFormat;
@@ -140,5 +142,12 @@ public final class CommonUtils {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(timeStamp);
         return formatter.format(calendar.getTime());
+    }
+
+    public static byte[] bitmapToByte(Bitmap bitmap){
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+        return byteArray;
     }
 }

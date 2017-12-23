@@ -3,7 +3,7 @@ package com.techco.igotrip.data.network;
 
 import com.techco.igotrip.data.network.model.response.ExploreDataResponse;
 import com.techco.igotrip.data.network.model.response.FirstDataResponse;
-import com.techco.igotrip.data.network.model.response.LoginResponse;
+import com.techco.igotrip.data.network.model.response.UserResponse;
 import com.techco.igotrip.data.network.model.response.SelectNationResponse;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 import com.techco.igotrip.data.network.model.response.SelectTypeResponse;
@@ -85,12 +85,12 @@ public class AppApiHelper implements ApiHelper {
      * device_id: string value
      */
     @Override
-    public Observable<LoginResponse> login(Map<String, String> params) {
+    public Observable<UserResponse> login(Map<String, String> params) {
         return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_LOGIN)
                 .addHeaders(mApiHeader.getProtectedApiHeader())
                 .addBodyParameter(params)
                 .build()
-                .getObjectObservable(LoginResponse.class);
+                .getObjectObservable(UserResponse.class);
     }
 
     /**
@@ -102,12 +102,12 @@ public class AppApiHelper implements ApiHelper {
      * device_id: string value
      */
     @Override
-    public Observable<LoginResponse> signUp(Map<String, String> params) {
+    public Observable<UserResponse> signUp(Map<String, String> params) {
         return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_SIGNUP)
                 .addHeaders(mApiHeader.getProtectedApiHeader())
                 .addBodyParameter(params)
                 .build()
-                .getObjectObservable(LoginResponse.class);
+                .getObjectObservable(UserResponse.class);
     }
 
     /**
@@ -120,12 +120,12 @@ public class AppApiHelper implements ApiHelper {
      * device_id: string value
      */
     @Override
-    public Observable<LoginResponse> loginSocial(Map<String, String> params) {
+    public Observable<UserResponse> loginSocial(Map<String, String> params) {
         return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_LOGIN_SOCIAL)
                 .addHeaders(mApiHeader.getProtectedApiHeader())
                 .addBodyParameter(params)
                 .build()
-                .getObjectObservable(LoginResponse.class);
+                .getObjectObservable(UserResponse.class);
     }
 
     /**
@@ -134,12 +134,30 @@ public class AppApiHelper implements ApiHelper {
      * new_pass: string value
      */
     @Override
-    public Observable<LoginResponse> changePassword(Map<String, String> params) {
+    public Observable<UserResponse> changePassword(Map<String, String> params) {
         return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_CHANGE_PASSWORD)
                 .addHeaders(mApiHeader.getProtectedApiHeader())
                 .addBodyParameter(params)
                 .build()
-                .getObjectObservable(LoginResponse.class);
+                .getObjectObservable(UserResponse.class);
+    }
+
+    /**
+     * id: int value
+     * phone: string value
+     * email: string value
+     * birthday: string value
+     * address: string value
+     * gender: int value
+     * image: base64 string
+     */
+    @Override
+    public Observable<UserResponse> updateInfo(Map<String, String> params) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_UPDATE_INFO)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .addBodyParameter(params)
+                .build()
+                .getObjectObservable(UserResponse.class);
     }
 }
 

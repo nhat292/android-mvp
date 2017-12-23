@@ -1,5 +1,5 @@
 
-package com.techco.igotrip.ui.custom;
+package com.techco.igotrip.ui.custom.views;
 
 import android.content.Context;
 import android.graphics.Bitmap;

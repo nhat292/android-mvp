@@ -14,4 +14,6 @@ import com.techco.igotrip.ui.base.MvpPresenter;
 public interface InfoMvpPresenter<V extends InfoBaseView> extends MvpPresenter<V> {
 
     void getUserInfo();
+
+    void updateInfo(int id, String phone, String email, String fullname, String birthday, String address, int gender, String image64);
 }

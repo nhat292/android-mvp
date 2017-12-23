@@ -1,69 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/margin_padding_large"
         android:background="@drawable/bg_dialog"
-        android:layout_margin="10dp"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="4dp"
-        app:cardUseCompatPadding="true">
+        android:minWidth="@dimen/dialog_min_width"
+        android:orientation="vertical"
+        android:padding="@dimen/margin_padding_normal">
+
+
+        <TextView
+            android:id="@+id/txtTitle"
+            style="@style/TextStyle.Heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:text="TITLE"
+            android:textSize="@dimen/text_size_large" />
+
+        <TextView
+            android:id="@+id/txtMessage"
+            style="@style/TextStyle.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginTop="@dimen/margin_padding_normal"
+            android:gravity="center"
+            android:text="THIS IS MESSAGE"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/editText"
+            style="@style/EditText"
+            android:layout_marginTop="@dimen/margin_padding_normal"
+            android:background="@drawable/bg_edittext_dialog"
+            android:imeOptions="actionNext"
+            android:inputType="textEmailAddress"
+            android:visibility="gone" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="@dimen/margin_padding_normal">
+            android:layout_marginTop="@dimen/margin_padding_large"
+            android:gravity="end">
 
-
-            <TextView
-                android:id="@+id/txtTitle"
-                style="@style/TextStyle.Heading"
+            <Button
+                android:id="@+id/btnCancel"
+                style="@style/Button.Action.Negative"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center_horizontal"
-                android:text="TITLE"
-                android:textSize="@dimen/text_size_large" />
+                android:minHeight="0px"
+                android:paddingBottom="@dimen/margin_padding_very_small"
+                android:paddingTop="@dimen/margin_padding_very_small"
+                android:text="@android:string/cancel" />
 
-            <TextView
-                android:id="@+id/txtMessage"
-                style="@style/TextStyle.Title"
+            <Button
+                android:id="@+id/btnOk"
+                style="@style/Button.Action.Positive"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:layout_marginEnd="@dimen/margin_padding_normal"
-                android:layout_marginStart="@dimen/margin_padding_normal"
-                android:layout_marginTop="@dimen/margin_padding_normal"
-                android:gravity="center"
-                android:text="THIS IS MESSAGE"
-                android:textColor="@color/black" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_padding_large"
-                android:gravity="end">
-
-                <Button
-                    android:id="@+id/btnCancel"
-                    style="@style/Button.Action.Negative"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@android:string/cancel" />
-
-                <Button
-                    android:id="@+id/btnOk"
-                    style="@style/Button.Action.Positive"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@android:string/ok" />
-            </LinearLayout>
+                android:minHeight="0px"
+                android:paddingBottom="@dimen/margin_padding_very_small"
+                android:paddingTop="@dimen/margin_padding_very_small"
+                android:text="@android:string/ok" />
         </LinearLayout>
-    </android.support.v7.widget.CardView>
+    </LinearLayout>
 
 </RelativeLayout>

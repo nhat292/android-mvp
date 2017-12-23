@@ -12,6 +12,7 @@ import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
@@ -24,7 +25,7 @@ import com.techco.igotrip.dagger.component.ActivityComponent;
 import com.techco.igotrip.dagger.component.DaggerActivityComponent;
 import com.techco.igotrip.dagger.module.ActivityModule;
 import com.techco.igotrip.ui.dialog.DialogCallback;
-import com.techco.igotrip.ui.dialog.appdialog.AppDialog;
+import com.techco.igotrip.ui.dialog.app.AppDialog;
 import com.techco.igotrip.utils.AppUiUtils;
 
 import butterknife.Unbinder;
@@ -131,7 +132,7 @@ public abstract class BaseActivity extends AppCompatActivity
     @Override
     public void showSimpleDialog(String title, String message) {
         AppDialog dialog = AppDialog.newInstance();
-        dialog.show(getSupportFragmentManager(), title, message, false, null, null);
+        dialog.show(getSupportFragmentManager(), title, message, null, null, null, InputType.TYPE_NULL);
         dialog.setCallback(new DialogCallback<AppDialog>() {
             @Override
             public void onNegative(AppDialog dialog) {
@@ -139,16 +140,16 @@ public abstract class BaseActivity extends AppCompatActivity
             }
 
             @Override
-            public void onPositive(AppDialog dialog) {
+            public void onPositive(AppDialog dialog, Object o) {
                 dialog.dismissDialog(AppDialog.TAG);
             }
         });
     }
 
     @Override
-    public void showConfirmDialog(String title, String message, DialogCallback callback) {
+    public void showConfirmDialog(String title, String message, String okText, String cancelText, DialogCallback callback) {
         AppDialog dialog = AppDialog.newInstance();
-        dialog.show(getSupportFragmentManager(), title, message, true, null, null);
+        dialog.show(getSupportFragmentManager(), title, message, okText, cancelText, null, InputType.TYPE_NULL);
         dialog.setCallback(callback);
     }
 

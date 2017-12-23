@@ -8,5 +8,5 @@ public interface DialogCallback<T> {
 
     void onNegative(T dialog);
 
-    void onPositive(T dialog);
+    void onPositive(T dialog, Object o);
 }

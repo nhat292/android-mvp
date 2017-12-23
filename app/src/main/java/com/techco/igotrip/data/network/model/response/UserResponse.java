@@ -8,7 +8,7 @@ import com.techco.igotrip.data.network.model.object.User;
  * Created by Nhat on 12/17/17.
  */
 
-public class LoginResponse {
+public class UserResponse {
     @SerializedName("status")
     @Expose
     private int status;

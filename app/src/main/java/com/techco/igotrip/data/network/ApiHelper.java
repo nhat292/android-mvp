@@ -3,7 +3,7 @@ package com.techco.igotrip.data.network;
 
 import com.techco.igotrip.data.network.model.response.ExploreDataResponse;
 import com.techco.igotrip.data.network.model.response.FirstDataResponse;
-import com.techco.igotrip.data.network.model.response.LoginResponse;
+import com.techco.igotrip.data.network.model.response.UserResponse;
 import com.techco.igotrip.data.network.model.response.SelectNationResponse;
 import com.techco.igotrip.data.network.model.response.SelectTypeResponse;
 
@@ -28,11 +28,13 @@ public interface ApiHelper {
 
     Observable<SelectTypeResponse> selectType(int typeId);
 
-    Observable<LoginResponse> login(Map<String, String> params);
+    Observable<UserResponse> login(Map<String, String> params);
 
-    Observable<LoginResponse> signUp(Map<String, String> params);
+    Observable<UserResponse> signUp(Map<String, String> params);
 
-    Observable<LoginResponse> loginSocial(Map<String, String> params);
+    Observable<UserResponse> loginSocial(Map<String, String> params);
 
-    Observable<LoginResponse> changePassword(Map<String, String> params);
+    Observable<UserResponse> changePassword(Map<String, String> params);
+
+    Observable<UserResponse> updateInfo(Map<String, String> params);
 }

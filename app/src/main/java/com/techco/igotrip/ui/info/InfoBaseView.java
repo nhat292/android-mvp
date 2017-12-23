@@ -13,4 +13,6 @@ import com.techco.igotrip.ui.base.BaseView;
 public interface InfoBaseView extends BaseView {
 
     void onGetUserInfoSuccess(User user);
+
+    void onUpdateInfoSuccess();
 }
