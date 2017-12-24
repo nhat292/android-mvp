@@ -153,11 +153,13 @@
     <orderEntry type="library" scope="TEST" name="com.android.support.test.espresso:espresso-idling-resource-2.2.2" level="project" />
     <orderEntry type="library" name="com.facebook.android:facebook-login-4.29.0" level="project" />
     <orderEntry type="library" name="com.squareup.picasso:picasso:2.5.2@jar" level="project" />
+    <orderEntry type="library" name="com.google.android.gms:play-services-tasks-11.0.2" level="project" />
     <orderEntry type="library" scope="TEST" name="javax.annotation:javax.annotation-api:1.2@jar" level="project" />
     <orderEntry type="library" name="com.android.support:transition-26.1.0" level="project" />
     <orderEntry type="library" name="com.android.support:support-fragment-27.0.1" level="project" />
     <orderEntry type="library" name="com.android.support:design-26.1.0" level="project" />
     <orderEntry type="library" name="com.crashlytics.sdk.android:answers-1.4.1" level="project" />
+    <orderEntry type="library" name="com.google.android.gms:play-services-base-11.0.2" level="project" />
     <orderEntry type="library" name="com.android.support:support-v4-27.0.1" level="project" />
     <orderEntry type="library" name="com.amitshekhar.android:rx2-android-networking-1.0.0" level="project" />
     <orderEntry type="library" name="com.android.support:appcompat-v7-27.0.1" level="project" />
@@ -169,8 +171,10 @@
     <orderEntry type="library" name="com.facebook.android:facebook-common-4.29.0" level="project" />
     <orderEntry type="library" name="javax.inject:javax.inject:1@jar" level="project" />
     <orderEntry type="library" scope="TEST" name="org.objenesis:objenesis:2.5@jar" level="project" />
+    <orderEntry type="library" name="com.google.android.gms:play-services-basement-11.0.2" level="project" />
     <orderEntry type="library" name="com.parse.bolts:bolts-applinks:1.4.0@jar" level="project" />
     <orderEntry type="library" name="org.greenrobot:greendao-api:3.2.0@jar" level="project" />
+    <orderEntry type="library" name="cat.ereza:customactivityoncrash-2.1.0" level="project" />
     <orderEntry type="library" name="com.amitshekhar.android:debug-db-1.0.0" level="project" />
     <orderEntry type="library" name="com.squareup.retrofit2:converter-gson:2.1.0@jar" level="project" />
     <orderEntry type="library" name="com.facebook.android:facebook-core-4.29.0" level="project" />
@@ -188,6 +192,7 @@
     <orderEntry type="library" name="com.twitter.sdk.android:tweet-composer-3.1.1" level="project" />
     <orderEntry type="library" scope="TEST" name="net.bytebuddy:byte-buddy:1.6.5@jar" level="project" />
     <orderEntry type="library" name="com.jakewharton:butterknife-annotations:8.6.0@jar" level="project" />
+    <orderEntry type="library" name="com.google.android.gms:play-services-location-11.0.2" level="project" />
     <orderEntry type="library" name="org.greenrobot:greendao:3.2.0@jar" level="project" />
     <orderEntry type="library" name="uk.co.chrisjenx:calligraphy-2.2.0" level="project" />
     <orderEntry type="library" name="com.github.bumptech.glide:glide:3.7.0@jar" level="project" />

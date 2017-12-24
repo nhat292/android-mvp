@@ -28,7 +28,8 @@ public class ProvinceMainAdapter extends RecyclerView.Adapter<ProvinceMainViewHo
     @Override
     public ProvinceMainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.main_province_item, null);
-        RecyclerView.LayoutParams layoutParams = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) parent.getContext().getResources().getDimension(R.dimen.province_item_height));
+        RecyclerView.LayoutParams layoutParams = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                (int) parent.getContext().getResources().getDimension(R.dimen.province_item_height));
         view.setLayoutParams(layoutParams);
         return new ProvinceMainViewHolder(view);
     }

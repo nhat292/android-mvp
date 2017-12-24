@@ -1,6 +1,7 @@
 
 package com.techco.igotrip.data.network;
 
+import com.techco.igotrip.data.network.model.response.ArticleResponse;
 import com.techco.igotrip.data.network.model.response.ExploreDataResponse;
 import com.techco.igotrip.data.network.model.response.FirstDataResponse;
 import com.techco.igotrip.data.network.model.response.UserResponse;
@@ -158,6 +159,24 @@ public class AppApiHelper implements ApiHelper {
                 .addBodyParameter(params)
                 .build()
                 .getObjectObservable(UserResponse.class);
+    }
+
+    /**
+     * provinceId: int value
+     * lat: double value
+     * lng: double value
+     * minDistance: double value
+     * typeId: int value
+     * houseTypeId: int value
+     * user_id: int string
+     */
+    @Override
+    public Observable<ArticleResponse> exploreArticle(Map<String, String> params) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_EXPLORE_ARTICLE)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .addBodyParameter(params)
+                .build()
+                .getObjectObservable(ArticleResponse.class);
     }
 }
 

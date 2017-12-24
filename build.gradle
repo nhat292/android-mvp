@@ -58,4 +58,7 @@ ext {
     circleImageVersion = '2.1.0'
     facebookSDKVersion = '4.29.0'
     twitterSDKVersion = '3.1.1'
+
+    googleServiceVersion = '11.0.2'
+    customCrashVersion = '2.1.0'
 }

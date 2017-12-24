@@ -1,6 +1,7 @@
 
 package com.techco.igotrip.data.network;
 
+import com.techco.igotrip.data.network.model.response.ArticleResponse;
 import com.techco.igotrip.data.network.model.response.ExploreDataResponse;
 import com.techco.igotrip.data.network.model.response.FirstDataResponse;
 import com.techco.igotrip.data.network.model.response.UserResponse;
@@ -37,4 +38,6 @@ public interface ApiHelper {
     Observable<UserResponse> changePassword(Map<String, String> params);
 
     Observable<UserResponse> updateInfo(Map<String, String> params);
+
+    Observable<ArticleResponse> exploreArticle(Map<String, String> params);
 }

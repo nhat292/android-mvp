@@ -1,5 +1,6 @@
 buildscript {
     repositories {
+        maven { url 'https://maven.google.com' }
         maven { url 'https://maven.fabric.io/public' }
     }
 
@@ -119,6 +120,11 @@ dependencies {
     implementation "com.facebook.android:facebook-login:$rootProject.facebookSDKVersion"
 
     implementation "com.twitter.sdk.android:twitter:$rootProject.twitterSDKVersion"
+
+    implementation "com.google.android.gms:play-services-location:$rootProject.googleServiceVersion"
+
+    //Custom crashes
+    compile "cat.ereza:customactivityoncrash:$rootProject.customCrashVersion"
 
     //Import modules
     implementation project(':common')

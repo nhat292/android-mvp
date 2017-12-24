@@ -12,6 +12,7 @@ import com.techco.igotrip.dagger.component.ApplicationComponent;
 import com.techco.igotrip.dagger.component.DaggerApplicationComponent;
 import com.techco.igotrip.dagger.module.ApplicationModule;
 import com.techco.igotrip.data.DataManager;
+import com.techco.igotrip.ui.launch.LaunchActivity;
 import com.twitter.sdk.android.core.DefaultLogger;
 import com.twitter.sdk.android.core.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
@@ -19,6 +20,7 @@ import com.twitter.sdk.android.core.TwitterConfig;
 
 import javax.inject.Inject;
 
+import cat.ereza.customactivityoncrash.config.CaocConfig;
 import io.fabric.sdk.android.Fabric;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
@@ -61,6 +63,13 @@ public class App extends Application {
             AndroidNetworking.enableLogging(Level.BODY);
         }
         CalligraphyConfig.initDefault(mCalligraphyConfig);
+        CaocConfig.Builder.create()
+                .backgroundMode(CaocConfig.BACKGROUND_MODE_SILENT) //default: CaocConfig.BACKGROUND_MODE_SHOW_CUSTOM
+                .trackActivities(true) //default: false
+                .minTimeBetweenCrashesMs(2000) //default: 3000
+                .errorDrawable(R.mipmap.ic_launcher) //default: bug image
+                .restartActivity(LaunchActivity.class) //default: null (your app's launch activity)
+                .apply();
     }
 
     public ApplicationComponent getComponent() {

@@ -8,6 +8,7 @@ import com.techco.igotrip.dagger.ApplicationContext;
 import com.techco.igotrip.data.network.ApiHeader;
 import com.techco.igotrip.data.network.ApiHelper;
 import com.techco.igotrip.data.network.model.object.User;
+import com.techco.igotrip.data.network.model.response.ArticleResponse;
 import com.techco.igotrip.data.network.model.response.ExploreDataResponse;
 import com.techco.igotrip.data.network.model.response.FirstDataResponse;
 import com.techco.igotrip.data.network.model.response.UserResponse;
@@ -93,6 +94,11 @@ public class AppDataManager implements DataManager {
     @Override
     public Observable<UserResponse> updateInfo(Map<String, String> params) {
         return mApiHelper.updateInfo(params);
+    }
+
+    @Override
+    public Observable<ArticleResponse> exploreArticle(Map<String, String> params) {
+        return mApiHelper.exploreArticle(params);
     }
 
     @Override

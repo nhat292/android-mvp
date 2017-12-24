@@ -19,6 +19,8 @@
     <string name="confirm_title">Confirm</string>
     <string name="success">SUCCESS</string>
     <string name="permission">PERMISSION</string>
+    <string name="location">LOCATION</string>
+    <string name="message_ask_enable_location">Your GPS seems to be disabled, do you want to enable it?</string>
 
     <!--Permission-->
     <string name="setting">SETTING</string>

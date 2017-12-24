@@ -14,4 +14,5 @@ import com.techco.igotrip.ui.base.MvpPresenter;
 public interface ProvinceDetailMvpPresenter<V extends ProvinceDetailBaseView> extends MvpPresenter<V> {
     void getExploreData();
     void selectType(int typeId);
+    void exploreArticle(int provinceId, double lat, double lng, double minDistance, int typeId, int houseTypeId);
 }

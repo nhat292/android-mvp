@@ -1,5 +1,8 @@
 package com.techco.igotrip.data.network.model.object;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -7,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by Nhat on 12/15/17.
  */
 
-public class Province {
+public class Province implements Parcelable {
     @SerializedName("id")
     @Expose
     private int id;
@@ -32,6 +35,29 @@ public class Province {
     @SerializedName("sequence")
     @Expose
     private int sequence;
+
+    protected Province(Parcel in) {
+        id = in.readInt();
+        name = in.readString();
+        nationId = in.readInt();
+        description = in.readString();
+        image = in.readString();
+        createdAt = in.readString();
+        updatedAt = in.readString();
+        sequence = in.readInt();
+    }
+
+    public static final Creator<Province> CREATOR = new Creator<Province>() {
+        @Override
+        public Province createFromParcel(Parcel in) {
+            return new Province(in);
+        }
+
+        @Override
+        public Province[] newArray(int size) {
+            return new Province[size];
+        }
+    };
 
     public int getId() {
         return id;
@@ -95,5 +121,22 @@ public class Province {
 
     public void setSequence(int sequence) {
         this.sequence = sequence;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(id);
+        parcel.writeString(name);
+        parcel.writeInt(nationId);
+        parcel.writeString(description);
+        parcel.writeString(image);
+        parcel.writeString(createdAt);
+        parcel.writeString(updatedAt);
+        parcel.writeInt(sequence);
     }
 }

@@ -138,6 +138,16 @@ public class MainActivity extends BaseActivity implements MainBaseView, SwipeRef
     protected void setUp() {
         swipeRefreshLayoutMain.setColorSchemeResources(R.color.colorPrimary, R.color.colorPrimary);
         swipeRefreshLayoutMain.setOnRefreshListener(this);
+
+        provinceMainAdapter = new ProvinceMainAdapter(provinces, (object, position) -> {
+            short type = (short) object;
+            if (type == ProvinceMainViewHolder.CLICK_TYPE_ITEM) {
+                startActivity(ProvinceDetailActivity.getStartIntent(this, this.provinces.get(position)));
+            } else {
+
+            }
+        });
+        recyclerMainList.setAdapter(provinceMainAdapter);
     }
 
     @OnClick(R.id.imgMenu)
@@ -283,20 +293,12 @@ public class MainActivity extends BaseActivity implements MainBaseView, SwipeRef
         swipeRefreshLayoutMain.setRefreshing(false);
         this.provinces.clear();
         this.provinces.addAll(response.getProvinces());
-        provinceMainAdapter = new ProvinceMainAdapter(provinces, (object, position) -> {
-            short type = (short) object;
-            if (type == ProvinceMainViewHolder.CLICK_TYPE_ITEM) {
-                startActivity(ProvinceDetailActivity.getStartIntent(this, this.provinces.get(position).getName()));
-            } else {
-
-            }
-        });
-        recyclerMainList.setAdapter(provinceMainAdapter);
         if (provinces.size() > 0) {
             llEmpty.setVisibility(View.GONE);
         } else {
             llEmpty.setVisibility(View.VISIBLE);
         }
+        provinceMainAdapter.notifyDataSetChanged();
     }
 
     @Override
