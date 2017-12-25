@@ -6,12 +6,16 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.TextView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -23,6 +27,7 @@ import com.karumi.dexter.listener.single.PermissionListener;
 import com.karumi.dexter.listener.single.SnackbarOnDeniedPermissionListener;
 import com.techco.common.AppLogger;
 import com.techco.igotrip.R;
+import com.techco.igotrip.data.network.model.object.Article;
 import com.techco.igotrip.data.network.model.object.Province;
 import com.techco.igotrip.data.network.model.object.SubType;
 import com.techco.igotrip.data.network.model.object.Type;
@@ -32,6 +37,7 @@ import com.techco.igotrip.data.network.model.response.SelectTypeResponse;
 import com.techco.igotrip.ui.adapter.SubTypeAdapter;
 import com.techco.igotrip.ui.adapter.TypeAdapter;
 import com.techco.igotrip.ui.base.BaseActivity;
+import com.techco.igotrip.ui.custom.carousellayout.CarouselPagerAdapter;
 import com.techco.igotrip.ui.dialog.DialogCallback;
 import com.techco.igotrip.ui.dialog.app.AppDialog;
 import com.techco.igotrip.utils.permission.ErrorPermissionRequestListener;
@@ -61,6 +67,9 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
     private static final String TAG = "ProvinceDetailActivity";
     public static final String EXTRA_PROVINCE = "PROVINCE";
 
+    public static int VIEW_PAGER_WIDTH = 0;
+    public static int VIEW_PAGER_HEIGHT = 0;
+
     @Inject
     ProvinceDetailMvpPresenter<ProvinceDetailBaseView> mPresenter;
 
@@ -70,6 +79,8 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
     RecyclerView recyclerSubType;
     @BindView(R.id.recyclerType)
     RecyclerView recyclerType;
+    @BindView(R.id.pagerArticle)
+    ViewPager pagerArticle;
 
     private List<Type> types = new ArrayList<>();
     private List<SubType> subTypes = new ArrayList<>();
@@ -78,6 +89,8 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
     private TypeAdapter typeAdapter;
     private SubTypeAdapter subTypeAdapter;
     private Province province;
+    private CarouselPagerAdapter carouselPagerAdapter;
+    private ArrayList<Article> articles = new ArrayList<>();
 
     private double minDistance = 0.0;
     private Location location;
@@ -127,11 +140,34 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
         });
         subTypeAdapter = new SubTypeAdapter(this.subTypes, ((object, position) -> {
             this.currentSubType = (SubType) object;
-
+            exploreArticle();
         }));
 
-        recyclerType.setAdapter(typeAdapter);
-        recyclerSubType.setAdapter(subTypeAdapter);
+        ViewTreeObserver vto = pagerArticle.getViewTreeObserver();
+        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+                    pagerArticle.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                } else {
+                    pagerArticle.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                }
+                VIEW_PAGER_WIDTH = pagerArticle.getMeasuredWidth();
+                VIEW_PAGER_HEIGHT = pagerArticle.getMeasuredHeight();
+                DisplayMetrics metrics = new DisplayMetrics();
+                getWindowManager().getDefaultDisplay().getMetrics(metrics);
+                int pageMargin = (int) (metrics.widthPixels * 0.21);
+                pagerArticle.setPageMargin(-pageMargin);
+                carouselPagerAdapter = new CarouselPagerAdapter(ProvinceDetailActivity.this, pagerArticle, getSupportFragmentManager(), articles);
+                pagerArticle.setAdapter(carouselPagerAdapter);
+                pagerArticle.addOnPageChangeListener(carouselPagerAdapter);
+                pagerArticle.setCurrentItem(0);
+                pagerArticle.setOffscreenPageLimit(3);
+
+                recyclerType.setAdapter(typeAdapter);
+                recyclerSubType.setAdapter(subTypeAdapter);
+            }
+        });
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -174,11 +210,15 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
             currentSubType = this.subTypes.get(0);
         }
         subTypeAdapter.notifyDataSetChanged();
+        exploreArticle();
     }
 
     @Override
     public void onExploreArticleSuccess(ArticleResponse response) {
         AppLogger.d(TAG, "Article size: " + response.getArticles().size());
+        articles.clear();
+        articles.addAll(response.getArticles());
+        carouselPagerAdapter.notifyDataSetChanged();
     }
 
     private void checkLocaionPermission() {

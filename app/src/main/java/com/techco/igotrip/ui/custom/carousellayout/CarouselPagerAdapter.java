@@ -7,6 +7,9 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 
 import com.techco.igotrip.R;
+import com.techco.igotrip.data.network.model.object.Article;
+
+import java.util.ArrayList;
 
 public class CarouselPagerAdapter extends FragmentPagerAdapter implements ViewPager.OnPageChangeListener {
 
@@ -16,40 +19,36 @@ public class CarouselPagerAdapter extends FragmentPagerAdapter implements ViewPa
     private Context context;
     private FragmentManager fragmentManager;
     private float scale;
+    private ArrayList<Article> articles;
+    private ViewPager pager;
 
-    public CarouselPagerAdapter(Context context, FragmentManager fm) {
+    public CarouselPagerAdapter(Context context, ViewPager pager, FragmentManager fm, ArrayList<Article> articles) {
         super(fm);
         this.fragmentManager = fm;
         this.context = context;
+        this.articles = articles;
+        this.pager = pager;
     }
 
     @Override
     public Fragment getItem(int position) {
-        // make the first pager bigger than others
         try {
             if (position == 0)
                 scale = BIG_SCALE;
             else
                 scale = SMALL_SCALE;
 
-            position = position % 10;
+            position = position % articles.size();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return ItemFragment.newInstance(context, position, scale);
+        return ItemFragment.newInstance(context, position, scale, articles.get(position));
     }
 
     @Override
     public int getCount() {
-        int count = 0;
-        try {
-            count = 10 * 1000;
-        } catch (Exception e) {
-            // TODO: handle exception
-            e.printStackTrace();
-        }
-        return count;
+        return articles.size();
     }
 
     @Override
@@ -80,10 +79,10 @@ public class CarouselPagerAdapter extends FragmentPagerAdapter implements ViewPa
     @SuppressWarnings("ConstantConditions")
     private CarouselLinearLayout getRootView(int position) {
         return (CarouselLinearLayout) fragmentManager.findFragmentByTag(this.getFragmentTag(position))
-                .getView().findViewById(R.id.root_container);
+                .getView().findViewById(R.id.llRoot);
     }
 
     private String getFragmentTag(int position) {
-        return "";
+        return "android:switcher:" + pager.getId() + ":" + position;
     }
 }

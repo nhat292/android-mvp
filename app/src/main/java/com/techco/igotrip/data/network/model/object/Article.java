@@ -1,5 +1,8 @@
 package com.techco.igotrip.data.network.model.object;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -7,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by Nhat on 12/24/17.
  */
 
-public class Article {
+public class Article implements Parcelable {
     public static final int WAITING = 1;
     public static final int APPROVED = 2;
     public static final int REJECT = 3;
@@ -76,6 +79,42 @@ public class Article {
     @SerializedName("user_id")
     @Expose
     private int userId;
+
+    protected Article(Parcel in) {
+        id = in.readInt();
+        title = in.readString();
+        description = in.readString();
+        contactNumber = in.readString();
+        contactName = in.readString();
+        createdAt = in.readString();
+        updatedAt = in.readString();
+        addressDetail = in.readString();
+        lat = in.readDouble();
+        lng = in.readDouble();
+        distance = in.readDouble();
+        articleType = in.readString();
+        articleHouseType = in.readString();
+        image = in.readString();
+        province = in.readString();
+        favorite = in.readByte() != 0;
+        mytrip = in.readByte() != 0;
+        status = in.readInt();
+        favoriteCount = in.readInt();
+        index = in.readInt();
+        userId = in.readInt();
+    }
+
+    public static final Creator<Article> CREATOR = new Creator<Article>() {
+        @Override
+        public Article createFromParcel(Parcel in) {
+            return new Article(in);
+        }
+
+        @Override
+        public Article[] newArray(int size) {
+            return new Article[size];
+        }
+    };
 
     public int getId() {
         return id;
@@ -243,5 +282,35 @@ public class Article {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(id);
+        parcel.writeString(title);
+        parcel.writeString(description);
+        parcel.writeString(contactNumber);
+        parcel.writeString(contactName);
+        parcel.writeString(createdAt);
+        parcel.writeString(updatedAt);
+        parcel.writeString(addressDetail);
+        parcel.writeDouble(lat);
+        parcel.writeDouble(lng);
+        parcel.writeDouble(distance);
+        parcel.writeString(articleType);
+        parcel.writeString(articleHouseType);
+        parcel.writeString(image);
+        parcel.writeString(province);
+        parcel.writeByte((byte) (favorite ? 1 : 0));
+        parcel.writeByte((byte) (mytrip ? 1 : 0));
+        parcel.writeInt(status);
+        parcel.writeInt(favoriteCount);
+        parcel.writeInt(index);
+        parcel.writeInt(userId);
     }
 }

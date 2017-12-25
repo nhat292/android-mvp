@@ -124,7 +124,7 @@ dependencies {
     implementation "com.google.android.gms:play-services-location:$rootProject.googleServiceVersion"
 
     //Custom crashes
-    compile "cat.ereza:customactivityoncrash:$rootProject.customCrashVersion"
+    implementation "cat.ereza:customactivityoncrash:$rootProject.customCrashVersion"
 
     //Import modules
     implementation project(':common')

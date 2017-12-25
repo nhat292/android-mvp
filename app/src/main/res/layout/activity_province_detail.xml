@@ -33,4 +33,11 @@
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
         tools:listitem="@layout/type_item" />
 
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pagerArticle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/recyclerType"
+        android:layout_below="@+id/recyclerSubType" />
+
 </RelativeLayout>
