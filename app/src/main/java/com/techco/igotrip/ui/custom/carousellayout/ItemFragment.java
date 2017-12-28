@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.techco.igotrip.R;
 import com.techco.igotrip.data.network.ApiEndPoint;
 import com.techco.igotrip.data.network.model.object.Article;
+import com.techco.igotrip.ui.custom.views.MaterialBadgeTextView;
 import com.techco.igotrip.ui.provincedetail.ProvinceDetailActivity;
 
 import butterknife.BindView;
@@ -24,7 +25,7 @@ import butterknife.OnClick;
 
 public class ItemFragment extends Fragment {
 
-    private static final String POSITON = "position";
+    private static final String POSITION = "position";
     private static final String SCALE = "scale";
     private static final String DATA = "data";
 
@@ -36,14 +37,15 @@ public class ItemFragment extends Fragment {
     ImageView imgItem;
     @BindView(R.id.webViewItem)
     WebView webViewItem;
+    @BindView(R.id.txtBadgeCount)
+    MaterialBadgeTextView txtBadgeCount;
 
 
     public static Fragment newInstance(Context context, int pos, float scale, Article article) {
         Bundle b = new Bundle();
-        b.putInt(POSITON, pos);
+        b.putInt(POSITION, pos);
         b.putFloat(SCALE, scale);
         b.putParcelable(DATA, article);
-
         return Fragment.instantiate(context, ItemFragment.class.getName(), b);
     }
 
@@ -59,7 +61,7 @@ public class ItemFragment extends Fragment {
             return null;
         }
 
-        final int postion = this.getArguments().getInt(POSITON);
+        final int postion = this.getArguments().getInt(POSITION);
         float scale = this.getArguments().getFloat(SCALE);
         final Article article = this.getArguments().getParcelable(DATA);
 
@@ -76,7 +78,7 @@ public class ItemFragment extends Fragment {
                 .centerCrop()
                 .into(imgItem);
         webViewItem.loadData(article.getDescription(), "text/html", "UTF-8");
-
+        txtBadgeCount.setBadgeCount(article.getFavoriteCount(), false);
 
         llContain.setOnClickListener(view1 -> {
 

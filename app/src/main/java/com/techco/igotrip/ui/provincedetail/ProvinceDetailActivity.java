@@ -16,6 +16,7 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -81,6 +82,10 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
     RecyclerView recyclerType;
     @BindView(R.id.pagerArticle)
     ViewPager pagerArticle;
+    @BindView(R.id.txtArticleTitle)
+    TextView txtArticleTitle;
+    @BindView(R.id.imgEmpty)
+    ImageView imgEmpty;
 
     private List<Type> types = new ArrayList<>();
     private List<SubType> subTypes = new ArrayList<>();
@@ -131,6 +136,7 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
 
     @Override
     protected void setUp() {
+        txtArticleTitle.setVisibility(View.INVISIBLE);
         province = getIntent().getParcelableExtra(ProvinceDetailActivity.EXTRA_PROVINCE);
         txtTitle.setText(province.getName());
 
@@ -162,10 +168,27 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
                 pagerArticle.setAdapter(carouselPagerAdapter);
                 pagerArticle.addOnPageChangeListener(carouselPagerAdapter);
                 pagerArticle.setCurrentItem(0);
-                pagerArticle.setOffscreenPageLimit(3);
+                pagerArticle.setOffscreenPageLimit(0);
 
                 recyclerType.setAdapter(typeAdapter);
                 recyclerSubType.setAdapter(subTypeAdapter);
+                pagerArticle.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                    @Override
+                    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                        AppLogger.d(getClass().getSimpleName(), "onPageScrolled");
+                        txtArticleTitle.setText(articles.get(position).getTitle());
+                    }
+
+                    @Override
+                    public void onPageSelected(int position) {
+                        AppLogger.d(getClass().getSimpleName(), "onPageSelected");
+                    }
+
+                    @Override
+                    public void onPageScrollStateChanged(int state) {
+                        AppLogger.d(getClass().getSimpleName(), "onPageScrollStateChanged");
+                    }
+                });
             }
         });
 
@@ -219,6 +242,15 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
         articles.clear();
         articles.addAll(response.getArticles());
         carouselPagerAdapter.notifyDataSetChanged();
+        if(articles.size() == 0) {
+            txtArticleTitle.setVisibility(View.INVISIBLE);
+            pagerArticle.setVisibility(View.GONE);
+            imgEmpty.setVisibility(View.VISIBLE);
+        } else {
+            txtArticleTitle.setVisibility(View.VISIBLE);
+            pagerArticle.setVisibility(View.VISIBLE);
+            imgEmpty.setVisibility(View.INVISIBLE);
+        }
     }
 
     private void checkLocaionPermission() {

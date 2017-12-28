@@ -42,7 +42,7 @@ public class ProvinceDetailPresenter<V extends ProvinceDetailBaseView> extends B
                 .getExploreData().subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(response -> {
-                    getMvpView().hideLoading();
+                    //getMvpView().hideLoading();
                     getMvpView().onGetExploreDataSuccess(response);
                 }, throwable -> {
                     if (!isViewAttached()) {
@@ -65,7 +65,7 @@ public class ProvinceDetailPresenter<V extends ProvinceDetailBaseView> extends B
                 .selectType(typeId).subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(response -> {
-                    getMvpView().hideLoading();
+                    //getMvpView().hideLoading();
                     getMvpView().onSelectTypeSuccess(response);
                 }, throwable -> {
                     if (!isViewAttached()) {

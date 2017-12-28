@@ -62,7 +62,7 @@ public class App extends Application {
         if (BuildConfig.DEBUG) {
             AndroidNetworking.enableLogging(Level.BODY);
         }
-        CalligraphyConfig.initDefault(mCalligraphyConfig);
+        //CalligraphyConfig.initDefault(mCalligraphyConfig);
         CaocConfig.Builder.create()
                 .backgroundMode(CaocConfig.BACKGROUND_MODE_SILENT) //default: CaocConfig.BACKGROUND_MODE_SHOW_CUSTOM
                 .trackActivities(true) //default: false

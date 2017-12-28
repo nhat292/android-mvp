@@ -286,7 +286,7 @@ public class InfoActivity extends BaseActivity implements InfoBaseView, Permissi
                         } else {
                             checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE, readExternalStoragePermissionListener);
                         }
-                    } else if (position == 0) {
+                    } else if (position == 1) {
                         if (hasView) {
                             checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE, readExternalStoragePermissionListener);
                         } else {

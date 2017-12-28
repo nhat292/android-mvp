@@ -20,6 +20,7 @@
             android:id="@+id/imgItem"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_margin="@dimen/margin_padding_small"
             android:layout_weight="1"
             android:scaleType="fitCenter" />
 
@@ -57,38 +58,68 @@
 
                 <ImageView
                     android:id="@+id/imgJourney"
-                    style="@style/Button.Secondary"
                     android:layout_width="@dimen/img_option_article_item_size"
                     android:layout_height="@dimen/img_option_article_item_size"
+                    android:background="@drawable/button_secondary_bg"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
                     android:padding="@dimen/margin_padding_very_small"
                     android:src="@drawable/ic_up" />
 
                 <ImageView
                     android:id="@+id/imgShare"
-                    style="@style/Button.Secondary"
                     android:layout_width="@dimen/img_option_article_item_size"
                     android:layout_height="@dimen/img_option_article_item_size"
                     android:layout_marginStart="@dimen/margin_padding_large"
+                    android:background="@drawable/button_secondary_bg"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
                     android:padding="@dimen/margin_padding_very_small"
                     android:src="@drawable/ic_share" />
 
                 <ImageView
                     android:id="@+id/imgComment"
-                    style="@style/Button.Secondary"
                     android:layout_width="@dimen/img_option_article_item_size"
                     android:layout_height="@dimen/img_option_article_item_size"
                     android:layout_marginStart="@dimen/margin_padding_large"
+                    android:background="@drawable/button_secondary_bg"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
                     android:padding="@dimen/margin_padding_very_small"
                     android:src="@drawable/ic_comment" />
 
-                <ImageView
-                    android:id="@+id/imgHeart"
-                    style="@style/Button.Secondary"
+                <RelativeLayout
                     android:layout_width="@dimen/img_option_article_item_size"
                     android:layout_height="@dimen/img_option_article_item_size"
-                    android:layout_marginStart="@dimen/margin_padding_large"
-                    android:padding="@dimen/margin_padding_very_small"
-                    android:src="@drawable/ic_heart" />
+                    android:layout_marginStart="@dimen/margin_padding_large">
+
+                    <ImageView
+                        android:id="@+id/imgHeart"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/button_secondary_bg"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:padding="@dimen/margin_padding_very_small"
+                        android:src="@drawable/ic_heart" />
+
+                    <com.techco.igotrip.ui.custom.views.MaterialBadgeTextView
+                        android:id="@+id/txtBadgeCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:background="@color/accent_red"
+                        android:ellipsize="none"
+                        android:gravity="center"
+                        android:text="0"
+                        android:textColor="@android:color/white"
+                        android:textSize="8sp" />
+                </RelativeLayout>
+
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

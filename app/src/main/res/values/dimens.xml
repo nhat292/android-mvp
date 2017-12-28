@@ -19,7 +19,7 @@
     <dimen name="text_size_large">20sp</dimen>
     <dimen name="text_size_normal">16sp</dimen>
     <dimen name="text_size_small">14sp</dimen>
-    <dimen name="text_size_very_small">25sp</dimen>
+    <dimen name="text_size_very_small">10sp</dimen>
 
     <dimen name="margin_padding_very_large">30dp</dimen>
     <dimen name="margin_padding_large">20dp</dimen>
