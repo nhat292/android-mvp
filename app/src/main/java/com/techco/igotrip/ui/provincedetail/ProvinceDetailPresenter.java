@@ -112,4 +112,35 @@ public class ProvinceDetailPresenter<V extends ProvinceDetailBaseView> extends B
                     }
                 }));
     }
+
+    @Override
+    public void actionFavorite(String action, int articleId) {
+        if (getDataManager().getUserInfo() == null) {
+            getMvpView().openLogin();
+            return;
+        }
+        getMvpView().showLoading();
+        Map<String, String> params = new HashMap<>();
+        params.put("user_id", String.valueOf(String.valueOf(getDataManager().getUserInfo().getId())));
+        params.put("action", action);
+        params.put("article_id", String.valueOf(articleId));
+        getCompositeDisposable().add(getDataManager()
+                .actionFavorite(params)
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(response -> {
+                    getMvpView().hideLoading();
+                    getMvpView().onActionFavoriteSuccess();
+                }, throwable -> {
+                    if (!isViewAttached()) {
+                        return;
+                    }
+                    getMvpView().hideLoading();
+                    // handle the error here
+                    if (throwable instanceof ANError) {
+                        ANError anError = (ANError) throwable;
+                        handleApiError(anError);
+                    }
+                }));
+    }
 }

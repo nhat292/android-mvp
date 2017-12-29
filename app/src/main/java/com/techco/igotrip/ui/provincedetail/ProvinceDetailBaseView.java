@@ -19,4 +19,8 @@ public interface ProvinceDetailBaseView extends BaseView {
     void onSelectTypeSuccess(SelectTypeResponse response);
 
     void onExploreArticleSuccess(ArticleResponse response);
+
+    void openLogin();
+
+    void onActionFavoriteSuccess();
 }

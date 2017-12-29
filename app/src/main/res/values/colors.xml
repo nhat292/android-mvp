@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#45b8df</color>
-    <color name="colorPrimaryDark">#45b8df</color>
-    <color name="colorAccent">#45b8df</color>
+    <color name="colorPrimary">#50c0f2</color>
+    <color name="colorPrimaryDark">#50c0f2</color>
+    <color name="colorAccent">#50c0f2</color>
 
     <color name="menuColor"></color>
     <color name="btnShowMapColor">#e8901b</color>

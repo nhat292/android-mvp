@@ -32,7 +32,7 @@
             android:shadowColor="#000"
             android:shadowDx="0"
             android:shadowDy="0"
-            android:shadowRadius="30"
+            android:shadowRadius="25"
             android:text="Ho Chi Minh"
             android:textColor="@color/accent_white"
             android:textSize="@dimen/text_size_very_large"

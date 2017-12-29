@@ -5,11 +5,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.ViewGroup;
 
 import com.techco.igotrip.R;
 import com.techco.igotrip.data.network.model.object.Article;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CarouselPagerAdapter extends FragmentPagerAdapter implements ViewPager.OnPageChangeListener {
 
@@ -21,6 +24,7 @@ public class CarouselPagerAdapter extends FragmentPagerAdapter implements ViewPa
     private float scale;
     private ArrayList<Article> articles;
     private ViewPager pager;
+    private Map<Integer, String> mFragmentTags;
 
     public CarouselPagerAdapter(Context context, ViewPager pager, FragmentManager fm, ArrayList<Article> articles) {
         super(fm);
@@ -28,6 +32,7 @@ public class CarouselPagerAdapter extends FragmentPagerAdapter implements ViewPa
         this.context = context;
         this.articles = articles;
         this.pager = pager;
+        mFragmentTags = new HashMap<Integer, String>();
     }
 
     @Override
@@ -84,5 +89,36 @@ public class CarouselPagerAdapter extends FragmentPagerAdapter implements ViewPa
 
     private String getFragmentTag(int position) {
         return "android:switcher:" + pager.getId() + ":" + position;
+    }
+
+    @Override
+    public Object instantiateItem(ViewGroup container, int position) {
+        Object object = super.instantiateItem(container, position);
+        if (object instanceof Fragment) {
+            Fragment fragment = (Fragment) object;
+            String tag = fragment.getTag();
+            mFragmentTags.put(position, tag);
+        }
+        return object;
+    }
+
+    public Fragment getFragment(int position) {
+        Fragment fragment = null;
+        String tag = mFragmentTags.get(position);
+        if (tag != null) {
+            fragment = fragmentManager.findFragmentByTag(tag);
+        }
+        return fragment;
+    }
+
+    @Override
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
+        if (articles.size() > 0) {
+            for (int i = 0; i < articles.size(); i++) {
+                ItemFragment fragment = (ItemFragment) getFragment(i);
+                fragment.update(articles.get(i));
+            }
+        }
     }
 }

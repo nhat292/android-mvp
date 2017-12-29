@@ -65,7 +65,8 @@
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground"
                     android:padding="@dimen/margin_padding_very_small"
-                    android:src="@drawable/ic_up" />
+                    android:src="@drawable/ic_up"
+                    android:tint="@color/dark_gray" />
 
                 <ImageView
                     android:id="@+id/imgShare"
@@ -77,7 +78,8 @@
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground"
                     android:padding="@dimen/margin_padding_very_small"
-                    android:src="@drawable/ic_share" />
+                    android:src="@drawable/ic_share"
+                    android:tint="@color/dark_gray" />
 
                 <ImageView
                     android:id="@+id/imgComment"
@@ -89,7 +91,8 @@
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground"
                     android:padding="@dimen/margin_padding_very_small"
-                    android:src="@drawable/ic_comment" />
+                    android:src="@drawable/ic_comment"
+                    android:tint="@color/dark_gray" />
 
                 <RelativeLayout
                     android:layout_width="@dimen/img_option_article_item_size"
@@ -105,7 +108,8 @@
                         android:focusable="true"
                         android:foreground="?attr/selectableItemBackground"
                         android:padding="@dimen/margin_padding_very_small"
-                        android:src="@drawable/ic_heart" />
+                        android:src="@drawable/ic_heart"
+                        android:tint="@color/dark_gray" />
 
                     <com.techco.igotrip.ui.custom.views.MaterialBadgeTextView
                         android:id="@+id/txtBadgeCount"

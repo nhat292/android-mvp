@@ -16,6 +16,7 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,6 +29,7 @@ import com.karumi.dexter.listener.single.PermissionListener;
 import com.karumi.dexter.listener.single.SnackbarOnDeniedPermissionListener;
 import com.techco.common.AppLogger;
 import com.techco.igotrip.R;
+import com.techco.igotrip.callback.ArticleActionCallback;
 import com.techco.igotrip.data.network.model.object.Article;
 import com.techco.igotrip.data.network.model.object.Province;
 import com.techco.igotrip.data.network.model.object.SubType;
@@ -41,6 +43,7 @@ import com.techco.igotrip.ui.base.BaseActivity;
 import com.techco.igotrip.ui.custom.carousellayout.CarouselPagerAdapter;
 import com.techco.igotrip.ui.dialog.DialogCallback;
 import com.techco.igotrip.ui.dialog.app.AppDialog;
+import com.techco.igotrip.ui.login.LoginActivity;
 import com.techco.igotrip.utils.permission.ErrorPermissionRequestListener;
 import com.techco.igotrip.utils.permission.PermissionResultListener;
 import com.techco.igotrip.utils.permission.SinglePermissionListener;
@@ -54,16 +57,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static android.location.GpsStatus.GPS_EVENT_STARTED;
-import static android.location.GpsStatus.GPS_EVENT_STOPPED;
-
 
 /**
  * Created by Nhat on 12/13/17.
  */
 
 
-public class ProvinceDetailActivity extends BaseActivity implements ProvinceDetailBaseView, PermissionResultListener {
+public class ProvinceDetailActivity extends BaseActivity implements ProvinceDetailBaseView, PermissionResultListener, ArticleActionCallback {
 
     private static final String TAG = "ProvinceDetailActivity";
     public static final String EXTRA_PROVINCE = "PROVINCE";
@@ -86,6 +86,8 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
     TextView txtArticleTitle;
     @BindView(R.id.imgEmpty)
     ImageView imgEmpty;
+    @BindView(R.id.btnReload)
+    Button btnReload;
 
     private List<Type> types = new ArrayList<>();
     private List<SubType> subTypes = new ArrayList<>();
@@ -98,6 +100,7 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
     private ArrayList<Article> articles = new ArrayList<>();
 
     private double minDistance = 0.0;
+    private boolean enableLazyLoad = true, resultOfLazyLoad;
     private Location location;
     private PermissionListener locationPermissionListenner;
     private FusedLocationProviderClient mFusedLocationClient;
@@ -146,6 +149,8 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
         });
         subTypeAdapter = new SubTypeAdapter(this.subTypes, ((object, position) -> {
             this.currentSubType = (SubType) object;
+            minDistance = 0.0f;
+            resultOfLazyLoad = false;
             exploreArticle();
         }));
 
@@ -177,6 +182,11 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
                     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                         AppLogger.d(getClass().getSimpleName(), "onPageScrolled");
                         txtArticleTitle.setText(articles.get(position).getTitle());
+                        if (position == articles.size() - 1 && enableLazyLoad) {
+                            enableLazyLoad = false;
+                            resultOfLazyLoad = true;
+                            exploreArticle();
+                        }
                     }
 
                     @Override
@@ -201,6 +211,12 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
         finish();
     }
 
+    @OnClick(R.id.btnReload)
+    public void onReloadClick(View v) {
+        btnReload.setVisibility(View.INVISIBLE);
+        exploreArticle();
+    }
+
     @Override
     public void onGetExploreDataSuccess(ExploreDataResponse response) {
         this.types.clear();
@@ -221,7 +237,7 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
         typeAdapter.notifyDataSetChanged();
         subTypeAdapter.notifyDataSetChanged();
 
-        checkLocaionPermission();
+        checkLocationPermission();
     }
 
     @Override
@@ -233,27 +249,37 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
             currentSubType = this.subTypes.get(0);
         }
         subTypeAdapter.notifyDataSetChanged();
+        resultOfLazyLoad = false;
+        minDistance = 0.0f;
         exploreArticle();
     }
 
     @Override
     public void onExploreArticleSuccess(ArticleResponse response) {
         AppLogger.d(TAG, "Article size: " + response.getArticles().size());
-        articles.clear();
+        if (response.getArticles().size() < 20) {
+            enableLazyLoad = false;
+        } else {
+            enableLazyLoad = true;
+        }
+        if (!resultOfLazyLoad) {
+            articles.clear();
+        }
         articles.addAll(response.getArticles());
-        carouselPagerAdapter.notifyDataSetChanged();
-        if(articles.size() == 0) {
+        if (articles.size() == 0) {
             txtArticleTitle.setVisibility(View.INVISIBLE);
-            pagerArticle.setVisibility(View.GONE);
+            pagerArticle.setVisibility(View.INVISIBLE);
             imgEmpty.setVisibility(View.VISIBLE);
         } else {
+            minDistance = articles.get(articles.size() - 1).getDistance();
             txtArticleTitle.setVisibility(View.VISIBLE);
             pagerArticle.setVisibility(View.VISIBLE);
             imgEmpty.setVisibility(View.INVISIBLE);
         }
+        carouselPagerAdapter.notifyDataSetChanged();
     }
 
-    private void checkLocaionPermission() {
+    private void checkLocationPermission() {
         Dexter.withActivity(this)
                 .withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
                 .withListener(locationPermissionListenner)
@@ -304,39 +330,9 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
                                 }
                             });
                 } else {
-                    manager.addGpsStatusListener(event -> {
-                        if (this.location != null) return;
-                        switch (event) {
-                            case GPS_EVENT_STARTED:
-                                mFusedLocationClient.getLastLocation()
-                                        .addOnSuccessListener(this, location -> {
-                                            if (location != null) {
-                                                this.location = location;
-                                                exploreArticle();
-                                            }
-                                        });
-                                break;
-                            case GPS_EVENT_STOPPED:
-
-                                break;
-                        }
-                    });
-                    showConfirmDialog(getString(R.string.location),
-                            getString(R.string.message_ask_enable_location),
-                            null,
-                            getString(android.R.string.cancel),
-                            new DialogCallback<AppDialog>() {
-                                @Override
-                                public void onNegative(AppDialog dialog) {
-                                    dialog.dismissDialog(AppDialog.TAG);
-                                }
-
-                                @Override
-                                public void onPositive(AppDialog dialog, Object o) {
-                                    dialog.dismissDialog(AppDialog.TAG);
-                                    startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
-                                }
-                            });
+                    hideLoading();
+                    btnReload.setVisibility(View.VISIBLE);
+                    showAskForGPS();
                 }
             }
         }
@@ -376,5 +372,66 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
                 currentType.getId(),
                 currentSubType.getId()
         );
+    }
+
+    private void showAskForGPS() {
+        showConfirmDialog(getString(R.string.location),
+                getString(R.string.message_ask_enable_location),
+                null,
+                getString(android.R.string.cancel),
+                new DialogCallback<AppDialog>() {
+                    @Override
+                    public void onNegative(AppDialog dialog) {
+                        dialog.dismissDialog(AppDialog.TAG);
+                    }
+
+                    @Override
+                    public void onPositive(AppDialog dialog, Object o) {
+                        dialog.dismissDialog(AppDialog.TAG);
+                        startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                    }
+                });
+    }
+
+
+    private int position;
+
+    @Override
+    public void onAddJourneyClick(int position) {
+        this.position = position;
+    }
+
+    @Override
+    public void onShareClick(int position) {
+        this.position = position;
+    }
+
+    @Override
+    public void onCommentClick(int position) {
+        this.position = position;
+    }
+
+    @Override
+    public void onAddFavoriteClick(int position) {
+        this.position = position;
+        mPresenter.actionFavorite(articles.get(position).isFavorite() ? "remove" : "add", articles.get(position).getId());
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        this.position = position;
+    }
+
+    @Override
+    public void openLogin() {
+        startActivity(LoginActivity.getStartIntent(this));
+    }
+
+    @Override
+    public void onActionFavoriteSuccess() {
+        boolean favorite = !articles.get(position).isFavorite();
+        articles.get(position).setFavorite(favorite);
+        articles.get(position).setFavoriteCount(favorite ? articles.get(position).getFavoriteCount() + 1 : articles.get(position).getFavoriteCount() - 1);
+        carouselPagerAdapter.notifyDataSetChanged();
     }
 }

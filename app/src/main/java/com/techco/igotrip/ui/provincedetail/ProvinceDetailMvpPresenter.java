@@ -15,4 +15,5 @@ public interface ProvinceDetailMvpPresenter<V extends ProvinceDetailBaseView> ex
     void getExploreData();
     void selectType(int typeId);
     void exploreArticle(int provinceId, double lat, double lng, double minDistance, int typeId, int houseTypeId);
+    void actionFavorite(String action, int articleId);
 }

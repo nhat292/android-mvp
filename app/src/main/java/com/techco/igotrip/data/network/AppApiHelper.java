@@ -1,13 +1,14 @@
 
 package com.techco.igotrip.data.network;
 
+import com.rx2androidnetworking.Rx2AndroidNetworking;
 import com.techco.igotrip.data.network.model.response.ArticleResponse;
 import com.techco.igotrip.data.network.model.response.ExploreDataResponse;
 import com.techco.igotrip.data.network.model.response.FirstDataResponse;
-import com.techco.igotrip.data.network.model.response.UserResponse;
 import com.techco.igotrip.data.network.model.response.SelectNationResponse;
-import com.rx2androidnetworking.Rx2AndroidNetworking;
 import com.techco.igotrip.data.network.model.response.SelectTypeResponse;
+import com.techco.igotrip.data.network.model.response.SimpleDataResponse;
+import com.techco.igotrip.data.network.model.response.UserResponse;
 
 import java.util.Map;
 
@@ -177,6 +178,20 @@ public class AppApiHelper implements ApiHelper {
                 .addBodyParameter(params)
                 .build()
                 .getObjectObservable(ArticleResponse.class);
+    }
+
+    /**
+     * user_id: int value
+     * action: string -> add or remove
+     * article_id: int value
+     */
+    @Override
+    public Observable<SimpleDataResponse> actionFavorite(Map<String, String> params) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_ACTION_FAVORITE)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .addBodyParameter(params)
+                .build()
+                .getObjectObservable(SimpleDataResponse.class);
     }
 }
 

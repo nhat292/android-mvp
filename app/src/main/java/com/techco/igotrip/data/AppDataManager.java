@@ -11,6 +11,7 @@ import com.techco.igotrip.data.network.model.object.User;
 import com.techco.igotrip.data.network.model.response.ArticleResponse;
 import com.techco.igotrip.data.network.model.response.ExploreDataResponse;
 import com.techco.igotrip.data.network.model.response.FirstDataResponse;
+import com.techco.igotrip.data.network.model.response.SimpleDataResponse;
 import com.techco.igotrip.data.network.model.response.UserResponse;
 import com.techco.igotrip.data.network.model.response.SelectNationResponse;
 import com.techco.igotrip.data.network.model.response.SelectTypeResponse;
@@ -99,6 +100,11 @@ public class AppDataManager implements DataManager {
     @Override
     public Observable<ArticleResponse> exploreArticle(Map<String, String> params) {
         return mApiHelper.exploreArticle(params);
+    }
+
+    @Override
+    public Observable<SimpleDataResponse> actionFavorite(Map<String, String> params) {
+        return mApiHelper.actionFavorite(params);
     }
 
     @Override

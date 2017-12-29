@@ -43,6 +43,9 @@ public final class ApiEndPoint {
     public static String ENDPOINT_EXPLORE_ARTICLE = BASE_URL
             + "api/v1/explore-article";
 
+    public static String ENDPOINT_ACTION_FAVORITE = BASE_URL
+            + "api/v1/action-favorite";
+
     public static void changeBaseUrl(String baseUrl) {
         BASE_URL = baseUrl;
         ENDPOINT_FIRST_DATA = BASE_URL + "api/v1/first-data";
@@ -55,6 +58,7 @@ public final class ApiEndPoint {
         ENDPOINT_CHANGE_PASSWORD = BASE_URL + "api/v1/change-password";
         ENDPOINT_CHANGE_PASSWORD = BASE_URL + "api/v1/update-info";
         ENDPOINT_EXPLORE_ARTICLE = BASE_URL + "api/v1/explore-article";
+        ENDPOINT_ACTION_FAVORITE = BASE_URL + "api/v1/action-favorite";
     }
 
     private ApiEndPoint() {

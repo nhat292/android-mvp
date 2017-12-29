@@ -1,6 +1,7 @@
 package com.techco.igotrip.ui.custom.carousellayout;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -25,9 +26,9 @@ import butterknife.OnClick;
 
 public class ItemFragment extends Fragment {
 
-    private static final String POSITION = "position";
-    private static final String SCALE = "scale";
-    private static final String DATA = "data";
+    public static final String POSITION = "position";
+    public static final String SCALE = "scale";
+    public static final String DATA = "data";
 
     @BindView(R.id.llRoot)
     CarouselLinearLayout llRoot;
@@ -39,6 +40,17 @@ public class ItemFragment extends Fragment {
     WebView webViewItem;
     @BindView(R.id.txtBadgeCount)
     MaterialBadgeTextView txtBadgeCount;
+    @BindView(R.id.imgJourney)
+    ImageView imgJourney;
+    @BindView(R.id.imgShare)
+    ImageView imgShare;
+    @BindView(R.id.imgComment)
+    ImageView imgComment;
+    @BindView(R.id.imgHeart)
+    ImageView imgHeart;
+
+    private int position;
+    private Activity activity;
 
 
     public static Fragment newInstance(Context context, int pos, float scale, Article article) {
@@ -49,9 +61,11 @@ public class ItemFragment extends Fragment {
         return Fragment.instantiate(context, ItemFragment.class.getName(), b);
     }
 
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        activity = getActivity();
     }
 
     @SuppressLint("SetTextI18n")
@@ -61,7 +75,7 @@ public class ItemFragment extends Fragment {
             return null;
         }
 
-        final int postion = this.getArguments().getInt(POSITION);
+        position = this.getArguments().getInt(POSITION);
         float scale = this.getArguments().getFloat(SCALE);
         final Article article = this.getArguments().getParcelable(DATA);
 
@@ -73,15 +87,12 @@ public class ItemFragment extends Fragment {
         llContain.setLayoutParams(layoutParams);
         llRoot.setScaleBoth(scale);
 
-        Glide.with(getActivity())
-                .load(ApiEndPoint.BASE_URL + article.getImage())
-                .centerCrop()
-                .into(imgItem);
-        webViewItem.loadData(article.getDescription(), "text/html", "UTF-8");
-        txtBadgeCount.setBadgeCount(article.getFavoriteCount(), false);
+        update(article);
 
         llContain.setOnClickListener(view1 -> {
-
+            if (activity instanceof ProvinceDetailActivity) {
+                ((ProvinceDetailActivity) activity).onItemClick(position);
+            }
         });
 
 
@@ -90,21 +101,49 @@ public class ItemFragment extends Fragment {
 
     @OnClick(R.id.imgJourney)
     public void onJourneyClick() {
-
+        if (activity instanceof ProvinceDetailActivity) {
+            ((ProvinceDetailActivity) activity).onAddJourneyClick(position);
+        }
     }
 
     @OnClick(R.id.imgShare)
     public void onShareClick() {
-
+        if (activity instanceof ProvinceDetailActivity) {
+            ((ProvinceDetailActivity) activity).onShareClick(position);
+        }
     }
 
     @OnClick(R.id.imgComment)
     public void onCommentClick() {
-
+        if (activity instanceof ProvinceDetailActivity) {
+            ((ProvinceDetailActivity) activity).onCommentClick(position);
+        }
     }
 
-    @OnClick(R.id.imgJourney)
+    @OnClick(R.id.imgHeart)
     public void onAddFavoriteClick() {
+        if (activity instanceof ProvinceDetailActivity) {
+            ((ProvinceDetailActivity) activity).onAddFavoriteClick(position);
+        }
+    }
 
+    public void update(Article article) {
+        Glide.with(getActivity())
+                .load(ApiEndPoint.BASE_URL + article.getImage())
+                .centerCrop()
+                .into(imgItem);
+        webViewItem.loadData(article.getDescription(), "text/html", "UTF-8");
+        txtBadgeCount.setBadgeCount(article.getFavoriteCount(), false);
+
+        if (article.isMytrip()) {
+            imgJourney.setColorFilter(getResources().getColor(R.color.colorPrimary));
+        } else {
+            imgJourney.setColorFilter(getResources().getColor(R.color.dark_gray));
+        }
+        if (article.isFavorite()) {
+            imgHeart.setColorFilter(getResources().getColor(R.color.colorPrimary));
+        } else {
+            imgHeart.setColorFilter(getResources().getColor(R.color.dark_gray));
+        }
     }
 }

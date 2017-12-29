@@ -135,4 +135,7 @@
     <!--URLs-->
     <string name="support_url">http://kapategi.com/apps/api/v1/guide</string>
 
+    <!--Province detail-->
+    <string name="reload">Reload</string>
+
 </resources>
