@@ -143,4 +143,29 @@ public class ProvinceDetailPresenter<V extends ProvinceDetailBaseView> extends B
                     }
                 }));
     }
+
+    @Override
+    public void createShareLink(int articleId) {
+        getMvpView().showLoading();
+        Map<String, String> params = new HashMap<>();
+        params.put("article_id", String.valueOf(articleId));
+        getCompositeDisposable().add(getDataManager()
+                .createShareLink(params)
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(response -> {
+                    getMvpView().hideLoading();
+                    getMvpView().onCreateShareLinkSuccess(response.getData());
+                }, throwable -> {
+                    if (!isViewAttached()) {
+                        return;
+                    }
+                    getMvpView().hideLoading();
+                    // handle the error here
+                    if (throwable instanceof ANError) {
+                        ANError anError = (ANError) throwable;
+                        handleApiError(anError);
+                    }
+                }));
+    }
 }

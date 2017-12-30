@@ -24,4 +24,17 @@
         android:textAllCaps="true"
         android:textColor="@color/accent_white" />
 
+
+    <ImageView
+        android:id="@+id/imgRight"
+        style="@style/Button.Secondary"
+        android:layout_width="@dimen/img_back_size"
+        android:layout_height="@dimen/img_back_size"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/margin_padding_small"
+        android:padding="@dimen/margin_padding_very_small"
+        android:src="@drawable/ic_write"
+        android:visibility="gone" />
+
 </RelativeLayout>

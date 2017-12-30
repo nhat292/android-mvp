@@ -18,6 +18,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <provider android:authorities="com.facebook.app.FacebookContentProvider{497778373927201}"
+            android:name="com.facebook.FacebookContentProvider"
+            android:exported="true"/>
+
         <service android:name="com.techco.igotrip.service.SyncService" />
 
         <meta-data
@@ -93,6 +97,16 @@
 
         <activity
             android:name="com.techco.igotrip.ui.support.SupportActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.techco.igotrip.ui.comment.CommentActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.techco.igotrip.ui.writecomment.WriteCommentActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 

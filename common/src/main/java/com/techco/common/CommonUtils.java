@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.provider.Settings;
+import android.text.Html;
+import android.text.Spanned;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -30,7 +32,6 @@ public final class CommonUtils {
     private CommonUtils() {
         // This utility class is not publicly instantiable
     }
-
 
 
     @SuppressLint("all")
@@ -144,10 +145,21 @@ public final class CommonUtils {
         return formatter.format(calendar.getTime());
     }
 
-    public static byte[] bitmapToByte(Bitmap bitmap){
+    public static byte[] bitmapToByte(Bitmap bitmap) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
         byte[] byteArray = stream.toByteArray();
         return byteArray;
+    }
+
+    @SuppressWarnings("deprecation")
+    public static Spanned fromHtml(String html) {
+        Spanned result;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            result = Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY);
+        } else {
+            result = Html.fromHtml(html);
+        }
+        return result;
     }
 }

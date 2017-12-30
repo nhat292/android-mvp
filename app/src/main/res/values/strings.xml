@@ -21,6 +21,7 @@
     <string name="permission">PERMISSION</string>
     <string name="location">LOCATION</string>
     <string name="message_ask_enable_location">Your GPS seems to be disabled, do you want to enable it?</string>
+    <string name="message_share_success">This article has been shared on facebook</string>
 
     <!--Permission-->
     <string name="setting">SETTING</string>
@@ -110,6 +111,16 @@
     <string name="message_enter_current_password">Please enter the current password</string>
     <string name="message_enter_new_password">Please enter a new password</string>
     <string name="message_change_password_success">Password changed successfully</string>
+
+    <!--Comment-->
+    <string name="no_comments">No comments</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="edit_your_comment">Edit your comment</string>
+    <string name="enter_new_comment">Enter new comment</string>
+
+    <!--WriteComment-->
+    <string name="write_comment">Write Comment</string>
 
     <!--Support-->
     <string name="support">SUPPORT</string>

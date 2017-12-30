@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -20,6 +21,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.share.Sharer;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.karumi.dexter.Dexter;
@@ -40,6 +47,7 @@ import com.techco.igotrip.data.network.model.response.SelectTypeResponse;
 import com.techco.igotrip.ui.adapter.SubTypeAdapter;
 import com.techco.igotrip.ui.adapter.TypeAdapter;
 import com.techco.igotrip.ui.base.BaseActivity;
+import com.techco.igotrip.ui.comment.CommentActivity;
 import com.techco.igotrip.ui.custom.carousellayout.CarouselPagerAdapter;
 import com.techco.igotrip.ui.dialog.DialogCallback;
 import com.techco.igotrip.ui.dialog.app.AppDialog;
@@ -105,6 +113,9 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
     private PermissionListener locationPermissionListenner;
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationManager manager;
+
+    private CallbackManager callbackManager;
+    private ShareDialog shareDialog;
 
     public static Intent getStartIntent(Context context, Province province) {
         Intent intent = new Intent(context, ProvinceDetailActivity.class);
@@ -204,6 +215,25 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        callbackManager = CallbackManager.Factory.create();
+        shareDialog = new ShareDialog(this);
+        shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
+            @Override
+            public void onSuccess(Sharer.Result result) {
+                AppLogger.d(TAG, "Shared succeed");
+            }
+
+            @Override
+            public void onCancel() {
+                AppLogger.d(TAG, "Shared canceled");
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                AppLogger.d(TAG, "Shared error");
+            }
+        });
     }
 
     @OnClick(R.id.imgBack)
@@ -277,6 +307,16 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
             imgEmpty.setVisibility(View.INVISIBLE);
         }
         carouselPagerAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onCreateShareLinkSuccess(String link) {
+        if (ShareDialog.canShow(ShareLinkContent.class)) {
+            ShareLinkContent linkContent = new ShareLinkContent.Builder()
+                    .setContentUrl(Uri.parse(link))
+                    .build();
+            shareDialog.show(linkContent);
+        }
     }
 
     private void checkLocationPermission() {
@@ -401,14 +441,15 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
         this.position = position;
     }
 
+
     @Override
     public void onShareClick(int position) {
-        this.position = position;
+        mPresenter.createShareLink(articles.get(position).getId());
     }
 
     @Override
     public void onCommentClick(int position) {
-        this.position = position;
+        startActivity(CommentActivity.getStartIntent(this, articles.get(position)));
     }
 
     @Override

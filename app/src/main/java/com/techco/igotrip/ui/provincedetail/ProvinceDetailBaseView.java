@@ -23,4 +23,6 @@ public interface ProvinceDetailBaseView extends BaseView {
     void openLogin();
 
     void onActionFavoriteSuccess();
+
+    void onCreateShareLinkSuccess(String link);
 }

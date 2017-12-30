@@ -2,9 +2,12 @@
 package com.techco.igotrip.data.network;
 
 import com.techco.igotrip.data.network.model.response.ArticleResponse;
+import com.techco.igotrip.data.network.model.response.CommentListResponse;
+import com.techco.igotrip.data.network.model.response.CreateShareLinkResponse;
 import com.techco.igotrip.data.network.model.response.ExploreDataResponse;
 import com.techco.igotrip.data.network.model.response.FirstDataResponse;
 import com.techco.igotrip.data.network.model.response.SimpleDataResponse;
+import com.techco.igotrip.data.network.model.response.CommentResponse;
 import com.techco.igotrip.data.network.model.response.UserResponse;
 import com.techco.igotrip.data.network.model.response.SelectNationResponse;
 import com.techco.igotrip.data.network.model.response.SelectTypeResponse;
@@ -43,4 +46,14 @@ public interface ApiHelper {
     Observable<ArticleResponse> exploreArticle(Map<String, String> params);
 
     Observable<SimpleDataResponse> actionFavorite(Map<String, String> params);
+
+    Observable<CommentListResponse> getComments(Map<String, String> params);
+
+    Observable<SimpleDataResponse> deleteComment(Map<String, String> params);
+
+    Observable<CommentResponse> updateComment(Map<String, String> params);
+
+    Observable<CommentResponse> createComment(Map<String, String> params);
+
+    Observable<CreateShareLinkResponse> createShareLink(Map<String, String> params);
 }

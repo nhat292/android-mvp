@@ -3,11 +3,14 @@ package com.techco.igotrip.data.network;
 
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 import com.techco.igotrip.data.network.model.response.ArticleResponse;
+import com.techco.igotrip.data.network.model.response.CommentListResponse;
+import com.techco.igotrip.data.network.model.response.CreateShareLinkResponse;
 import com.techco.igotrip.data.network.model.response.ExploreDataResponse;
 import com.techco.igotrip.data.network.model.response.FirstDataResponse;
 import com.techco.igotrip.data.network.model.response.SelectNationResponse;
 import com.techco.igotrip.data.network.model.response.SelectTypeResponse;
 import com.techco.igotrip.data.network.model.response.SimpleDataResponse;
+import com.techco.igotrip.data.network.model.response.CommentResponse;
 import com.techco.igotrip.data.network.model.response.UserResponse;
 
 import java.util.Map;
@@ -192,6 +195,72 @@ public class AppApiHelper implements ApiHelper {
                 .addBodyParameter(params)
                 .build()
                 .getObjectObservable(SimpleDataResponse.class);
+    }
+
+    /**
+     * article_id: int value
+     */
+    @Override
+    public Observable<CommentListResponse> getComments(Map<String, String> params) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_GET_COMMENTS)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .addBodyParameter(params)
+                .build()
+                .getObjectObservable(CommentListResponse.class);
+    }
+
+
+    /**
+     * id: int value
+     */
+    @Override
+    public Observable<SimpleDataResponse> deleteComment(Map<String, String> params) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_DELETE_COMMENT)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .addBodyParameter(params)
+                .build()
+                .getObjectObservable(SimpleDataResponse.class);
+    }
+
+    /**
+     * id: int value
+     * new_content: string value
+     */
+    @Override
+    public Observable<CommentResponse> updateComment(Map<String, String> params) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_UPDATE_COMMENT)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .addBodyParameter(params)
+                .build()
+                .getObjectObservable(CommentResponse.class);
+    }
+
+
+    /**
+     * user_id: int value
+     * comment_content: string value
+     * article_id: int value
+     */
+    @Override
+    public Observable<CommentResponse> createComment(Map<String, String> params) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_CREATE_COMMENT)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .addBodyParameter(params)
+                .build()
+                .getObjectObservable(CommentResponse.class);
+    }
+
+
+    /**
+     * article_id: int value
+     */
+    @Override
+    public Observable<CreateShareLinkResponse> createShareLink(Map<String, String> params) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_CREATE_SHARE_LINK)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .addBodyParameter(params)
+                .build()
+                .getObjectObservable(CreateShareLinkResponse.class);
     }
 }
 

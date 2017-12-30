@@ -123,6 +123,8 @@ dependencies {
 
     implementation "com.google.android.gms:play-services-location:$rootProject.googleServiceVersion"
 
+    implementation 'com.facebook.android:facebook-share:[4,5)'
+
     //Custom crashes
     implementation "cat.ereza:customactivityoncrash:$rootProject.customCrashVersion"
 

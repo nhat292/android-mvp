@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_background_launch">
+
+    <include
+        android:id="@+id/navBar"
+        layout="@layout/nav_layout" />
+
+    <EditText
+        android:id="@+id/editContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/navBar"
+        android:layout_margin="@dimen/margin_padding_normal"
+        android:background="@drawable/bg_edittext_write_comment"
+        android:gravity="top"
+        android:imeOptions="actionDone"
+        android:inputType="textMultiLine|textNoSuggestions"
+        android:padding="@dimen/margin_padding_small"
+        android:textColor="@color/black"
+        android:textCursorDrawable="@drawable/edittext_cursor"
+        android:textSize="@dimen/text_size_large" />
+
+</RelativeLayout>

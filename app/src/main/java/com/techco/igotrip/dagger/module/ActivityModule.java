@@ -10,6 +10,9 @@ import com.techco.igotrip.dagger.PerActivity;
 import com.techco.igotrip.ui.changepassword.ChangePasswordBaseView;
 import com.techco.igotrip.ui.changepassword.ChangePasswordMvpPresenter;
 import com.techco.igotrip.ui.changepassword.ChangePasswordPresenter;
+import com.techco.igotrip.ui.comment.CommentBaseView;
+import com.techco.igotrip.ui.comment.CommentMvpPresenter;
+import com.techco.igotrip.ui.comment.CommentPresenter;
 import com.techco.igotrip.ui.dialog.rating.RatingDialogBaseView;
 import com.techco.igotrip.ui.dialog.rating.RatingDialogMvpPresenter;
 import com.techco.igotrip.ui.dialog.rating.RatingDialogPresenter;
@@ -34,6 +37,9 @@ import com.techco.igotrip.ui.provincedetail.ProvinceDetailPresenter;
 import com.techco.igotrip.ui.signup.SignUpBaseView;
 import com.techco.igotrip.ui.signup.SignUpMvpPresenter;
 import com.techco.igotrip.ui.signup.SignUpPresenter;
+import com.techco.igotrip.ui.writecomment.WriteCommentBaseView;
+import com.techco.igotrip.ui.writecomment.WriteCommentMvpPresenter;
+import com.techco.igotrip.ui.writecomment.WriteCommentPresenter;
 import com.techco.igotrip.utils.rx.AppSchedulerProvider;
 import com.techco.igotrip.utils.rx.SchedulerProvider;
 
@@ -129,6 +135,20 @@ public class ActivityModule {
     @PerActivity
     ChangePasswordMvpPresenter<ChangePasswordBaseView> provideChangePasswordPresenter(
             ChangePasswordPresenter<ChangePasswordBaseView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    CommentMvpPresenter<CommentBaseView> provideCommentPresenter(
+            CommentPresenter<CommentBaseView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    WriteCommentMvpPresenter<WriteCommentBaseView> provideWriteCommentPresenter(
+            WriteCommentPresenter<WriteCommentBaseView> presenter) {
         return presenter;
     }
 

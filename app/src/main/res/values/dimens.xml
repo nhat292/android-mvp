@@ -69,4 +69,7 @@
     <!--Province Detail-->
     <dimen name="recycler_view_sub_type_height">30dp</dimen>
     <dimen name="recycler_view_type_height">75dp</dimen>
+
+    <!--Comments-->
+    <dimen name="img_comment_avatar_size">60dp</dimen>
 </resources>
