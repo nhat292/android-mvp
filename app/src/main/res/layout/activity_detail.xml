@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/navBar"
+        layout="@layout/nav_layout" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/navBar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/image_article_detail_height">
+
+                <TextView
+                    android:id="@+id/txtNoImages"
+                    style="@style/TextStyle.Title.Sub"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="@string/no_images"
+                    android:textColor="@color/dark_gray" />
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/viewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <com.techco.igotrip.ui.custom.circleindicator.CirclePageIndicator
+                    android:id="@+id/circleIndicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="bottom"
+                    android:padding="@dimen/margin_padding_small"
+                    app:centered="true"
+                    app:fillColor="@color/colorPrimary"
+                    app:pageColor="@android:color/white"
+                    app:radius="2dp"
+                    app:snap="false"
+                    app:strokeColor="@color/colorPrimary"
+                    app:strokeWidth="1px" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_padding_small">
+
+                <ImageView
+                    android:layout_width="@dimen/img_address_size"
+                    android:layout_height="@dimen/img_address_size"
+                    android:src="@drawable/ic_map" />
+
+                <TextView
+                    android:id="@+id/txtAddress"
+                    style="@style/TextStyle.Title.Sub"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_padding_small"
+                    android:text="        This is an address"
+                    android:textColor="@color/black" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/txtDescription"
+                style="@style/TextStyle.Title.Sub"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_padding_small"
+                android:layout_marginEnd="@dimen/margin_padding_small"
+                android:layout_marginStart="@dimen/margin_padding_small"
+                android:layout_marginTop="@dimen/margin_padding_small"
+                android:text="This is a description"
+                android:textColor="@color/black" />
+
+            <TextView
+                style="@style/TextStyle.Title.Sub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_padding_small"
+                android:text="@string/post_by"
+                android:textColor="@color/black"
+                android:textStyle="italic" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgPoster"
+                android:layout_width="@dimen/img_poster_size"
+                android:layout_height="@dimen/img_poster_size"
+                android:layout_marginStart="@dimen/margin_padding_small"
+                android:layout_marginTop="@dimen/margin_padding_very_small"
+                android:background="@drawable/bg_avatar" />
+
+
+            <TextView
+                android:id="@+id/txtPoster"
+                style="@style/TextStyle.Title.Sub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_padding_small"
+                android:layout_marginTop="@dimen/margin_padding_very_small"
+                android:text="dong_admin"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtDate"
+                style="@style/TextStyle.Title.Sub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_padding_small"
+                android:layout_marginTop="@dimen/margin_padding_very_small"
+                android:text="Nov 22, 2017"
+                android:textColor="@color/black"
+                android:textStyle="italic" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/map_height"
+                android:layout_margin="@dimen/margin_padding_tiny"
+                android:background="@drawable/bg_border_black"
+                android:padding="1dp">
+
+                <fragment
+                    android:id="@+id/map"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <ImageView
+                    android:layout_width="@dimen/img_direction_size"
+                    android:layout_height="@dimen/img_direction_size"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_margin="@dimen/margin_padding_small"
+                    android:background="@drawable/button_secondary_bg"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:padding="@dimen/margin_padding_tiny"
+                    android:src="@drawable/ic_direction" />
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/btnComment"
+                style="@style/Button.Secondary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_padding_small"
+                android:layout_marginTop="@dimen/margin_padding_very_small"
+                android:text="@string/comment_format"
+                android:textColor="@color/black"
+                android:textStyle="italic" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginEnd="@dimen/margin_padding_normal"
+                android:layout_marginStart="@dimen/margin_padding_normal"
+                android:background="@color/dark_gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_padding_very_large"
+                android:layout_marginTop="@dimen/margin_padding_small"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imgJourney"
+                    android:layout_width="@dimen/img_option_article_item_size"
+                    android:layout_height="@dimen/img_option_article_item_size"
+                    android:background="@drawable/button_secondary_bg"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:padding="@dimen/margin_padding_very_small"
+                    android:src="@drawable/ic_up"
+                    android:tint="@color/dark_gray" />
+
+                <ImageView
+                    android:id="@+id/imgShare"
+                    android:layout_width="@dimen/img_option_article_item_size"
+                    android:layout_height="@dimen/img_option_article_item_size"
+                    android:layout_marginStart="@dimen/margin_padding_large"
+                    android:background="@drawable/button_secondary_bg"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:padding="@dimen/margin_padding_very_small"
+                    android:src="@drawable/ic_share"
+                    android:tint="@color/dark_gray" />
+
+                <ImageView
+                    android:id="@+id/imgComment"
+                    android:layout_width="@dimen/img_option_article_item_size"
+                    android:layout_height="@dimen/img_option_article_item_size"
+                    android:layout_marginStart="@dimen/margin_padding_large"
+                    android:background="@drawable/button_secondary_bg"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:padding="@dimen/margin_padding_very_small"
+                    android:src="@drawable/ic_comment"
+                    android:tint="@color/dark_gray" />
+
+                <RelativeLayout
+                    android:layout_width="@dimen/img_option_article_item_size"
+                    android:layout_height="@dimen/img_option_article_item_size"
+                    android:layout_marginStart="@dimen/margin_padding_large">
+
+                    <ImageView
+                        android:id="@+id/imgHeart"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/button_secondary_bg"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:padding="@dimen/margin_padding_very_small"
+                        android:src="@drawable/ic_heart"
+                        android:tint="@color/dark_gray" />
+
+                    <com.techco.igotrip.ui.custom.views.MaterialBadgeTextView
+                        android:id="@+id/txtBadgeCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:background="@color/accent_red"
+                        android:ellipsize="none"
+                        android:gravity="center"
+                        android:text="0"
+                        android:textColor="@android:color/white"
+                        android:textSize="8sp" />
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnEdit"
+                style="@style/Button.Primary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_padding_very_large"
+                android:layout_marginEnd="@dimen/margin_padding_very_small"
+                android:layout_marginStart="@dimen/margin_padding_very_small"
+                android:text="@string/btn_edit"
+                android:textSize="@dimen/text_size_large" />
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

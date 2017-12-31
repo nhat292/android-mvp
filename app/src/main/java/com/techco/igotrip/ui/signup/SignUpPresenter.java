@@ -80,6 +80,7 @@ public class SignUpPresenter<V extends SignUpBaseView> extends BasePresenter<V>
                     getMvpView().hideLoading();
                     if (response.getStatus() == 0) {
                         getDataManager().setUserInfo(response.getUser());
+                        getDataManager().setUsername(response.getUser().getUsername());
                         getMvpView().onRegisterSuccess();
                     } else if (response.getStatus() == 1) {
                         getMvpView().showSimpleDialog(App.getInstance().getString(R.string.error_title),

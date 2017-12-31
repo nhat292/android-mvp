@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "314027204898",
+    "project_id": "egotrip-1509074875692"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:314027204898:android:4c885e7596f02a9b",
+        "android_client_info": {
+          "package_name": "com.techco.igotrip"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "314027204898-hsh2u94p1ikeqo0dt3kqbgl4d76dk11g.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "314027204898-n8a6l9ne1056tnn7oct5c3kctl94gu3d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.techco.igotrip",
+            "certificate_hash": "5cf2fe9b82d24d75811a02ec648adbcb90c553f9"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBiR_bPjFCmNIkXhfug2cGXv5wB_k5J3g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

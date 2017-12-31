@@ -17,6 +17,8 @@ import com.twitter.sdk.android.core.identity.TwitterAuthClient;
 @PerActivity
 public interface LoginMvpPresenter<V extends LoginBaseView> extends MvpPresenter<V> {
 
+    void checkUsername();
+
     void onRegisterClick();
 
     void onLoginClick(String username, String password);
@@ -24,4 +26,6 @@ public interface LoginMvpPresenter<V extends LoginBaseView> extends MvpPresenter
     void initFacebookLogin(CallbackManager callbackManager);
 
     void loginTwitter(TwitterAuthClient twitterAuthClient, Activity context);
+
+    void forgotPassword(String username);
 }

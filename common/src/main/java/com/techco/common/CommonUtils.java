@@ -117,6 +117,18 @@ public final class CommonUtils {
         return dateString;
     }
 
+    public static String getPostDate(String dateString) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            Date date = dateFormat.parse(dateString);
+            dateFormat = new SimpleDateFormat("MMM dd, yyyy");
+            return dateFormat.format(date);
+        } catch (java.text.ParseException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
     public static boolean isYesterday(Date date) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());

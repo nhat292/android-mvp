@@ -66,6 +66,11 @@ public class LoginPresenter<V extends LoginBaseView> extends BasePresenter<V>
     }
 
     @Override
+    public void checkUsername() {
+        getMvpView().onCheckUsernameSuccess(getDataManager().getUsername());
+    }
+
+    @Override
     public void onRegisterClick() {
         getMvpView().openSignUpActivity();
     }
@@ -96,6 +101,7 @@ public class LoginPresenter<V extends LoginBaseView> extends BasePresenter<V>
                     getMvpView().hideLoading();
                     if (response.getStatus() == 0) {
                         getDataManager().setUserInfo(response.getUser());
+                        getDataManager().setUsername(response.getUser().getUsername());
                         getMvpView().onLoginSuccess();
                     } else if (response.getStatus() == 1) {
                         getMvpView().showSimpleDialog(App.getInstance().getString(R.string.error_title),
@@ -254,5 +260,35 @@ public class LoginPresenter<V extends LoginBaseView> extends BasePresenter<V>
 
     private void clearTwitterSession() {
         TwitterCore.getInstance().getSessionManager().clearActiveSession();
+    }
+
+    @Override
+    public void forgotPassword(String username) {
+        getMvpView().showLoading();
+        Map<String, String> params = new HashMap<>();
+        params.put("user_name", username);
+        getCompositeDisposable().add(getDataManager()
+                .forgotPassword(params)
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(response -> {
+                    getMvpView().hideLoading();
+                    if (response.getStatus() == 0) {
+                        getMvpView().onForgotPasswordSuccess();
+                    } else {
+                        getMvpView().showSimpleDialog(App.getInstance().getString(R.string.error_title),
+                                App.getInstance().getString(R.string.message_username_or_email_does_not_exists));
+                    }
+                }, throwable -> {
+                    if (!isViewAttached()) {
+                        return;
+                    }
+                    getMvpView().hideLoading();
+                    // handle the error here
+                    if (throwable instanceof ANError) {
+                        ANError anError = (ANError) throwable;
+                        handleApiError(anError);
+                    }
+                }));
     }
 }

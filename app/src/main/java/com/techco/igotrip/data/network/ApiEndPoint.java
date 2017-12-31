@@ -70,8 +70,20 @@ public final class ApiEndPoint {
     public static String ENDPOINT_CREATE_JOURNEY_ADD_TRIP = BASE_URL
             + "api/v1/create-journey-and-add-user-trip";
 
-    public static String ENDPOINT_CREATE_JOURNEY= BASE_URL
+    public static String ENDPOINT_CREATE_JOURNEY = BASE_URL
             + "api/v1/create-journey";
+
+    public static String ENDPOINT_FORGOT_PASSWORD = BASE_URL
+            + "api/v1/forgot-password";
+
+    public static String ENDPOINT_GET_IMAGES = BASE_URL
+            + "api/v1/article-images";
+
+    public static String ENDPOINT_GET_COMMENT_COUNT = BASE_URL
+            + "api/v1/get-comment-count";
+
+    public static String ENDPOINT_GET_USER_INFO = BASE_URL
+            + "api/v1/user-info";
 
 
     public static void changeBaseUrl(String baseUrl) {
@@ -96,6 +108,10 @@ public final class ApiEndPoint {
         ENDPOINT_ACTION_TRIP = BASE_URL + "api/v1/action-trip";
         ENDPOINT_CREATE_JOURNEY_ADD_TRIP = BASE_URL + "api/v1/create-journey-and-add-user-trip";
         ENDPOINT_CREATE_JOURNEY = BASE_URL + "api/v1/create-journey";
+        ENDPOINT_FORGOT_PASSWORD = BASE_URL + "api/v1/forgot-password";
+        ENDPOINT_GET_IMAGES = BASE_URL + "api/v1/article-images";
+        ENDPOINT_GET_COMMENT_COUNT = BASE_URL + "api/v1/get-comment-count";
+        ENDPOINT_GET_USER_INFO = BASE_URL + "api/v1/user-info";
     }
 
     private ApiEndPoint() {

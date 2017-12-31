@@ -2,12 +2,14 @@
 package com.techco.igotrip.data.network;
 
 import com.rx2androidnetworking.Rx2AndroidNetworking;
+import com.techco.igotrip.data.network.model.response.ArticleImagesResponse;
 import com.techco.igotrip.data.network.model.response.ArticleResponse;
 import com.techco.igotrip.data.network.model.response.CommentListResponse;
 import com.techco.igotrip.data.network.model.response.CommentResponse;
 import com.techco.igotrip.data.network.model.response.CreateShareLinkResponse;
 import com.techco.igotrip.data.network.model.response.ExploreDataResponse;
 import com.techco.igotrip.data.network.model.response.FirstDataResponse;
+import com.techco.igotrip.data.network.model.response.GetCommentCountResponse;
 import com.techco.igotrip.data.network.model.response.JourneyResponse;
 import com.techco.igotrip.data.network.model.response.SelectNationResponse;
 import com.techco.igotrip.data.network.model.response.SelectTypeResponse;
@@ -318,6 +320,54 @@ public class AppApiHelper implements ApiHelper {
                 .addBodyParameter(params)
                 .build()
                 .getObjectObservable(SimpleDataResponse.class);
+    }
+
+    /**
+     * user_name: string value (username or email)
+     */
+    @Override
+    public Observable<SimpleDataResponse> forgotPassword(Map<String, String> params) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_FORGOT_PASSWORD)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .addBodyParameter(params)
+                .build()
+                .getObjectObservable(SimpleDataResponse.class);
+    }
+
+    /**
+     * article_id: int value
+     */
+    @Override
+    public Observable<ArticleImagesResponse> getImages(Map<String, String> params) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_GET_IMAGES)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .addBodyParameter(params)
+                .build()
+                .getObjectObservable(ArticleImagesResponse.class);
+    }
+
+    /**
+     * article_id: int value
+     */
+    @Override
+    public Observable<GetCommentCountResponse> getCommentCount(Map<String, String> params) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_GET_COMMENT_COUNT)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .addBodyParameter(params)
+                .build()
+                .getObjectObservable(GetCommentCountResponse.class);
+    }
+
+    /**
+     * id: int value
+     */
+    @Override
+    public Observable<UserResponse> getUserInfo(Map<String, String> params) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_GET_USER_INFO)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .addBodyParameter(params)
+                .build()
+                .getObjectObservable(UserResponse.class);
     }
 }
 

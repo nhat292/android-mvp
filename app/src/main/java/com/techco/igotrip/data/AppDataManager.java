@@ -8,11 +8,13 @@ import com.techco.igotrip.dagger.ApplicationContext;
 import com.techco.igotrip.data.network.ApiHeader;
 import com.techco.igotrip.data.network.ApiHelper;
 import com.techco.igotrip.data.network.model.object.User;
+import com.techco.igotrip.data.network.model.response.ArticleImagesResponse;
 import com.techco.igotrip.data.network.model.response.ArticleResponse;
 import com.techco.igotrip.data.network.model.response.CommentListResponse;
 import com.techco.igotrip.data.network.model.response.CreateShareLinkResponse;
 import com.techco.igotrip.data.network.model.response.ExploreDataResponse;
 import com.techco.igotrip.data.network.model.response.FirstDataResponse;
+import com.techco.igotrip.data.network.model.response.GetCommentCountResponse;
 import com.techco.igotrip.data.network.model.response.JourneyResponse;
 import com.techco.igotrip.data.network.model.response.SimpleDataResponse;
 import com.techco.igotrip.data.network.model.response.CommentResponse;
@@ -157,6 +159,26 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public Observable<SimpleDataResponse> forgotPassword(Map<String, String> params) {
+        return mApiHelper.forgotPassword(params);
+    }
+
+    @Override
+    public Observable<ArticleImagesResponse> getImages(Map<String, String> params) {
+        return mApiHelper.getImages(params);
+    }
+
+    @Override
+    public Observable<GetCommentCountResponse> getCommentCount(Map<String, String> params) {
+        return mApiHelper.getCommentCount(params);
+    }
+
+    @Override
+    public Observable<UserResponse> getUserInfo(Map<String, String> params) {
+        return mApiHelper.getUserInfo(params);
+    }
+
+    @Override
     public void setUserInfo(User user) {
         mPreferencesHelper.setUserInfo(user);
     }
@@ -164,5 +186,15 @@ public class AppDataManager implements DataManager {
     @Override
     public User getUserInfo() {
         return mPreferencesHelper.getUserInfo();
+    }
+
+    @Override
+    public void setUsername(String username) {
+        mPreferencesHelper.setUsername(username);
+    }
+
+    @Override
+    public String getUsername() {
+        return mPreferencesHelper.getUsername();
     }
 }

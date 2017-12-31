@@ -51,6 +51,7 @@ import com.techco.igotrip.ui.base.BaseActivity;
 import com.techco.igotrip.ui.comment.CommentActivity;
 import com.techco.igotrip.ui.createtrip.CreateTripActivity;
 import com.techco.igotrip.ui.custom.carousellayout.CarouselPagerAdapter;
+import com.techco.igotrip.ui.detail.DetailActivity;
 import com.techco.igotrip.ui.dialog.DialogCallback;
 import com.techco.igotrip.ui.dialog.app.AppDialog;
 import com.techco.igotrip.ui.dialog.simplelist.SimpleListDialog;
@@ -115,7 +116,7 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
     private double minDistance = 0.0;
     private boolean enableLazyLoad = true, resultOfLazyLoad;
     private Location location;
-    private PermissionListener locationPermissionListenner;
+    private PermissionListener locationPermissionListener;
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationManager manager;
 
@@ -374,7 +375,7 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
     private void checkLocationPermission() {
         Dexter.withActivity(this)
                 .withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
-                .withListener(locationPermissionListenner)
+                .withListener(locationPermissionListener)
                 .withErrorListener(new ErrorPermissionRequestListener(this))
                 .check();
     }
@@ -383,7 +384,7 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
         final ViewGroup viewGroup = (ViewGroup) ((ViewGroup) this
                 .findViewById(android.R.id.content)).getChildAt(0);
         PermissionListener feedbackViewPermissionListener = new SinglePermissionListener(this);
-        locationPermissionListenner = new CompositePermissionListener(feedbackViewPermissionListener,
+        locationPermissionListener = new CompositePermissionListener(feedbackViewPermissionListener,
                 SnackbarOnDeniedPermissionListener.Builder.with(viewGroup,
                         R.string.message_camera_permission_denied)
                         .withOpenSettingsButton(R.string.setting)
@@ -514,7 +515,7 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
 
     @Override
     public void onItemClick(int position) {
-        this.position = position;
+        startActivity(DetailActivity.getStartIntent(this, articles.get(position)));
     }
 
     @Override

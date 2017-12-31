@@ -14,4 +14,8 @@ public interface PreferencesHelper {
 
     User getUserInfo();
 
+    void setUsername(String username);
+
+    String getUsername();
+
 }

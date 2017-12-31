@@ -18,15 +18,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <service android:name="com.techco.igotrip.service.SyncService" />
+
+        <!--FACEBOOK-->
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
         <provider android:authorities="com.facebook.app.FacebookContentProvider{497778373927201}"
             android:name="com.facebook.FacebookContentProvider"
             android:exported="true"/>
 
-        <service android:name="com.techco.igotrip.service.SyncService" />
-
+        <!--GOOGLE MAPS-->
         <meta-data
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id" />
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_map_key" />
 
         <activity
             android:name="com.facebook.FacebookActivity"
@@ -112,6 +117,11 @@
 
         <activity
             android:name="com.techco.igotrip.ui.createtrip.CreateTripActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.techco.igotrip.ui.detail.DetailActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 

@@ -123,7 +123,9 @@ dependencies {
 
     implementation "com.google.android.gms:play-services-location:$rootProject.googleServiceVersion"
 
-    implementation 'com.facebook.android:facebook-share:[4,5)'
+    implementation "com.facebook.android:facebook-share:$facebookSDKShareVersion"
+
+    implementation "com.google.android.gms:play-services-maps:$googleMapVersion"
 
     //Custom crashes
     implementation "cat.ereza:customactivityoncrash:$rootProject.customCrashVersion"
@@ -131,6 +133,7 @@ dependencies {
     //Import modules
     implementation project(':common')
 }
+apply plugin: 'com.google.gms.google-services'
 
 configurations.all {
     resolutionStrategy.force "com.android.support:support-annotations:$supportLibraryVersion"

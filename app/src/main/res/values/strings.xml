@@ -59,6 +59,12 @@
     <string name="message_empty_password">Please enter a password</string>
     <string name="message_password_incorrect">Password is incorrect</string>
     <string name="message_account_does_not_exist">Account does not exist</string>
+    <string name="forgot_password">Forgot password</string>
+    <string name="message_forgot_password">Please enter your username. iGoTrip will send to your email a new password:</string>
+    <string name="username_or_email_hint">Username or Email</string>
+    <string name="message_enter_username_or_email">Please enter your username or email</string>
+    <string name="message_username_or_email_does_not_exists">Username or email does not exists</string>
+    <string name="message_forgot_password_success">Request new password sent successfully. iGoTrip will send to your email a new password as soon as possible. Thank you for using the app!</string>
 
     <!--Register-->
     <string name="submit_text">submit</string>
@@ -157,5 +163,15 @@
     <string name="description">Description</string>
     <string name="message_trip_name_empty">Please enter a trip name</string>
     <string name="message_trip_name_existed_format">The trip with name %s already exist. Please select another name</string>
+
+    <!--Detail-->
+    <string name="post_by">Post by</string>
+    <string name="comment_format">Comments(%d)</string>
+    <string name="btn_edit">edit</string>
+    <string name="no_images">No images</string>
+
+
+    <!--Keys-->
+    <string name="google_map_key">AIzaSyDGNHKSfoTrZhiH0vnq5WddwUMQadIdr8o</string>
 
 </resources>

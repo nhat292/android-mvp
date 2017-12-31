@@ -11,9 +11,11 @@ import com.techco.igotrip.ui.base.BaseView;
 
 public interface LoginBaseView extends BaseView {
 
+    void onCheckUsernameSuccess(String username);
+
     void openSignUpActivity();
 
-    void showForgotPasswordDialog();
+    void onForgotPasswordSuccess();
 
     void onLoginSuccess();
 

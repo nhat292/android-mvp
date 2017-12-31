@@ -4,6 +4,7 @@ package com.techco.igotrip.ui.login;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -14,6 +15,8 @@ import com.facebook.login.LoginManager;
 import com.techco.common.KeyboardUtils;
 import com.techco.igotrip.R;
 import com.techco.igotrip.ui.base.BaseActivity;
+import com.techco.igotrip.ui.dialog.DialogCallback;
+import com.techco.igotrip.ui.dialog.app.AppDialog;
 import com.techco.igotrip.ui.signup.SignUpActivity;
 import com.twitter.sdk.android.core.identity.TwitterAuthClient;
 
@@ -76,6 +79,12 @@ public class LoginActivity extends BaseActivity implements LoginBaseView, TextVi
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        mPresenter.checkUsername();
+    }
+
+    @Override
     protected void setUp() {
         editUsernameEmail.setOnEditorActionListener(this);
         editPassword.setOnEditorActionListener(this);
@@ -93,7 +102,27 @@ public class LoginActivity extends BaseActivity implements LoginBaseView, TextVi
 
     @OnClick(R.id.txtForgotPassword)
     public void onForgotPasswordClick(View v) {
+        AppDialog dialog = AppDialog.newInstance();
+        dialog.show(getSupportFragmentManager(), getString(R.string.forgot_password),
+                getString(R.string.message_forgot_password), null, getString(android.R.string.cancel),
+                getString(R.string.username_or_email_hint), InputType.TYPE_CLASS_TEXT);
+        dialog.setCallback(new DialogCallback<AppDialog>() {
+            @Override
+            public void onNegative(AppDialog dialog) {
+                dialog.dismissDialog(AppDialog.TAG);
+            }
 
+            @Override
+            public void onPositive(AppDialog dialog, Object o) {
+                String username = (String) o;
+                if (username.isEmpty()) {
+                    showMessage(R.string.message_enter_username_or_email);
+                } else {
+                    dialog.dismissDialog(AppDialog.TAG);
+                    mPresenter.forgotPassword(username);
+                }
+            }
+        });
     }
 
     @OnClick(R.id.btnRegister)
@@ -119,8 +148,14 @@ public class LoginActivity extends BaseActivity implements LoginBaseView, TextVi
     }
 
     @Override
-    public void showForgotPasswordDialog() {
+    public void onCheckUsernameSuccess(String username) {
+        editUsernameEmail.setText(username);
+        editUsernameEmail.setSelection(username.length());
+    }
 
+    @Override
+    public void onForgotPasswordSuccess() {
+        showSimpleDialog(null, getString(R.string.message_forgot_password_success));
     }
 
     @Override

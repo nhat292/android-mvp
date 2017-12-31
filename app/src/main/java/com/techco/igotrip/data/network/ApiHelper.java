@@ -1,12 +1,14 @@
 
 package com.techco.igotrip.data.network;
 
+import com.techco.igotrip.data.network.model.response.ArticleImagesResponse;
 import com.techco.igotrip.data.network.model.response.ArticleResponse;
 import com.techco.igotrip.data.network.model.response.CommentListResponse;
 import com.techco.igotrip.data.network.model.response.CommentResponse;
 import com.techco.igotrip.data.network.model.response.CreateShareLinkResponse;
 import com.techco.igotrip.data.network.model.response.ExploreDataResponse;
 import com.techco.igotrip.data.network.model.response.FirstDataResponse;
+import com.techco.igotrip.data.network.model.response.GetCommentCountResponse;
 import com.techco.igotrip.data.network.model.response.JourneyResponse;
 import com.techco.igotrip.data.network.model.response.SelectNationResponse;
 import com.techco.igotrip.data.network.model.response.SelectTypeResponse;
@@ -65,4 +67,12 @@ public interface ApiHelper {
     Observable<SimpleDataResponse> createJourneyAndAddTrip(Map<String, String> params);
 
     Observable<SimpleDataResponse> createJourney(Map<String, String> params);
+
+    Observable<SimpleDataResponse> forgotPassword(Map<String, String> params);
+
+    Observable<ArticleImagesResponse> getImages(Map<String, String> params);
+
+    Observable<GetCommentCountResponse> getCommentCount(Map<String, String> params);
+
+    Observable<UserResponse> getUserInfo(Map<String, String> params);
 }

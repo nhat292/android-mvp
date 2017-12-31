@@ -21,6 +21,7 @@ import javax.inject.Singleton;
 public class AppPreferencesHelper implements PreferencesHelper {
 
     private static final String PREF_KEY_USER_INFO = "PREF_KEY_USER_INFO";
+    private static final String PREF_KEY_USERNAME = "PREF_KEY_USERNAME";
 
     private final SharedPreferences mPrefs;
 
@@ -47,5 +48,15 @@ public class AppPreferencesHelper implements PreferencesHelper {
             return new Gson().fromJson(userJson, User.class);
         }
         return null;
+    }
+
+    @Override
+    public void setUsername(String username) {
+        mPrefs.edit().putString(PREF_KEY_USERNAME, username).apply();
+    }
+
+    @Override
+    public String getUsername() {
+        return mPrefs.getString(PREF_KEY_USERNAME, "");
     }
 }

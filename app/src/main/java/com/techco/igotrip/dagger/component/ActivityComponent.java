@@ -6,6 +6,7 @@ import com.techco.igotrip.dagger.module.ActivityModule;
 import com.techco.igotrip.ui.changepassword.ChangePasswordActivity;
 import com.techco.igotrip.ui.comment.CommentActivity;
 import com.techco.igotrip.ui.createtrip.CreateTripActivity;
+import com.techco.igotrip.ui.detail.DetailActivity;
 import com.techco.igotrip.ui.dialog.rating.RateUsDialog;
 import com.techco.igotrip.ui.info.InfoActivity;
 import com.techco.igotrip.ui.launch.LaunchActivity;
@@ -40,5 +41,6 @@ public interface ActivityComponent {
     void inject(CommentActivity activity);
     void inject(WriteCommentActivity activity);
     void inject(CreateTripActivity activity);
+    void inject(DetailActivity activity);
 
 }
