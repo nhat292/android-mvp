@@ -4,8 +4,8 @@ package com.techco.igotrip.dagger.module;
 import android.app.Application;
 import android.content.Context;
 
+import com.techco.common.AppConstants;
 import com.techco.igotrip.BuildConfig;
-import com.techco.igotrip.R;
 import com.techco.igotrip.dagger.ApiInfo;
 import com.techco.igotrip.dagger.ApplicationContext;
 import com.techco.igotrip.dagger.DatabaseInfo;
@@ -17,13 +17,11 @@ import com.techco.igotrip.data.network.ApiHelper;
 import com.techco.igotrip.data.network.AppApiHelper;
 import com.techco.igotrip.data.prefs.AppPreferencesHelper;
 import com.techco.igotrip.data.prefs.PreferencesHelper;
-import com.techco.common.AppConstants;
 
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 /**
  * Created by Nhat on 12/13/17.
@@ -96,12 +94,12 @@ public class ApplicationModule {
                 preferencesHelper.getUserInfo() != null ? preferencesHelper.getUserInfo().getToken() : "");
     }
 
-    @Provides
+    /*@Provides
     @Singleton
     CalligraphyConfig provideCalligraphyDefaultConfig() {
         return new CalligraphyConfig.Builder()
                 .setDefaultFontPath("fonts/source-sans-pro/SourceSansPro-Regular.ttf")
                 .setFontAttrId(R.attr.fontPath)
                 .build();
-    }
+    }*/
 }

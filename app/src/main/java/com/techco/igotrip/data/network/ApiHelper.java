@@ -3,14 +3,15 @@ package com.techco.igotrip.data.network;
 
 import com.techco.igotrip.data.network.model.response.ArticleResponse;
 import com.techco.igotrip.data.network.model.response.CommentListResponse;
+import com.techco.igotrip.data.network.model.response.CommentResponse;
 import com.techco.igotrip.data.network.model.response.CreateShareLinkResponse;
 import com.techco.igotrip.data.network.model.response.ExploreDataResponse;
 import com.techco.igotrip.data.network.model.response.FirstDataResponse;
-import com.techco.igotrip.data.network.model.response.SimpleDataResponse;
-import com.techco.igotrip.data.network.model.response.CommentResponse;
-import com.techco.igotrip.data.network.model.response.UserResponse;
+import com.techco.igotrip.data.network.model.response.JourneyResponse;
 import com.techco.igotrip.data.network.model.response.SelectNationResponse;
 import com.techco.igotrip.data.network.model.response.SelectTypeResponse;
+import com.techco.igotrip.data.network.model.response.SimpleDataResponse;
+import com.techco.igotrip.data.network.model.response.UserResponse;
 
 import java.util.Map;
 
@@ -56,4 +57,12 @@ public interface ApiHelper {
     Observable<CommentResponse> createComment(Map<String, String> params);
 
     Observable<CreateShareLinkResponse> createShareLink(Map<String, String> params);
+
+    Observable<JourneyResponse> getJourneys(Map<String, String> params);
+
+    Observable<SimpleDataResponse> actionTrip(Map<String, String> params);
+
+    Observable<SimpleDataResponse> createJourneyAndAddTrip(Map<String, String> params);
+
+    Observable<SimpleDataResponse> createJourney(Map<String, String> params);
 }

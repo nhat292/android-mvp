@@ -141,6 +141,7 @@ public class CommentActivity extends BaseActivity implements CommentBaseView {
         comments.add(comment);
         adapter.notifyItemInserted(comments.size() - 1);
         recyclerComment.scrollToPosition(comments.size() - 1);
+        updateList();
     }
 
     @Override

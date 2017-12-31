@@ -33,7 +33,6 @@
             <TextView
                 android:id="@+id/txtName"
                 style="@style/TextStyle.Title.Sub"
-                fontPath="fonts/source-sans-pro/SourceSansPro-Bold.ttf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
@@ -44,7 +43,6 @@
             <TextView
                 android:id="@+id/txtTime"
                 style="@style/TextStyle.Title.Sub"
-                fontPath="fonts/source-sans-pro/SourceSansPro-Italic.ttf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
@@ -58,13 +56,10 @@
     <TextView
         android:id="@+id/txtMessage"
         style="@style/TextStyle.Title.Sub"
-        fontPath="fonts/source-sans-pro/SourceSansPro-Italic.ttf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_padding_small"
         android:layout_marginStart="@dimen/margin_padding_small"
-        android:maxLines="1"
-        android:singleLine="true"
         android:text="This is a message"
         android:textColor="@color/black"
         android:textStyle="italic" />

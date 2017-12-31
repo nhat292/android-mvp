@@ -22,7 +22,6 @@ import javax.inject.Inject;
 
 import cat.ereza.customactivityoncrash.config.CaocConfig;
 import io.fabric.sdk.android.Fabric;
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 
 /**
@@ -35,8 +34,8 @@ public class App extends Application {
     @Inject
     DataManager mDataManager;
 
-    @Inject
-    CalligraphyConfig mCalligraphyConfig;
+    /*@Inject
+    CalligraphyConfig mCalligraphyConfig;*/
 
     private ApplicationComponent mApplicationComponent;
 

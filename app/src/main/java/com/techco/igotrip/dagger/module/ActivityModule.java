@@ -13,6 +13,9 @@ import com.techco.igotrip.ui.changepassword.ChangePasswordPresenter;
 import com.techco.igotrip.ui.comment.CommentBaseView;
 import com.techco.igotrip.ui.comment.CommentMvpPresenter;
 import com.techco.igotrip.ui.comment.CommentPresenter;
+import com.techco.igotrip.ui.createtrip.CreateTripBaseView;
+import com.techco.igotrip.ui.createtrip.CreateTripMvpPresenter;
+import com.techco.igotrip.ui.createtrip.CreateTripPresenter;
 import com.techco.igotrip.ui.dialog.rating.RatingDialogBaseView;
 import com.techco.igotrip.ui.dialog.rating.RatingDialogMvpPresenter;
 import com.techco.igotrip.ui.dialog.rating.RatingDialogPresenter;
@@ -149,6 +152,13 @@ public class ActivityModule {
     @PerActivity
     WriteCommentMvpPresenter<WriteCommentBaseView> provideWriteCommentPresenter(
             WriteCommentPresenter<WriteCommentBaseView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    CreateTripMvpPresenter<CreateTripBaseView> provideCreateTripPresenter(
+            CreateTripPresenter<CreateTripBaseView> presenter) {
         return presenter;
     }
 

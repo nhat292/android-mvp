@@ -61,6 +61,18 @@ public final class ApiEndPoint {
     public static String ENDPOINT_CREATE_SHARE_LINK = BASE_URL
             + "api/v1/create-share-link";
 
+    public static String ENDPOINT_GET_JOURNEYS = BASE_URL
+            + "api/v1/get-journeys";
+
+    public static String ENDPOINT_ACTION_TRIP = BASE_URL
+            + "api/v1/action-trip";
+
+    public static String ENDPOINT_CREATE_JOURNEY_ADD_TRIP = BASE_URL
+            + "api/v1/create-journey-and-add-user-trip";
+
+    public static String ENDPOINT_CREATE_JOURNEY= BASE_URL
+            + "api/v1/create-journey";
+
 
     public static void changeBaseUrl(String baseUrl) {
         BASE_URL = baseUrl;
@@ -80,6 +92,10 @@ public final class ApiEndPoint {
         ENDPOINT_UPDATE_COMMENT = BASE_URL + "api/v1/update-comment";
         ENDPOINT_CREATE_COMMENT = BASE_URL + "api/v1/create-comment";
         ENDPOINT_CREATE_SHARE_LINK = BASE_URL + "api/v1/create-share-link";
+        ENDPOINT_GET_JOURNEYS = BASE_URL + "api/v1/get-journeys";
+        ENDPOINT_ACTION_TRIP = BASE_URL + "api/v1/action-trip";
+        ENDPOINT_CREATE_JOURNEY_ADD_TRIP = BASE_URL + "api/v1/create-journey-and-add-user-trip";
+        ENDPOINT_CREATE_JOURNEY = BASE_URL + "api/v1/create-journey";
     }
 
     private ApiEndPoint() {

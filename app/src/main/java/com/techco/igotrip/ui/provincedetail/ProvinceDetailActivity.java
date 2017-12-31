@@ -38,6 +38,7 @@ import com.techco.common.AppLogger;
 import com.techco.igotrip.R;
 import com.techco.igotrip.callback.ArticleActionCallback;
 import com.techco.igotrip.data.network.model.object.Article;
+import com.techco.igotrip.data.network.model.object.Journey;
 import com.techco.igotrip.data.network.model.object.Province;
 import com.techco.igotrip.data.network.model.object.SubType;
 import com.techco.igotrip.data.network.model.object.Type;
@@ -48,9 +49,11 @@ import com.techco.igotrip.ui.adapter.SubTypeAdapter;
 import com.techco.igotrip.ui.adapter.TypeAdapter;
 import com.techco.igotrip.ui.base.BaseActivity;
 import com.techco.igotrip.ui.comment.CommentActivity;
+import com.techco.igotrip.ui.createtrip.CreateTripActivity;
 import com.techco.igotrip.ui.custom.carousellayout.CarouselPagerAdapter;
 import com.techco.igotrip.ui.dialog.DialogCallback;
 import com.techco.igotrip.ui.dialog.app.AppDialog;
+import com.techco.igotrip.ui.dialog.simplelist.SimpleListDialog;
 import com.techco.igotrip.ui.login.LoginActivity;
 import com.techco.igotrip.utils.permission.ErrorPermissionRequestListener;
 import com.techco.igotrip.utils.permission.PermissionResultListener;
@@ -75,6 +78,8 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
 
     private static final String TAG = "ProvinceDetailActivity";
     public static final String EXTRA_PROVINCE = "PROVINCE";
+
+    public static final int REQUEST_ADD_TRIP = 100;
 
     public static int VIEW_PAGER_WIDTH = 0;
     public static int VIEW_PAGER_HEIGHT = 0;
@@ -146,6 +151,11 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
     protected void onDestroy() {
         mPresenter.onDetach();
         super.onDestroy();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     @Override
@@ -319,6 +329,43 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
         }
     }
 
+    @Override
+    public void onGetJourneysSuccess(List<Journey> journeys) {
+        AppLogger.d(TAG, "Journeys: " + journeys.size());
+        List<String> datas = new ArrayList<>();
+        datas.add(getString(R.string.add_new_trip));
+        if (journeys.size() > 0) {
+            for (int i = 0; i < journeys.size(); i++) {
+                datas.add(journeys.get(i).getName());
+            }
+        }
+        SimpleListDialog dialog = SimpleListDialog.newInstance();
+        dialog.show(getSupportFragmentManager(), getString(R.string.select_trip), datas);
+        dialog.setCallback(new DialogCallback<SimpleListDialog>() {
+            @Override
+            public void onNegative(SimpleListDialog dialog) {
+                dialog.dismissDialog(SimpleListDialog.TAG);
+            }
+
+            @Override
+            public void onPositive(SimpleListDialog dialog, Object o) {
+                dialog.dismissDialog(SimpleListDialog.TAG);
+                int position = (int) o;
+                if (position == 0) {
+                    startActivityForResult(CreateTripActivity.getStartIntent(ProvinceDetailActivity.this, articles.get(position).getId()), REQUEST_ADD_TRIP);
+                } else {
+                    mPresenter.actionTrip(articles.get(position).getId(), journeys.get(position - 1).getId(), true);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onAddOrRemoveJourneySuccess() {
+        articles.get(position).setMytrip(!articles.get(position).isMytrip());
+        carouselPagerAdapter.notifyDataSetChanged();
+    }
+
     private void checkLocationPermission() {
         Dexter.withActivity(this)
                 .withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
@@ -439,6 +486,8 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
     @Override
     public void onAddJourneyClick(int position) {
         this.position = position;
+        boolean action = articles.get(position).isMytrip() ? true : false;
+        mPresenter.actionTrip(articles.get(position).getId(), -1, action);
     }
 
 
@@ -474,5 +523,15 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
         articles.get(position).setFavorite(favorite);
         articles.get(position).setFavoriteCount(favorite ? articles.get(position).getFavoriteCount() + 1 : articles.get(position).getFavoriteCount() - 1);
         carouselPagerAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != RESULT_OK) return;
+        if (requestCode == REQUEST_ADD_TRIP) {
+            articles.get(position).setMytrip(true);
+            //carouselPagerAdapter.notifyDataSetChanged();
+        }
     }
 }

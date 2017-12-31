@@ -32,7 +32,7 @@ public class CarouselPagerAdapter extends FragmentPagerAdapter implements ViewPa
         this.context = context;
         this.articles = articles;
         this.pager = pager;
-        mFragmentTags = new HashMap<Integer, String>();
+        mFragmentTags = new HashMap<>();
     }
 
     @Override

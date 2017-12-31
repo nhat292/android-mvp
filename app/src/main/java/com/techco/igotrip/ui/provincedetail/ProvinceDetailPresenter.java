@@ -168,4 +168,60 @@ public class ProvinceDetailPresenter<V extends ProvinceDetailBaseView> extends B
                     }
                 }));
     }
+
+    @Override
+    public void actionTrip(int articleId, int journeyId, boolean action) {
+        if (getDataManager().getUserInfo() == null) {
+            getMvpView().openLogin();
+            return;
+        }
+        if (action) {
+            getMvpView().showLoading();
+            Map<String, String> params = new HashMap<>();
+            params.put("user_id", String.valueOf(getDataManager().getUserInfo().getId()));
+            params.put("action", journeyId == -1 ? "remove" : "add");
+            params.put("article_id", String.valueOf(articleId));
+            params.put("journey_id", String.valueOf(journeyId));
+            getCompositeDisposable().add(getDataManager()
+                    .actionTrip(params)
+                    .subscribeOn(getSchedulerProvider().io())
+                    .observeOn(getSchedulerProvider().ui())
+                    .subscribe(response -> {
+                        getMvpView().hideLoading();
+                        getMvpView().onAddOrRemoveJourneySuccess();
+                    }, throwable -> {
+                        if (!isViewAttached()) {
+                            return;
+                        }
+                        getMvpView().hideLoading();
+                        // handle the error here
+                        if (throwable instanceof ANError) {
+                            ANError anError = (ANError) throwable;
+                            handleApiError(anError);
+                        }
+                    }));
+        } else {
+            getMvpView().showLoading();
+            Map<String, String> params = new HashMap<>();
+            params.put("user_id", String.valueOf(getDataManager().getUserInfo().getId()));
+            getCompositeDisposable().add(getDataManager()
+                    .getJourneys(params)
+                    .subscribeOn(getSchedulerProvider().io())
+                    .observeOn(getSchedulerProvider().ui())
+                    .subscribe(response -> {
+                        getMvpView().hideLoading();
+                        getMvpView().onGetJourneysSuccess(response.getJourneys());
+                    }, throwable -> {
+                        if (!isViewAttached()) {
+                            return;
+                        }
+                        getMvpView().hideLoading();
+                        // handle the error here
+                        if (throwable instanceof ANError) {
+                            ANError anError = (ANError) throwable;
+                            handleApiError(anError);
+                        }
+                    }));
+        }
+    }
 }

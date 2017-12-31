@@ -4,13 +4,14 @@ package com.techco.igotrip.data.network;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 import com.techco.igotrip.data.network.model.response.ArticleResponse;
 import com.techco.igotrip.data.network.model.response.CommentListResponse;
+import com.techco.igotrip.data.network.model.response.CommentResponse;
 import com.techco.igotrip.data.network.model.response.CreateShareLinkResponse;
 import com.techco.igotrip.data.network.model.response.ExploreDataResponse;
 import com.techco.igotrip.data.network.model.response.FirstDataResponse;
+import com.techco.igotrip.data.network.model.response.JourneyResponse;
 import com.techco.igotrip.data.network.model.response.SelectNationResponse;
 import com.techco.igotrip.data.network.model.response.SelectTypeResponse;
 import com.techco.igotrip.data.network.model.response.SimpleDataResponse;
-import com.techco.igotrip.data.network.model.response.CommentResponse;
 import com.techco.igotrip.data.network.model.response.UserResponse;
 
 import java.util.Map;
@@ -261,6 +262,62 @@ public class AppApiHelper implements ApiHelper {
                 .addBodyParameter(params)
                 .build()
                 .getObjectObservable(CreateShareLinkResponse.class);
+    }
+
+    /**
+     * user_id: int value
+     */
+    @Override
+    public Observable<JourneyResponse> getJourneys(Map<String, String> params) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_GET_JOURNEYS)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .addBodyParameter(params)
+                .build()
+                .getObjectObservable(JourneyResponse.class);
+    }
+
+    /**
+     * user_id: int value
+     * action: remove or add
+     * article_id: int value
+     * journey_id: int value (-1 is remove)
+     */
+    @Override
+    public Observable<SimpleDataResponse> actionTrip(Map<String, String> params) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_ACTION_TRIP)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .addBodyParameter(params)
+                .build()
+                .getObjectObservable(SimpleDataResponse.class);
+    }
+
+    /**
+     * user_id: int value
+     * journey_name: string value
+     * journey_description: string value
+     * article_id: int value
+     */
+    @Override
+    public Observable<SimpleDataResponse> createJourneyAndAddTrip(Map<String, String> params) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_CREATE_JOURNEY_ADD_TRIP)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .addBodyParameter(params)
+                .build()
+                .getObjectObservable(SimpleDataResponse.class);
+    }
+
+    /**
+     * user_id: int value
+     * journey_name: string value
+     * journey_description: string value
+     */
+    @Override
+    public Observable<SimpleDataResponse> createJourney(Map<String, String> params) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_CREATE_JOURNEY)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .addBodyParameter(params)
+                .build()
+                .getObjectObservable(SimpleDataResponse.class);
     }
 }
 
