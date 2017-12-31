@@ -159,6 +159,11 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
     protected void setUp() {
         txtArticleTitle.setVisibility(View.INVISIBLE);
         province = getIntent().getParcelableExtra(ProvinceDetailActivity.EXTRA_PROVINCE);
@@ -363,7 +368,7 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
     @Override
     public void onAddOrRemoveJourneySuccess() {
         articles.get(position).setMytrip(!articles.get(position).isMytrip());
-        carouselPagerAdapter.notifyDataSetChanged();
+        carouselPagerAdapter.notifyDataSetChanged(position);
     }
 
     private void checkLocationPermission() {
@@ -522,7 +527,7 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
         boolean favorite = !articles.get(position).isFavorite();
         articles.get(position).setFavorite(favorite);
         articles.get(position).setFavoriteCount(favorite ? articles.get(position).getFavoriteCount() + 1 : articles.get(position).getFavoriteCount() - 1);
-        carouselPagerAdapter.notifyDataSetChanged();
+        carouselPagerAdapter.notifyDataSetChanged(position);
     }
 
     @Override
@@ -531,7 +536,7 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
         if (resultCode != RESULT_OK) return;
         if (requestCode == REQUEST_ADD_TRIP) {
             articles.get(position).setMytrip(true);
-            //carouselPagerAdapter.notifyDataSetChanged();
+            carouselPagerAdapter.notifyDataSetChanged(position);
         }
     }
 }

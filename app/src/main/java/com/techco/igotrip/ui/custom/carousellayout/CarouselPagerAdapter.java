@@ -121,4 +121,10 @@ public class CarouselPagerAdapter extends FragmentPagerAdapter implements ViewPa
             }
         }
     }
+
+    public void notifyDataSetChanged(int position) {
+        super.notifyDataSetChanged();
+        ItemFragment fragment = (ItemFragment) getFragment(position);
+        fragment.update(articles.get(position));
+    }
 }
