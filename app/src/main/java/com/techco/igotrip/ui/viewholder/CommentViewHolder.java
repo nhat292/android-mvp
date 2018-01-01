@@ -45,8 +45,8 @@ public class CommentViewHolder extends BaseViewHolder {
 
     }
 
-    public void bind(List<Comment> comments, int posision, OnItemClickListener listener, CommentAdapter adapter) {
-        Comment comment = comments.get(posision);
+    public void bind(List<Comment> comments, int position, OnItemClickListener listener, CommentAdapter adapter) {
+        Comment comment = comments.get(position);
         txtName.setText(comment.getUsername() + "(" + comment.getFullname() + ")");
         txtTime.setText(comment.getUpdatedAt());
         Glide.with(itemView.getContext())
@@ -60,7 +60,7 @@ public class CommentViewHolder extends BaseViewHolder {
         } else {
             txtMessage.setText(comment.getContent());
         }
-        llRoot.setOnClickListener(view -> listener.onClick(comment, posision));
+        llRoot.setOnClickListener(view -> listener.onClick(comment, position));
     }
 
 }

@@ -42,8 +42,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_padding_large"
             android:minHeight="0px"
-            android:paddingBottom="@dimen/margin_padding_very_small"
-            android:paddingTop="@dimen/margin_padding_very_small"
+            android:paddingBottom="@dimen/margin_padding_small"
+            android:paddingTop="@dimen/margin_padding_small"
             android:text="@android:string/cancel" />
     </LinearLayout>
 

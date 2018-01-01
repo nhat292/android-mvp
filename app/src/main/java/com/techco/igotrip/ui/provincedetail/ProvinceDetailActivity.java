@@ -260,7 +260,7 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
     @OnClick(R.id.btnReload)
     public void onReloadClick(View v) {
         btnReload.setVisibility(View.INVISIBLE);
-        exploreArticle();
+        checkLocationPermission();
     }
 
     @Override

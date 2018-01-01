@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rlItem"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/my_trip_item_height"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground">
+
+    <ImageView
+        android:id="@+id/imgIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/margin_padding_small"
+        android:src="@drawable/ic_up"
+        android:tint="@color/colorPrimary" />
+
+    <TextView
+        android:id="@+id/txtName"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/margin_padding_small"
+        android:layout_toEndOf="@+id/imgIcon"
+        android:layout_toStartOf="@+id/imgDelete"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:text="Item"
+        android:textColor="@color/accent_black"
+        android:textSize="@dimen/text_size_normal" />
+
+    <ImageView
+        android:id="@+id/imgDelete"
+        android:layout_width="@dimen/img_delete_item_size"
+        android:layout_height="@dimen/img_delete_item_size"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/margin_padding_small"
+        android:background="@drawable/button_secondary_bg"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:src="@drawable/ic_delete"
+        android:tint="@color/dark_gray" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/margin_padding_small"
+        android:background="@color/dark_gray" />
+
+
+</RelativeLayout>

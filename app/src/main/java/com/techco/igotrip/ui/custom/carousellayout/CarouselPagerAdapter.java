@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.techco.igotrip.R;
@@ -102,6 +103,12 @@ public class CarouselPagerAdapter extends FragmentPagerAdapter implements ViewPa
         return object;
     }
 
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+        super.destroyItem(container, position, object);
+        container.removeView((View) object);
+    }
+
     public Fragment getFragment(int position) {
         Fragment fragment = null;
         String tag = mFragmentTags.get(position);
@@ -126,5 +133,11 @@ public class CarouselPagerAdapter extends FragmentPagerAdapter implements ViewPa
         super.notifyDataSetChanged();
         ItemFragment fragment = (ItemFragment) getFragment(position);
         fragment.update(articles.get(position));
+    }
+
+    public void notifyItemRemoved(int position) {
+        mFragmentTags.remove(position);
+        super.notifyDataSetChanged();
+
     }
 }

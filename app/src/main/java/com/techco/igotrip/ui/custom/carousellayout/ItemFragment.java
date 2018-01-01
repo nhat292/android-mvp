@@ -18,6 +18,7 @@ import com.techco.igotrip.R;
 import com.techco.igotrip.data.network.ApiEndPoint;
 import com.techco.igotrip.data.network.model.object.Article;
 import com.techco.igotrip.ui.custom.views.MaterialBadgeTextView;
+import com.techco.igotrip.ui.favorite.FavoriteActivity;
 import com.techco.igotrip.ui.provincedetail.ProvinceDetailActivity;
 
 import butterknife.BindView;
@@ -79,8 +80,12 @@ public class ItemFragment extends Fragment {
         float scale = this.getArguments().getFloat(SCALE);
         final Article article = this.getArguments().getParcelable(DATA);
 
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams((int) (ProvinceDetailActivity.VIEW_PAGER_WIDTH * 0.9),
-                (int) (ProvinceDetailActivity.VIEW_PAGER_HEIGHT * 0.98));
+        int width = (int) (activity instanceof ProvinceDetailActivity ? ProvinceDetailActivity.VIEW_PAGER_WIDTH * 0.9 :
+                activity instanceof FavoriteActivity ? FavoriteActivity.VIEW_PAGER_WIDTH * 0.9 : 0);
+        int height = (int) (activity instanceof ProvinceDetailActivity ? ProvinceDetailActivity.VIEW_PAGER_HEIGHT * 0.98 :
+                activity instanceof FavoriteActivity ? FavoriteActivity.VIEW_PAGER_HEIGHT * 0.98 : 0);
+
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(width, height);
         View view = inflater.inflate(R.layout.fragment_article, container, false);
         ButterKnife.bind(this, view);
 
@@ -93,6 +98,9 @@ public class ItemFragment extends Fragment {
             if (activity instanceof ProvinceDetailActivity) {
                 ((ProvinceDetailActivity) activity).onItemClick(position);
             }
+            if (activity instanceof FavoriteActivity) {
+                ((FavoriteActivity) activity).onItemClick(position);
+            }
         });
 
 
@@ -104,12 +112,18 @@ public class ItemFragment extends Fragment {
         if (activity instanceof ProvinceDetailActivity) {
             ((ProvinceDetailActivity) activity).onAddJourneyClick(position);
         }
+        if (activity instanceof FavoriteActivity) {
+            ((FavoriteActivity) activity).onAddJourneyClick(position);
+        }
     }
 
     @OnClick(R.id.imgShare)
     public void onShareClick() {
         if (activity instanceof ProvinceDetailActivity) {
             ((ProvinceDetailActivity) activity).onShareClick(position);
+        }
+        if (activity instanceof FavoriteActivity) {
+            ((FavoriteActivity) activity).onShareClick(position);
         }
     }
 
@@ -118,12 +132,18 @@ public class ItemFragment extends Fragment {
         if (activity instanceof ProvinceDetailActivity) {
             ((ProvinceDetailActivity) activity).onCommentClick(position);
         }
+        if (activity instanceof FavoriteActivity) {
+            ((FavoriteActivity) activity).onCommentClick(position);
+        }
     }
 
     @OnClick(R.id.imgHeart)
     public void onAddFavoriteClick() {
         if (activity instanceof ProvinceDetailActivity) {
             ((ProvinceDetailActivity) activity).onAddFavoriteClick(position);
+        }
+        if (activity instanceof FavoriteActivity) {
+            ((FavoriteActivity) activity).onAddFavoriteClick(position);
         }
     }
 

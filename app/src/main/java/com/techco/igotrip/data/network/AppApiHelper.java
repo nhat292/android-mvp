@@ -369,5 +369,31 @@ public class AppApiHelper implements ApiHelper {
                 .build()
                 .getObjectObservable(UserResponse.class);
     }
+
+    /**
+     * journey_id: int value
+     */
+    @Override
+    public Observable<SimpleDataResponse> deleteJourney(Map<String, String> params) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_DELETE_JOURNEY)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .addBodyParameter(params)
+                .build()
+                .getObjectObservable(SimpleDataResponse.class);
+    }
+
+    /**
+     * user_id: int value
+     * lat: double value
+     * lng: double value
+     */
+    @Override
+    public Observable<ArticleResponse> getFavorites(Map<String, String> params) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_GET_FAVORITES)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .addBodyParameter(params)
+                .build()
+                .getObjectObservable(ArticleResponse.class);
+    }
 }
 

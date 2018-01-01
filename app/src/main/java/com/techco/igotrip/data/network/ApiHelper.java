@@ -75,4 +75,8 @@ public interface ApiHelper {
     Observable<GetCommentCountResponse> getCommentCount(Map<String, String> params);
 
     Observable<UserResponse> getUserInfo(Map<String, String> params);
+
+    Observable<SimpleDataResponse> deleteJourney(Map<String, String> params);
+
+    Observable<ArticleResponse> getFavorites(Map<String, String> params);
 }

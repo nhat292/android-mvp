@@ -179,6 +179,16 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public Observable<SimpleDataResponse> deleteJourney(Map<String, String> params) {
+        return mApiHelper.deleteJourney(params);
+    }
+
+    @Override
+    public Observable<ArticleResponse> getFavorites(Map<String, String> params) {
+        return mApiHelper.getFavorites(params);
+    }
+
+    @Override
     public void setUserInfo(User user) {
         mPreferencesHelper.setUserInfo(user);
     }
