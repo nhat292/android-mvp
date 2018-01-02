@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_nav_height"
+        android:background="?attr/colorPrimary"
+        android:padding="@dimen/margin_padding_tiny">
+
+        <ImageView
+            android:id="@+id/imgMenu"
+            style="@style/Button.Secondary"
+            android:layout_width="@dimen/menu_button_width"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/margin_padding_small"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_menu_bar" />
+
+        <ImageView
+            android:id="@+id/imgLogo"
+            style="@style/Button.Secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:padding="@dimen/margin_padding_tiny"
+            android:src="@drawable/ic_title_icon" />
+
+        <ImageView
+            android:id="@+id/imgRight"
+            style="@style/Button.Secondary"
+            android:layout_width="@dimen/img_back_size"
+            android:layout_height="@dimen/img_back_size"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/margin_padding_small"
+            android:padding="@dimen/margin_padding_very_small"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_photo" />
+    </RelativeLayout>
+
+    <include layout="@layout/you_are_here_content" />
+
+</LinearLayout>

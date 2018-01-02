@@ -181,6 +181,9 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
             exploreArticle();
         }));
 
+        recyclerType.setAdapter(typeAdapter);
+        recyclerSubType.setAdapter(subTypeAdapter);
+
         ViewTreeObserver vto = pagerArticle.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -201,9 +204,6 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
                 pagerArticle.addOnPageChangeListener(carouselPagerAdapter);
                 pagerArticle.setCurrentItem(0);
                 pagerArticle.setOffscreenPageLimit(0);
-
-                recyclerType.setAdapter(typeAdapter);
-                recyclerSubType.setAdapter(subTypeAdapter);
                 pagerArticle.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                     @Override
                     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -369,7 +369,7 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
     @Override
     public void onAddOrRemoveJourneySuccess() {
         articles.get(position).setMytrip(!articles.get(position).isMytrip());
-        carouselPagerAdapter.notifyDataSetChanged(position);
+        carouselPagerAdapter.notifyDataSetChanged();
     }
 
     private void checkLocationPermission() {
@@ -519,6 +519,11 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
     }
 
     @Override
+    public void onDeleteClick(int position) {
+
+    }
+
+    @Override
     public void openLogin() {
         startActivity(LoginActivity.getStartIntent(this));
     }
@@ -528,7 +533,7 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
         boolean favorite = !articles.get(position).isFavorite();
         articles.get(position).setFavorite(favorite);
         articles.get(position).setFavoriteCount(favorite ? articles.get(position).getFavoriteCount() + 1 : articles.get(position).getFavoriteCount() - 1);
-        carouselPagerAdapter.notifyDataSetChanged(position);
+        carouselPagerAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -537,7 +542,7 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
         if (resultCode != RESULT_OK) return;
         if (requestCode == REQUEST_ADD_TRIP) {
             articles.get(position).setMytrip(true);
-            carouselPagerAdapter.notifyDataSetChanged(position);
+            carouselPagerAdapter.notifyDataSetChanged();
         }
     }
 }

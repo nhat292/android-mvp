@@ -1,5 +1,8 @@
 package com.techco.igotrip.data.network.model.object;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -7,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by Nhat on 12/15/17.
  */
 
-public class Nation {
+public class Nation implements Parcelable {
     @SerializedName("id")
     @Expose
     private int id;
@@ -23,6 +26,26 @@ public class Nation {
     @SerializedName("sequence")
     @Expose
     private int sequence;
+
+    protected Nation(Parcel in) {
+        id = in.readInt();
+        name = in.readString();
+        continentId = in.readInt();
+        countryCode = in.readString();
+        sequence = in.readInt();
+    }
+
+    public static final Creator<Nation> CREATOR = new Creator<Nation>() {
+        @Override
+        public Nation createFromParcel(Parcel in) {
+            return new Nation(in);
+        }
+
+        @Override
+        public Nation[] newArray(int size) {
+            return new Nation[size];
+        }
+    };
 
     public int getId() {
         return id;
@@ -62,5 +85,19 @@ public class Nation {
 
     public void setSequence(int sequence) {
         this.sequence = sequence;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(id);
+        parcel.writeString(name);
+        parcel.writeInt(continentId);
+        parcel.writeString(countryCode);
+        parcel.writeInt(sequence);
     }
 }

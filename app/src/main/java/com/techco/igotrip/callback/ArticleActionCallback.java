@@ -15,4 +15,6 @@ public interface ArticleActionCallback {
     void onCommentClick(int position);
 
     void onAddFavoriteClick(int position);
+
+    void onDeleteClick(int position);
 }

@@ -91,6 +91,12 @@ public final class ApiEndPoint {
     public static String ENDPOINT_GET_FAVORITES = BASE_URL
             + "api/v1/get-favorites";
 
+    public static String ENDPOINT_GET_USER_ARTICLES = BASE_URL
+            + "api/v1/user-articles";
+
+    public static String ENDPOINT_DELETE_ARTICLE = BASE_URL
+            + "api/v1/delete-article";
+
 
     public static void changeBaseUrl(String baseUrl) {
         BASE_URL = baseUrl;
@@ -120,6 +126,8 @@ public final class ApiEndPoint {
         ENDPOINT_GET_USER_INFO = BASE_URL + "api/v1/user-info";
         ENDPOINT_DELETE_JOURNEY = BASE_URL + "api/v1/delete_journey";
         ENDPOINT_GET_FAVORITES = BASE_URL + "api/v1/get-favorites";
+        ENDPOINT_GET_USER_ARTICLES = BASE_URL + "api/v1/user-articles";
+        ENDPOINT_DELETE_ARTICLE = BASE_URL + "api/v1/delete-article";
     }
 
     private ApiEndPoint() {

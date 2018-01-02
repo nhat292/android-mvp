@@ -1,19 +1,16 @@
 package com.techco.igotrip.ui.custom.carousellayout;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.techco.igotrip.R;
 import com.techco.igotrip.data.network.model.object.Article;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class CarouselPagerAdapter extends FragmentPagerAdapter implements ViewPager.OnPageChangeListener {
 
@@ -25,7 +22,6 @@ public class CarouselPagerAdapter extends FragmentPagerAdapter implements ViewPa
     private float scale;
     private ArrayList<Article> articles;
     private ViewPager pager;
-    private Map<Integer, String> mFragmentTags;
 
     public CarouselPagerAdapter(Context context, ViewPager pager, FragmentManager fm, ArrayList<Article> articles) {
         super(fm);
@@ -33,7 +29,6 @@ public class CarouselPagerAdapter extends FragmentPagerAdapter implements ViewPa
         this.context = context;
         this.articles = articles;
         this.pager = pager;
-        mFragmentTags = new HashMap<>();
     }
 
     @Override
@@ -50,6 +45,12 @@ public class CarouselPagerAdapter extends FragmentPagerAdapter implements ViewPa
             e.printStackTrace();
         }
         return ItemFragment.newInstance(context, position, scale, articles.get(position));
+    }
+
+
+    @Override
+    public int getItemPosition(@NonNull Object object) {
+        return POSITION_NONE;
     }
 
     @Override
@@ -83,61 +84,12 @@ public class CarouselPagerAdapter extends FragmentPagerAdapter implements ViewPa
     }
 
     @SuppressWarnings("ConstantConditions")
-    private CarouselLinearLayout getRootView(int position) {
+    public CarouselLinearLayout getRootView(int position) {
         return (CarouselLinearLayout) fragmentManager.findFragmentByTag(this.getFragmentTag(position))
                 .getView().findViewById(R.id.llRoot);
     }
 
     private String getFragmentTag(int position) {
         return "android:switcher:" + pager.getId() + ":" + position;
-    }
-
-    @Override
-    public Object instantiateItem(ViewGroup container, int position) {
-        Object object = super.instantiateItem(container, position);
-        if (object instanceof Fragment) {
-            Fragment fragment = (Fragment) object;
-            String tag = fragment.getTag();
-            mFragmentTags.put(position, tag);
-        }
-        return object;
-    }
-
-    @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
-        super.destroyItem(container, position, object);
-        container.removeView((View) object);
-    }
-
-    public Fragment getFragment(int position) {
-        Fragment fragment = null;
-        String tag = mFragmentTags.get(position);
-        if (tag != null) {
-            fragment = fragmentManager.findFragmentByTag(tag);
-        }
-        return fragment;
-    }
-
-    @Override
-    public void notifyDataSetChanged() {
-        super.notifyDataSetChanged();
-        if (articles.size() > 0) {
-            for (int i = 0; i < articles.size(); i++) {
-                ItemFragment fragment = (ItemFragment) getFragment(i);
-                fragment.update(articles.get(i));
-            }
-        }
-    }
-
-    public void notifyDataSetChanged(int position) {
-        super.notifyDataSetChanged();
-        ItemFragment fragment = (ItemFragment) getFragment(position);
-        fragment.update(articles.get(position));
-    }
-
-    public void notifyItemRemoved(int position) {
-        mFragmentTags.remove(position);
-        super.notifyDataSetChanged();
-
     }
 }

@@ -43,6 +43,7 @@ import com.techco.igotrip.ui.base.BaseActivity;
 import com.techco.igotrip.ui.comment.CommentActivity;
 import com.techco.igotrip.ui.createtrip.CreateTripActivity;
 import com.techco.igotrip.ui.custom.carousellayout.CarouselPagerAdapter;
+import com.techco.igotrip.ui.detail.DetailActivity;
 import com.techco.igotrip.ui.dialog.DialogCallback;
 import com.techco.igotrip.ui.dialog.app.AppDialog;
 import com.techco.igotrip.ui.dialog.simplelist.SimpleListDialog;
@@ -219,7 +220,7 @@ public class FavoriteActivity extends BaseActivity implements FavoriteBaseView, 
     @Override
     public void onRemoveFavoriteSuccess() {
         articles.remove(position);
-        carouselPagerAdapter.notifyItemRemoved(position);
+        carouselPagerAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -257,7 +258,7 @@ public class FavoriteActivity extends BaseActivity implements FavoriteBaseView, 
                 if (position == 0) {
                     startActivityForResult(CreateTripActivity.getStartIntent(FavoriteActivity.this, articles.get(position).getId()), REQUEST_ADD_TRIP);
                 } else {
-                    mPresenter.actionTrip(articles.get(position).getId(), journeys.get(position - 1).getId(), true);
+                    mPresenter.actionTrip(articles.get(FavoriteActivity.this.position).getId(), journeys.get(position - 1).getId(), true);
                 }
             }
         });
@@ -266,7 +267,7 @@ public class FavoriteActivity extends BaseActivity implements FavoriteBaseView, 
     @Override
     public void onAddOrRemoveJourneySuccess() {
         articles.get(position).setMytrip(!articles.get(position).isMytrip());
-        carouselPagerAdapter.notifyDataSetChanged(position);
+        carouselPagerAdapter.notifyDataSetChanged();
     }
 
     private void checkLocationPermission() {
@@ -389,6 +390,11 @@ public class FavoriteActivity extends BaseActivity implements FavoriteBaseView, 
 
     @Override
     public void onItemClick(int position) {
+        startActivity(DetailActivity.getStartIntent(this, articles.get(position)));
+    }
+
+    @Override
+    public void onDeleteClick(int position) {
 
     }
 
@@ -421,7 +427,7 @@ public class FavoriteActivity extends BaseActivity implements FavoriteBaseView, 
         if (resultCode != RESULT_OK) return;
         if (requestCode == REQUEST_ADD_TRIP) {
             articles.get(position).setMytrip(true);
-            carouselPagerAdapter.notifyDataSetChanged(position);
+            carouselPagerAdapter.notifyDataSetChanged();
         }
     }
 }

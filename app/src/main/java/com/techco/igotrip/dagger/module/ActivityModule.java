@@ -22,6 +22,9 @@ import com.techco.igotrip.ui.detail.DetailPresenter;
 import com.techco.igotrip.ui.dialog.rating.RatingDialogBaseView;
 import com.techco.igotrip.ui.dialog.rating.RatingDialogMvpPresenter;
 import com.techco.igotrip.ui.dialog.rating.RatingDialogPresenter;
+import com.techco.igotrip.ui.experience.ExperienceBaseView;
+import com.techco.igotrip.ui.experience.ExperienceMvpPresenter;
+import com.techco.igotrip.ui.experience.ExperiencePresenter;
 import com.techco.igotrip.ui.favorite.FavoriteBaseView;
 import com.techco.igotrip.ui.favorite.FavoriteMvpPresenter;
 import com.techco.igotrip.ui.favorite.FavoritePresenter;
@@ -46,12 +49,18 @@ import com.techco.igotrip.ui.mytrip.MyTripPresenter;
 import com.techco.igotrip.ui.provincedetail.ProvinceDetailBaseView;
 import com.techco.igotrip.ui.provincedetail.ProvinceDetailMvpPresenter;
 import com.techco.igotrip.ui.provincedetail.ProvinceDetailPresenter;
+import com.techco.igotrip.ui.showmap.ShowMapBaseView;
+import com.techco.igotrip.ui.showmap.ShowMapMvpPresenter;
+import com.techco.igotrip.ui.showmap.ShowMapPresenter;
 import com.techco.igotrip.ui.signup.SignUpBaseView;
 import com.techco.igotrip.ui.signup.SignUpMvpPresenter;
 import com.techco.igotrip.ui.signup.SignUpPresenter;
 import com.techco.igotrip.ui.writecomment.WriteCommentBaseView;
 import com.techco.igotrip.ui.writecomment.WriteCommentMvpPresenter;
 import com.techco.igotrip.ui.writecomment.WriteCommentPresenter;
+import com.techco.igotrip.ui.youarehere.YouAreHereBaseView;
+import com.techco.igotrip.ui.youarehere.YouAreHereMvpPresenter;
+import com.techco.igotrip.ui.youarehere.YouAreHerePresenter;
 import com.techco.igotrip.utils.rx.AppSchedulerProvider;
 import com.techco.igotrip.utils.rx.SchedulerProvider;
 
@@ -192,6 +201,26 @@ public class ActivityModule {
         return presenter;
     }
 
+    @Provides
+    @PerActivity
+    ExperienceMvpPresenter<ExperienceBaseView> provideExperiencePresenter(
+            ExperiencePresenter<ExperienceBaseView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    ShowMapMvpPresenter<ShowMapBaseView> provideShowMapPresenter(
+            ShowMapPresenter<ShowMapBaseView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    YouAreHereMvpPresenter<YouAreHereBaseView> provideYouAreHerePresenter(
+            YouAreHerePresenter<YouAreHereBaseView> presenter) {
+        return presenter;
+    }
 
     @Provides
     LinearLayoutManager provideLinearLayoutManager(AppCompatActivity activity) {

@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -18,6 +19,7 @@ import com.techco.igotrip.R;
 import com.techco.igotrip.data.network.ApiEndPoint;
 import com.techco.igotrip.data.network.model.object.Article;
 import com.techco.igotrip.ui.custom.views.MaterialBadgeTextView;
+import com.techco.igotrip.ui.experience.ExperienceActivity;
 import com.techco.igotrip.ui.favorite.FavoriteActivity;
 import com.techco.igotrip.ui.provincedetail.ProvinceDetailActivity;
 
@@ -49,6 +51,8 @@ public class ItemFragment extends Fragment {
     ImageView imgComment;
     @BindView(R.id.imgHeart)
     ImageView imgHeart;
+    @BindView(R.id.btnDelete)
+    Button btnDelete;
 
     private int position;
     private Activity activity;
@@ -81,9 +85,11 @@ public class ItemFragment extends Fragment {
         final Article article = this.getArguments().getParcelable(DATA);
 
         int width = (int) (activity instanceof ProvinceDetailActivity ? ProvinceDetailActivity.VIEW_PAGER_WIDTH * 0.9 :
-                activity instanceof FavoriteActivity ? FavoriteActivity.VIEW_PAGER_WIDTH * 0.9 : 0);
+                activity instanceof FavoriteActivity ? FavoriteActivity.VIEW_PAGER_WIDTH * 0.9 :
+                        activity instanceof ExperienceActivity ? ExperienceActivity.VIEW_PAGER_WIDTH * 0.9 : 0);
         int height = (int) (activity instanceof ProvinceDetailActivity ? ProvinceDetailActivity.VIEW_PAGER_HEIGHT * 0.98 :
-                activity instanceof FavoriteActivity ? FavoriteActivity.VIEW_PAGER_HEIGHT * 0.98 : 0);
+                activity instanceof FavoriteActivity ? FavoriteActivity.VIEW_PAGER_HEIGHT * 0.98 :
+                        activity instanceof ExperienceActivity ? ExperienceActivity.VIEW_PAGER_HEIGHT * 0.98 : 0);
 
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(width, height);
         View view = inflater.inflate(R.layout.fragment_article, container, false);
@@ -93,6 +99,11 @@ public class ItemFragment extends Fragment {
         llRoot.setScaleBoth(scale);
 
         update(article);
+        if (activity instanceof ExperienceActivity) {
+            btnDelete.setVisibility(View.VISIBLE);
+        } else {
+            btnDelete.setVisibility(View.GONE);
+        }
 
         llContain.setOnClickListener(view1 -> {
             if (activity instanceof ProvinceDetailActivity) {
@@ -100,6 +111,15 @@ public class ItemFragment extends Fragment {
             }
             if (activity instanceof FavoriteActivity) {
                 ((FavoriteActivity) activity).onItemClick(position);
+            }
+            if (activity instanceof ExperienceActivity) {
+                ((ExperienceActivity) activity).onItemClick(position);
+            }
+        });
+
+        btnDelete.setOnClickListener(view1 -> {
+            if(activity instanceof ExperienceActivity) {
+                ((ExperienceActivity) activity).onDeleteClick(position);
             }
         });
 
@@ -115,6 +135,9 @@ public class ItemFragment extends Fragment {
         if (activity instanceof FavoriteActivity) {
             ((FavoriteActivity) activity).onAddJourneyClick(position);
         }
+        if (activity instanceof ExperienceActivity) {
+            ((ExperienceActivity) activity).onAddJourneyClick(position);
+        }
     }
 
     @OnClick(R.id.imgShare)
@@ -124,6 +147,9 @@ public class ItemFragment extends Fragment {
         }
         if (activity instanceof FavoriteActivity) {
             ((FavoriteActivity) activity).onShareClick(position);
+        }
+        if (activity instanceof ExperienceActivity) {
+            ((ExperienceActivity) activity).onShareClick(position);
         }
     }
 
@@ -135,6 +161,9 @@ public class ItemFragment extends Fragment {
         if (activity instanceof FavoriteActivity) {
             ((FavoriteActivity) activity).onCommentClick(position);
         }
+        if (activity instanceof ExperienceActivity) {
+            ((ExperienceActivity) activity).onCommentClick(position);
+        }
     }
 
     @OnClick(R.id.imgHeart)
@@ -144,6 +173,9 @@ public class ItemFragment extends Fragment {
         }
         if (activity instanceof FavoriteActivity) {
             ((FavoriteActivity) activity).onAddFavoriteClick(position);
+        }
+        if (activity instanceof ExperienceActivity) {
+            ((ExperienceActivity) activity).onAddFavoriteClick(position);
         }
     }
 

@@ -11,6 +11,7 @@ import com.techco.igotrip.R;
 import com.techco.igotrip.ui.base.BaseActivity;
 import com.techco.igotrip.ui.login.LoginActivity;
 import com.techco.igotrip.ui.main.MainActivity;
+import com.techco.igotrip.ui.youarehere.YouAreHereActivity;
 
 import javax.inject.Inject;
 
@@ -77,7 +78,7 @@ public class MenuActivity extends BaseActivity implements MenuBaseView {
 
     @Override
     public void openYouAreHereActivity() {
-
+        startActivity(YouAreHereActivity.getStartIntent(this));
     }
 
     @Override

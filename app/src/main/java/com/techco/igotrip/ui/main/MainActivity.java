@@ -31,17 +31,18 @@ import com.techco.igotrip.ui.adapter.ProvinceMainAdapter;
 import com.techco.igotrip.ui.base.BaseActivity;
 import com.techco.igotrip.ui.dialog.DialogCallback;
 import com.techco.igotrip.ui.dialog.app.AppDialog;
+import com.techco.igotrip.ui.experience.ExperienceActivity;
 import com.techco.igotrip.ui.favorite.FavoriteActivity;
 import com.techco.igotrip.ui.info.InfoActivity;
 import com.techco.igotrip.ui.login.LoginActivity;
 import com.techco.igotrip.ui.mytrip.MyTripActivity;
 import com.techco.igotrip.ui.provincedetail.ProvinceDetailActivity;
+import com.techco.igotrip.ui.showmap.ShowMapActivity;
 import com.techco.igotrip.ui.viewholder.ProvinceMainViewHolder;
 import com.techco.igotrip.utils.NationComparator;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -94,12 +95,12 @@ public class MainActivity extends BaseActivity implements MainBaseView, SwipeRef
     Button btnMenuLogin;
 
     private ContinentAdapter continentAdapter;
-    private List<Continent> continents = new ArrayList<>();
-    private List<Nation> allNations = new ArrayList<>();
-    private List<Nation> nations = new ArrayList<>();
+    private ArrayList<Continent> continents = new ArrayList<>();
+    private ArrayList<Nation> allNations = new ArrayList<>();
+    private ArrayList<Nation> nations = new ArrayList<>();
     private int nationId = 0;
     private boolean isUserLogged = false;
-    private List<Province> provinces = new ArrayList<>();
+    private ArrayList<Province> provinces = new ArrayList<>();
     private ProvinceMainAdapter provinceMainAdapter;
 
 
@@ -146,7 +147,13 @@ public class MainActivity extends BaseActivity implements MainBaseView, SwipeRef
             if (type == ProvinceMainViewHolder.CLICK_TYPE_ITEM) {
                 startActivity(ProvinceDetailActivity.getStartIntent(this, this.provinces.get(position)));
             } else {
-
+                startActivity(ShowMapActivity.getStartIntent(
+                        MainActivity.this,
+                        provinces.get(position),
+                        txtNationName.getText().toString(),
+                        nations,
+                        continents
+                ));
             }
         });
         recyclerMainList.setAdapter(provinceMainAdapter);
@@ -187,7 +194,7 @@ public class MainActivity extends BaseActivity implements MainBaseView, SwipeRef
     @OnClick(R.id.btnMenuExperiences)
     public void onMenuExperiencesClick() {
         if (isUserLogged()) {
-
+            startActivity(ExperienceActivity.getStartIntent(this));
             closeLeftMenu();
         }
     }

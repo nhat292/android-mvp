@@ -395,5 +395,31 @@ public class AppApiHelper implements ApiHelper {
                 .build()
                 .getObjectObservable(ArticleResponse.class);
     }
+
+    /**
+     * user_id: int value
+     * lat: double value
+     * lng: double value
+     */
+    @Override
+    public Observable<ArticleResponse> getUserArticles(Map<String, String> params) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_GET_USER_ARTICLES)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .addBodyParameter(params)
+                .build()
+                .getObjectObservable(ArticleResponse.class);
+    }
+
+    /**
+     * article_id: int value
+     */
+    @Override
+    public Observable<SimpleDataResponse> deleteArticle(Map<String, String> params) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_DELETE_ARTICLE)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .addBodyParameter(params)
+                .build()
+                .getObjectObservable(SimpleDataResponse.class);
+    }
 }
 

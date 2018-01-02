@@ -79,4 +79,8 @@ public interface ApiHelper {
     Observable<SimpleDataResponse> deleteJourney(Map<String, String> params);
 
     Observable<ArticleResponse> getFavorites(Map<String, String> params);
+
+    Observable<ArticleResponse> getUserArticles(Map<String, String> params);
+
+    Observable<SimpleDataResponse> deleteArticle(Map<String, String> params);
 }

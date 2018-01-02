@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgProvinceDetail">
+
+    <include
+        android:id="@+id/navBar"
+        layout="@layout/nav_layout" />
+
+    <TextView
+        android:id="@+id/txtArticleTitle"
+        style="@style/TextStyle.Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/navBar"
+        android:layout_margin="@dimen/margin_padding_very_small"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:text="Ha Noi"
+        android:textColor="@color/colorArticleTitle"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/imgEmpty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_empty"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/btnReload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/button_reload_bg"
+        android:foreground="?attr/selectableItemBackground"
+        android:text="@string/reload"
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        android:visibility="invisible" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pagerArticle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/txtArticleTitle"
+        android:layout_marginBottom="@dimen/margin_padding_very_small" />
+
+</RelativeLayout>

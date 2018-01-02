@@ -178,6 +178,9 @@
     <!--Favorites-->
 
 
+    <!--Experiences-->
+    <string name="delete_text">delete</string>
+
     <!--Keys-->
     <string name="google_map_key">AIzaSyDGNHKSfoTrZhiH0vnq5WddwUMQadIdr8o</string>
 

@@ -8,6 +8,7 @@ import com.techco.igotrip.ui.comment.CommentActivity;
 import com.techco.igotrip.ui.createtrip.CreateTripActivity;
 import com.techco.igotrip.ui.detail.DetailActivity;
 import com.techco.igotrip.ui.dialog.rating.RateUsDialog;
+import com.techco.igotrip.ui.experience.ExperienceActivity;
 import com.techco.igotrip.ui.favorite.FavoriteActivity;
 import com.techco.igotrip.ui.info.InfoActivity;
 import com.techco.igotrip.ui.launch.LaunchActivity;
@@ -16,8 +17,10 @@ import com.techco.igotrip.ui.main.MainActivity;
 import com.techco.igotrip.ui.menu.MenuActivity;
 import com.techco.igotrip.ui.mytrip.MyTripActivity;
 import com.techco.igotrip.ui.provincedetail.ProvinceDetailActivity;
+import com.techco.igotrip.ui.showmap.ShowMapActivity;
 import com.techco.igotrip.ui.signup.SignUpActivity;
 import com.techco.igotrip.ui.writecomment.WriteCommentActivity;
+import com.techco.igotrip.ui.youarehere.YouAreHereActivity;
 
 import dagger.Component;
 
@@ -46,5 +49,8 @@ public interface ActivityComponent {
     void inject(DetailActivity activity);
     void inject(MyTripActivity activity);
     void inject(FavoriteActivity activity);
+    void inject(ExperienceActivity activity);
+    void inject(ShowMapActivity activity);
+    void inject(YouAreHereActivity activity);
 
 }
