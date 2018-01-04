@@ -24,6 +24,8 @@ public final class AppConstants {
     public static final String TIMESTAMP_FORMAT = "yyyyMMdd_HHmmss";
     public static final String HTTP_PREFIX = "http";
 
+    public static final String GOOGLE_API_KEY = "AIzaSyDEhbxLyrdW91OoNvmeOn9GHEh9FXJhEpI";
+
     private AppConstants() {
         // This utility class is not publicly instantiable
     }

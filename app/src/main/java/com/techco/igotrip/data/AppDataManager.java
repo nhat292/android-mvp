@@ -16,10 +16,11 @@ import com.techco.igotrip.data.network.model.response.ExploreDataResponse;
 import com.techco.igotrip.data.network.model.response.FirstDataResponse;
 import com.techco.igotrip.data.network.model.response.GetCommentCountResponse;
 import com.techco.igotrip.data.network.model.response.JourneyResponse;
+import com.techco.igotrip.data.network.model.response.SearchPlaceResponse;
 import com.techco.igotrip.data.network.model.response.SimpleDataResponse;
 import com.techco.igotrip.data.network.model.response.CommentResponse;
 import com.techco.igotrip.data.network.model.response.UserResponse;
-import com.techco.igotrip.data.network.model.response.SelectNationResponse;
+import com.techco.igotrip.data.network.model.response.ProvinceResponse;
 import com.techco.igotrip.data.network.model.response.SelectTypeResponse;
 import com.techco.igotrip.data.prefs.PreferencesHelper;
 
@@ -64,7 +65,7 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Observable<SelectNationResponse> selectNation(Map<String, String> params) {
+    public Observable<ProvinceResponse> selectNation(Map<String, String> params) {
         return mApiHelper.selectNation(params);
     }
 
@@ -196,6 +197,21 @@ public class AppDataManager implements DataManager {
     @Override
     public Observable<SimpleDataResponse> deleteArticle(Map<String, String> params) {
         return mApiHelper.deleteArticle(params);
+    }
+
+    @Override
+    public Observable<SearchPlaceResponse> searchPlaces(String url) {
+        return mApiHelper.searchPlaces(url);
+    }
+
+    @Override
+    public Observable<ArticleResponse> getArticleProvince(Map<String, String> params) {
+        return mApiHelper.getArticleProvince(params);
+    }
+
+    @Override
+    public Observable<ProvinceResponse> getProvinces(Map<String, String> params) {
+        return mApiHelper.getProvinces(params);
     }
 
     @Override

@@ -12,6 +12,7 @@ import com.techco.igotrip.BuildConfig;
 public final class ApiEndPoint {
 
     public static String BASE_URL = BuildConfig.BASE_URL;
+    public static String BASE_GOOGLE_API = "https://maps.googleapis.com/maps/api/";
 
     public static String ENDPOINT_FIRST_DATA = BASE_URL
             + "api/v1/first-data";
@@ -97,6 +98,11 @@ public final class ApiEndPoint {
     public static String ENDPOINT_DELETE_ARTICLE = BASE_URL
             + "api/v1/delete-article";
 
+    public static String ENDPOINT_ARTICLE_PROVINCE = BASE_URL
+            + "api/v1/articles-province";
+
+    public static String ENDPOINT_GET_PROVINCES = BASE_URL
+            + "api/v1/get-provinces-by-nation";
 
     public static void changeBaseUrl(String baseUrl) {
         BASE_URL = baseUrl;
@@ -128,6 +134,8 @@ public final class ApiEndPoint {
         ENDPOINT_GET_FAVORITES = BASE_URL + "api/v1/get-favorites";
         ENDPOINT_GET_USER_ARTICLES = BASE_URL + "api/v1/user-articles";
         ENDPOINT_DELETE_ARTICLE = BASE_URL + "api/v1/delete-article";
+        ENDPOINT_ARTICLE_PROVINCE = BASE_URL + "api/v1/articles-province";
+        ENDPOINT_GET_PROVINCES = BASE_URL + "api/v1/get-provinces-by-nation";
     }
 
     private ApiEndPoint() {

@@ -11,7 +11,8 @@ import com.techco.igotrip.data.network.model.response.ExploreDataResponse;
 import com.techco.igotrip.data.network.model.response.FirstDataResponse;
 import com.techco.igotrip.data.network.model.response.GetCommentCountResponse;
 import com.techco.igotrip.data.network.model.response.JourneyResponse;
-import com.techco.igotrip.data.network.model.response.SelectNationResponse;
+import com.techco.igotrip.data.network.model.response.ProvinceResponse;
+import com.techco.igotrip.data.network.model.response.SearchPlaceResponse;
 import com.techco.igotrip.data.network.model.response.SelectTypeResponse;
 import com.techco.igotrip.data.network.model.response.SimpleDataResponse;
 import com.techco.igotrip.data.network.model.response.UserResponse;
@@ -55,12 +56,12 @@ public class AppApiHelper implements ApiHelper {
      * nation_id: integer value
      */
     @Override
-    public Observable<SelectNationResponse> selectNation(Map<String, String> params) {
+    public Observable<ProvinceResponse> selectNation(Map<String, String> params) {
         return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_SELECT_NATION)
                 .addHeaders(mApiHeader.getProtectedApiHeader())
                 .addBodyParameter(params)
                 .build()
-                .getObjectObservable(SelectNationResponse.class);
+                .getObjectObservable(ProvinceResponse.class);
     }
 
     /**
@@ -420,6 +421,32 @@ public class AppApiHelper implements ApiHelper {
                 .addBodyParameter(params)
                 .build()
                 .getObjectObservable(SimpleDataResponse.class);
+    }
+
+    @Override
+    public Observable<SearchPlaceResponse> searchPlaces(String url) {
+        return Rx2AndroidNetworking.post(url)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .build()
+                .getObjectObservable(SearchPlaceResponse.class);
+    }
+
+    @Override
+    public Observable<ArticleResponse> getArticleProvince(Map<String, String> params) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_ARTICLE_PROVINCE)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .addBodyParameter(params)
+                .build()
+                .getObjectObservable(ArticleResponse.class);
+    }
+
+    @Override
+    public Observable<ProvinceResponse> getProvinces(Map<String, String> params) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_GET_PROVINCES)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .addBodyParameter(params)
+                .build()
+                .getObjectObservable(ProvinceResponse.class);
     }
 }
 

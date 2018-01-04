@@ -31,7 +31,7 @@
         android:layout_height="@dimen/recycler_view_type_height"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:background="@color/accent_white"
+        android:background="@color/transparent_white"
         android:orientation="horizontal"
         android:overScrollMode="ifContentScrolls"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"

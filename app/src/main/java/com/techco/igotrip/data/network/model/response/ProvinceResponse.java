@@ -10,7 +10,7 @@ import java.util.List;
  * Created by Nhat on 12/16/17.
  */
 
-public class SelectNationResponse {
+public class ProvinceResponse {
     @SerializedName("status")
     @Expose
     private int status;

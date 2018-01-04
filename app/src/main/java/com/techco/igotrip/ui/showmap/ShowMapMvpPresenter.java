@@ -14,4 +14,12 @@ import com.techco.igotrip.ui.base.MvpPresenter;
 public interface ShowMapMvpPresenter<V extends ShowMapBaseView> extends MvpPresenter<V> {
 
     void getExploreData();
+
+    void selectType(int typeId);
+
+    void searchPlaces(String query, String nextPageToken);
+
+    void exploreArticle(int provinceId, double lat, double lng, int typeId, int subTypeId);
+
+    void getProvinces(int nationId);
 }

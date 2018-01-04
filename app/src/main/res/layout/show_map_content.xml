@@ -31,9 +31,23 @@
         android:layout_height="@dimen/recycler_view_type_height"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:background="@color/accent_white"
+        android:background="@color/transparent_white"
         android:orientation="horizontal"
         android:overScrollMode="ifContentScrolls"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
         tools:listitem="@layout/type_item" />
+
+    <ImageView
+        android:id="@+id/imgList"
+        android:layout_width="@dimen/img_circle_size"
+        android:layout_height="@dimen/img_circle_size"
+        android:layout_above="@+id/recyclerType"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="@dimen/margin_padding_small"
+        android:layout_marginRight="@dimen/margin_padding_small"
+        android:background="@drawable/bg_circle"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="@dimen/margin_padding_small"
+        android:src="@drawable/ic_list" />
 </RelativeLayout>

@@ -24,7 +24,7 @@ import com.techco.igotrip.data.network.model.object.Nation;
 import com.techco.igotrip.data.network.model.object.Province;
 import com.techco.igotrip.data.network.model.object.User;
 import com.techco.igotrip.data.network.model.response.FirstDataResponse;
-import com.techco.igotrip.data.network.model.response.SelectNationResponse;
+import com.techco.igotrip.data.network.model.response.ProvinceResponse;
 import com.techco.igotrip.ui.adapter.ContinentAdapter;
 import com.techco.igotrip.ui.adapter.NationAdapter;
 import com.techco.igotrip.ui.adapter.ProvinceMainAdapter;
@@ -151,7 +151,7 @@ public class MainActivity extends BaseActivity implements MainBaseView, SwipeRef
                         MainActivity.this,
                         provinces.get(position),
                         txtNationName.getText().toString(),
-                        nations,
+                        allNations,
                         continents
                 ));
             }
@@ -298,7 +298,7 @@ public class MainActivity extends BaseActivity implements MainBaseView, SwipeRef
     }
 
     @Override
-    public void onSelectNationSuccess(SelectNationResponse response) {
+    public void onSelectNationSuccess(ProvinceResponse response) {
         swipeRefreshLayoutMain.setRefreshing(false);
         this.provinces.clear();
         this.provinces.addAll(response.getProvinces());

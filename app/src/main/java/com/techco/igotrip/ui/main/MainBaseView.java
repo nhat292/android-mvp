@@ -4,7 +4,7 @@ package com.techco.igotrip.ui.main;
 
 import com.techco.igotrip.data.network.model.object.User;
 import com.techco.igotrip.data.network.model.response.FirstDataResponse;
-import com.techco.igotrip.data.network.model.response.SelectNationResponse;
+import com.techco.igotrip.data.network.model.response.ProvinceResponse;
 import com.techco.igotrip.ui.base.BaseView;
 
 /**
@@ -16,7 +16,7 @@ public interface MainBaseView extends BaseView {
 
     void onGetFirstDataSuccess(FirstDataResponse response);
 
-    void onSelectNationSuccess(SelectNationResponse response);
+    void onSelectNationSuccess(ProvinceResponse response);
 
     void onCheckUserStatusSuccess(User user);
 }

@@ -10,7 +10,8 @@ import com.techco.igotrip.data.network.model.response.ExploreDataResponse;
 import com.techco.igotrip.data.network.model.response.FirstDataResponse;
 import com.techco.igotrip.data.network.model.response.GetCommentCountResponse;
 import com.techco.igotrip.data.network.model.response.JourneyResponse;
-import com.techco.igotrip.data.network.model.response.SelectNationResponse;
+import com.techco.igotrip.data.network.model.response.SearchPlaceResponse;
+import com.techco.igotrip.data.network.model.response.ProvinceResponse;
 import com.techco.igotrip.data.network.model.response.SelectTypeResponse;
 import com.techco.igotrip.data.network.model.response.SimpleDataResponse;
 import com.techco.igotrip.data.network.model.response.UserResponse;
@@ -30,7 +31,7 @@ public interface ApiHelper {
 
     Observable<FirstDataResponse> getFirstData();
 
-    Observable<SelectNationResponse> selectNation(Map<String, String> params);
+    Observable<ProvinceResponse> selectNation(Map<String, String> params);
 
     Observable<ExploreDataResponse> getExploreData();
 
@@ -83,4 +84,10 @@ public interface ApiHelper {
     Observable<ArticleResponse> getUserArticles(Map<String, String> params);
 
     Observable<SimpleDataResponse> deleteArticle(Map<String, String> params);
+
+    Observable<SearchPlaceResponse> searchPlaces(String url);
+
+    Observable<ArticleResponse> getArticleProvince(Map<String, String> params);
+
+    Observable<ProvinceResponse> getProvinces(Map<String, String> params);
 }
