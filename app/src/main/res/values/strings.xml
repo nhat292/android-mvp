@@ -24,6 +24,7 @@
     <string name="message_share_success">This article has been shared on facebook</string>
     <string name="select_trip">Select trip</string>
     <string name="add_new_trip">Add new Trip</string>
+    <string name="no_data_found">No data found</string>
 
     <!--Permission-->
     <string name="setting">SETTING</string>
@@ -181,6 +182,9 @@
     <!--Favorites-->
 
     <!--DialogMarkerInfo-->
+
+    <!--View Articles-->
+    <string name="view_articles">View articles</string>
 
 
     <!--Experiences-->

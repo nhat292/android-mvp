@@ -5,7 +5,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.DrawerLayout;
@@ -18,8 +17,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -30,7 +27,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.karumi.dexter.listener.single.PermissionListener;
 import com.techco.common.Utils;
 import com.techco.igotrip.R;
 import com.techco.igotrip.data.network.model.object.Article;
@@ -52,6 +48,7 @@ import com.techco.igotrip.ui.base.BaseActivity;
 import com.techco.igotrip.ui.detail.DetailActivity;
 import com.techco.igotrip.ui.dialog.DialogCallback;
 import com.techco.igotrip.ui.dialog.simplelist.SimpleListDialog;
+import com.techco.igotrip.ui.viewarticles.ViewArticlesActivity;
 import com.techco.igotrip.utils.NationComparator;
 
 import java.util.ArrayList;
@@ -73,8 +70,7 @@ import butterknife.OnClick;
 
 
 public class ShowMapActivity extends BaseActivity implements ShowMapBaseView, OnMapReadyCallback,
-        GoogleMap.OnMyLocationButtonClickListener, GoogleMap.OnMyLocationChangeListener, GoogleMap.OnInfoWindowClickListener,
-        GoogleMap.OnCameraChangeListener, GoogleMap.OnCameraIdleListener, GoogleMap.OnMarkerClickListener {
+        GoogleMap.OnInfoWindowClickListener, GoogleMap.OnMarkerClickListener, GoogleMap.OnMyLocationChangeListener {
     private static final String TAG = "ShowMapActivity";
 
     private static final String EXTRA_PROVINCE = "PROVINCE";
@@ -128,10 +124,7 @@ public class ShowMapActivity extends BaseActivity implements ShowMapBaseView, On
     private double mLat, mLng;
     private List<Marker> markers = new ArrayList<>();
     private Map<Marker, Article> markerMap = new HashMap<>();
-
-    private PermissionListener locationPermissionListener;
-    private FusedLocationProviderClient mFusedLocationClient;
-    private LocationManager manager;
+    private ArrayList<Article> articles = new ArrayList<>();
 
     public static Intent getStartIntent(Context context, Province province, String nationName, ArrayList<Nation> nations, ArrayList<Continent> continents) {
         Intent intent = new Intent(context, ShowMapActivity.class);
@@ -209,8 +202,6 @@ public class ShowMapActivity extends BaseActivity implements ShowMapBaseView, On
         recyclerNation.setAdapter(mNationAdapter);
         selectContinent(mContinents.get(0));
 
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -247,7 +238,11 @@ public class ShowMapActivity extends BaseActivity implements ShowMapBaseView, On
 
     @OnClick(R.id.imgList)
     public void onListClick() {
-
+        if (articles.size() == 0) {
+            showMessage(R.string.no_data_found);
+        } else {
+            startActivity(ViewArticlesActivity.getStartIntent(this, articles));
+        }
     }
 
     @SuppressLint("MissingPermission")
@@ -257,15 +252,13 @@ public class ShowMapActivity extends BaseActivity implements ShowMapBaseView, On
 
         //Settings Google maps
         mGoogleMap.getUiSettings().setAllGesturesEnabled(true);
-        mGoogleMap.setOnMyLocationButtonClickListener(this);
         mGoogleMap.getUiSettings().setCompassEnabled(false);
         mGoogleMap.getUiSettings().setZoomControlsEnabled(false);
         mGoogleMap.getUiSettings().setMapToolbarEnabled(false);
         mGoogleMap.setOnInfoWindowClickListener(this);
+        mGoogleMap.setOnMyLocationChangeListener(this);
         mGoogleMap.getUiSettings().setMyLocationButtonEnabled(false);
         mGoogleMap.setMyLocationEnabled(false);
-        mGoogleMap.setOnCameraChangeListener(this);
-        mGoogleMap.setOnCameraIdleListener(this);
         mGoogleMap.setOnMarkerClickListener(this);
         mGoogleMap.setMaxZoomPreference(17.0f);
     }
@@ -320,6 +313,8 @@ public class ShowMapActivity extends BaseActivity implements ShowMapBaseView, On
 
     @Override
     public void onGetArticlesSuccess(List<Article> articles) {
+        this.articles.clear();
+        this.articles.addAll(articles);
         clearAllMarkers();
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
         for (Article data : articles) {
@@ -333,7 +328,7 @@ public class ShowMapActivity extends BaseActivity implements ShowMapBaseView, On
             markers.add(marker);
             markerMap.put(marker, data);
         }
-        int padding = 10;
+        int padding = 30;
         mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), padding));
         mGoogleMap.setInfoWindowAdapter(new MapInfoWindowAdapter(this, markerMap));
     }
@@ -402,15 +397,6 @@ public class ShowMapActivity extends BaseActivity implements ShowMapBaseView, On
         markers.clear();
     }
 
-    @Override
-    public void onCameraChange(CameraPosition cameraPosition) {
-
-    }
-
-    @Override
-    public void onCameraIdle() {
-
-    }
 
     @Override
     public void onInfoWindowClick(Marker marker) {
@@ -425,13 +411,12 @@ public class ShowMapActivity extends BaseActivity implements ShowMapBaseView, On
         return true;
     }
 
-    @Override
-    public boolean onMyLocationButtonClick() {
-        return false;
-    }
 
     @Override
     public void onMyLocationChange(Location location) {
-
+        if (location != null) {
+            mLat = location.getLatitude();
+            mLng = location.getLongitude();
+        }
     }
 }

@@ -19,6 +19,7 @@ import com.techco.igotrip.ui.mytrip.MyTripActivity;
 import com.techco.igotrip.ui.provincedetail.ProvinceDetailActivity;
 import com.techco.igotrip.ui.showmap.ShowMapActivity;
 import com.techco.igotrip.ui.signup.SignUpActivity;
+import com.techco.igotrip.ui.viewarticles.ViewArticlesActivity;
 import com.techco.igotrip.ui.writecomment.WriteCommentActivity;
 import com.techco.igotrip.ui.youarehere.YouAreHereActivity;
 
@@ -52,5 +53,6 @@ public interface ActivityComponent {
     void inject(ExperienceActivity activity);
     void inject(ShowMapActivity activity);
     void inject(YouAreHereActivity activity);
+    void inject(ViewArticlesActivity activity);
 
 }

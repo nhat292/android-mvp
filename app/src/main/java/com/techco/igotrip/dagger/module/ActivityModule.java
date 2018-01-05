@@ -55,6 +55,9 @@ import com.techco.igotrip.ui.showmap.ShowMapPresenter;
 import com.techco.igotrip.ui.signup.SignUpBaseView;
 import com.techco.igotrip.ui.signup.SignUpMvpPresenter;
 import com.techco.igotrip.ui.signup.SignUpPresenter;
+import com.techco.igotrip.ui.viewarticles.ViewArticlesBaseView;
+import com.techco.igotrip.ui.viewarticles.ViewArticlesMvpPresenter;
+import com.techco.igotrip.ui.viewarticles.ViewArticlesPresenter;
 import com.techco.igotrip.ui.writecomment.WriteCommentBaseView;
 import com.techco.igotrip.ui.writecomment.WriteCommentMvpPresenter;
 import com.techco.igotrip.ui.writecomment.WriteCommentPresenter;
@@ -219,6 +222,13 @@ public class ActivityModule {
     @PerActivity
     YouAreHereMvpPresenter<YouAreHereBaseView> provideYouAreHerePresenter(
             YouAreHerePresenter<YouAreHereBaseView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    ViewArticlesMvpPresenter<ViewArticlesBaseView> provideViewArticlesPresenter(
+            ViewArticlesPresenter<ViewArticlesBaseView> presenter) {
         return presenter;
     }
 

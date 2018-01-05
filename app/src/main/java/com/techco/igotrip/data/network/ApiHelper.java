@@ -90,4 +90,6 @@ public interface ApiHelper {
     Observable<ArticleResponse> getArticleProvince(Map<String, String> params);
 
     Observable<ProvinceResponse> getProvinces(Map<String, String> params);
+
+    Observable<ArticleResponse> getArticlesNearBy(Map<String, String> params);
 }

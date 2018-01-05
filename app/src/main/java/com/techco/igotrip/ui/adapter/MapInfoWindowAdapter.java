@@ -59,7 +59,7 @@ public class MapInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
             txtTitle.setText(data.getTitle());
             DecimalFormat df = new DecimalFormat("#.#");
             double distance = data.getDistance();
-            String distanceStr = df.format(distance) + " m";
+            String distanceStr = distance + " m";
             if (distance > 1000) {
                 distanceStr = df.format(distance / 1000) + " km";
             }

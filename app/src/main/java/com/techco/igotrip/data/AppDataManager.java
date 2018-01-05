@@ -215,6 +215,11 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public Observable<ArticleResponse> getArticlesNearBy(Map<String, String> params) {
+        return mApiHelper.getArticlesNearBy(params);
+    }
+
+    @Override
     public void setUserInfo(User user) {
         mPreferencesHelper.setUserInfo(user);
     }

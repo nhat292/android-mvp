@@ -36,4 +36,44 @@
         android:overScrollMode="ifContentScrolls"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
         tools:listitem="@layout/type_item" />
+
+    <ImageView
+        android:id="@+id/imgList"
+        android:layout_width="@dimen/img_circle_size"
+        android:layout_height="@dimen/img_circle_size"
+        android:layout_above="@+id/recyclerType"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="@dimen/margin_padding_small"
+        android:layout_marginEnd="@dimen/margin_padding_small"
+        android:background="@drawable/bg_circle"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="@dimen/margin_padding_small"
+        android:src="@drawable/ic_list" />
+
+    <ImageView
+        android:id="@+id/imgSearch"
+        android:layout_width="@dimen/img_circle_size"
+        android:layout_height="@dimen/img_circle_size"
+        android:layout_above="@+id/recyclerType"
+        android:layout_marginBottom="@dimen/margin_padding_small"
+        android:layout_marginStart="@dimen/margin_padding_small"
+        android:background="@drawable/bg_circle"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="@dimen/margin_padding_small"
+        android:src="@drawable/ic_search" />
+
+    <ImageView
+        android:id="@+id/imgMyLocation"
+        android:layout_width="@dimen/img_circle_size"
+        android:layout_height="@dimen/img_circle_size"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/recyclerSubType"
+        android:layout_marginEnd="@dimen/margin_padding_small"
+        android:layout_marginTop="@dimen/margin_padding_small"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="@dimen/margin_padding_very_small"
+        android:src="@drawable/ic_location" />
 </RelativeLayout>

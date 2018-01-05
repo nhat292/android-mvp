@@ -22,6 +22,7 @@ import com.techco.igotrip.ui.custom.views.MaterialBadgeTextView;
 import com.techco.igotrip.ui.experience.ExperienceActivity;
 import com.techco.igotrip.ui.favorite.FavoriteActivity;
 import com.techco.igotrip.ui.provincedetail.ProvinceDetailActivity;
+import com.techco.igotrip.ui.viewarticles.ViewArticlesActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -86,10 +87,12 @@ public class ItemFragment extends Fragment {
 
         int width = (int) (activity instanceof ProvinceDetailActivity ? ProvinceDetailActivity.VIEW_PAGER_WIDTH * 0.9 :
                 activity instanceof FavoriteActivity ? FavoriteActivity.VIEW_PAGER_WIDTH * 0.9 :
-                        activity instanceof ExperienceActivity ? ExperienceActivity.VIEW_PAGER_WIDTH * 0.9 : 0);
+                        activity instanceof ExperienceActivity ? ExperienceActivity.VIEW_PAGER_WIDTH * 0.9 :
+                                activity instanceof ViewArticlesActivity ? ViewArticlesActivity.VIEW_PAGER_WIDTH * 0.9 : 0);
         int height = (int) (activity instanceof ProvinceDetailActivity ? ProvinceDetailActivity.VIEW_PAGER_HEIGHT * 0.98 :
                 activity instanceof FavoriteActivity ? FavoriteActivity.VIEW_PAGER_HEIGHT * 0.98 :
-                        activity instanceof ExperienceActivity ? ExperienceActivity.VIEW_PAGER_HEIGHT * 0.98 : 0);
+                        activity instanceof ExperienceActivity ? ExperienceActivity.VIEW_PAGER_HEIGHT * 0.98 :
+                                activity instanceof ViewArticlesActivity ? ViewArticlesActivity.VIEW_PAGER_HEIGHT * 0.98 : 0);
 
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(width, height);
         View view = inflater.inflate(R.layout.fragment_article, container, false);
@@ -115,10 +118,13 @@ public class ItemFragment extends Fragment {
             if (activity instanceof ExperienceActivity) {
                 ((ExperienceActivity) activity).onItemClick(position);
             }
+            if (activity instanceof ViewArticlesActivity) {
+                ((ViewArticlesActivity) activity).onItemClick(position);
+            }
         });
 
         btnDelete.setOnClickListener(view1 -> {
-            if(activity instanceof ExperienceActivity) {
+            if (activity instanceof ExperienceActivity) {
                 ((ExperienceActivity) activity).onDeleteClick(position);
             }
         });
@@ -138,6 +144,9 @@ public class ItemFragment extends Fragment {
         if (activity instanceof ExperienceActivity) {
             ((ExperienceActivity) activity).onAddJourneyClick(position);
         }
+        if (activity instanceof ViewArticlesActivity) {
+            ((ViewArticlesActivity) activity).onAddJourneyClick(position);
+        }
     }
 
     @OnClick(R.id.imgShare)
@@ -150,6 +159,9 @@ public class ItemFragment extends Fragment {
         }
         if (activity instanceof ExperienceActivity) {
             ((ExperienceActivity) activity).onShareClick(position);
+        }
+        if (activity instanceof ViewArticlesActivity) {
+            ((ViewArticlesActivity) activity).onShareClick(position);
         }
     }
 
@@ -164,6 +176,9 @@ public class ItemFragment extends Fragment {
         if (activity instanceof ExperienceActivity) {
             ((ExperienceActivity) activity).onCommentClick(position);
         }
+        if (activity instanceof ViewArticlesActivity) {
+            ((ViewArticlesActivity) activity).onCommentClick(position);
+        }
     }
 
     @OnClick(R.id.imgHeart)
@@ -176,6 +191,9 @@ public class ItemFragment extends Fragment {
         }
         if (activity instanceof ExperienceActivity) {
             ((ExperienceActivity) activity).onAddFavoriteClick(position);
+        }
+        if (activity instanceof ViewArticlesActivity) {
+            ((ViewArticlesActivity) activity).onAddFavoriteClick(position);
         }
     }
 

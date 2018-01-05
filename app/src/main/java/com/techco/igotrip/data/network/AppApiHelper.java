@@ -448,5 +448,14 @@ public class AppApiHelper implements ApiHelper {
                 .build()
                 .getObjectObservable(ProvinceResponse.class);
     }
+
+    @Override
+    public Observable<ArticleResponse> getArticlesNearBy(Map<String, String> params) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_GET_ARTICLES_NEARBY)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .addBodyParameter(params)
+                .build()
+                .getObjectObservable(ArticleResponse.class);
+    }
 }
 

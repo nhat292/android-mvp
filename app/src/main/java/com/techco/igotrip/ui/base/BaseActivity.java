@@ -13,6 +13,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
+import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
@@ -121,11 +122,9 @@ public abstract class BaseActivity extends AppCompatActivity
 
     @Override
     public void showMessage(String message) {
-        if (message != null) {
-            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, getString(R.string.message_unknown_error), Toast.LENGTH_SHORT).show();
-        }
+        Toast toast = Toast.makeText(this, message != null ? message : getString(R.string.message_unknown_error), Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
     }
 
     @Override

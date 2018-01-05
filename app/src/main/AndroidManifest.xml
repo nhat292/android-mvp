@@ -150,6 +150,11 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name="com.techco.igotrip.ui.viewarticles.ViewArticlesActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="b1b1c634e84f884d1e7536228da192e390266076" />

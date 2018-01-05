@@ -1,27 +1,60 @@
 
 package com.techco.igotrip.ui.youarehere;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocomplete;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.single.CompositePermissionListener;
+import com.karumi.dexter.listener.single.PermissionListener;
+import com.karumi.dexter.listener.single.SnackbarOnDeniedPermissionListener;
+import com.techco.common.AppLogger;
+import com.techco.common.Utils;
 import com.techco.igotrip.R;
+import com.techco.igotrip.data.network.model.object.Article;
 import com.techco.igotrip.data.network.model.object.SubType;
 import com.techco.igotrip.data.network.model.object.Type;
 import com.techco.igotrip.data.network.model.object.User;
 import com.techco.igotrip.data.network.model.response.ExploreDataResponse;
+import com.techco.igotrip.data.network.model.response.SelectTypeResponse;
+import com.techco.igotrip.enums.ArticleMarkerType;
+import com.techco.igotrip.ui.adapter.MapInfoWindowAdapter;
 import com.techco.igotrip.ui.adapter.SubTypeAdapter;
 import com.techco.igotrip.ui.adapter.TypeAdapter;
 import com.techco.igotrip.ui.base.BaseActivity;
+import com.techco.igotrip.ui.detail.DetailActivity;
 import com.techco.igotrip.ui.dialog.DialogCallback;
 import com.techco.igotrip.ui.dialog.app.AppDialog;
 import com.techco.igotrip.ui.experience.ExperienceActivity;
@@ -29,9 +62,15 @@ import com.techco.igotrip.ui.favorite.FavoriteActivity;
 import com.techco.igotrip.ui.info.InfoActivity;
 import com.techco.igotrip.ui.login.LoginActivity;
 import com.techco.igotrip.ui.mytrip.MyTripActivity;
+import com.techco.igotrip.ui.viewarticles.ViewArticlesActivity;
+import com.techco.igotrip.utils.permission.ErrorPermissionRequestListener;
+import com.techco.igotrip.utils.permission.PermissionResultListener;
+import com.techco.igotrip.utils.permission.SinglePermissionListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -46,7 +85,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 
 
-public class YouAreHereActivity extends BaseActivity implements YouAreHereBaseView, OnMapReadyCallback {
+public class YouAreHereActivity extends BaseActivity implements YouAreHereBaseView, OnMapReadyCallback, PermissionResultListener, GoogleMap.OnMarkerClickListener, GoogleMap.OnInfoWindowClickListener {
+
+    private static final String TAG = "YouAreHereActivity";
+
+    public static final int PLACE_AUTOCOMPLETE_REQUEST_CODE = 0;
 
     @Inject
     YouAreHereMvpPresenter<YouAreHereBaseView> mPresenter;
@@ -82,6 +125,13 @@ public class YouAreHereActivity extends BaseActivity implements YouAreHereBaseVi
     private boolean isUserLogged = false;
 
     private GoogleMap mGoogleMap;
+    private PermissionListener locationPermissionListener;
+    private FusedLocationProviderClient mFusedLocationClient;
+    private LocationManager manager;
+    private Location mLocation;
+    private List<Marker> markers = new ArrayList<>();
+    private Map<Marker, Article> markerMap = new HashMap<>();
+    private ArrayList<Article> articles = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +145,8 @@ public class YouAreHereActivity extends BaseActivity implements YouAreHereBaseVi
         mPresenter.onAttach(YouAreHereActivity.this);
 
         setUp();
+
+        createPermissionListener();
 
         mPresenter.getExploreData();
     }
@@ -116,14 +168,18 @@ public class YouAreHereActivity extends BaseActivity implements YouAreHereBaseVi
     protected void setUp() {
         mTypeAdapter = new TypeAdapter(this.mTypes, (object, position) -> {
             this.mCurrentType = (Type) object;
-
+            mPresenter.selectType(mCurrentType.getId());
         });
         mSubTypeAdapter = new SubTypeAdapter(this.mSubTypes, ((object, position) -> {
             this.mCurrentSubType = (SubType) object;
+            exploreArticle();
         }));
 
         recyclerType.setAdapter(mTypeAdapter);
         recyclerSubType.setAdapter(mSubTypeAdapter);
+
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -202,6 +258,33 @@ public class YouAreHereActivity extends BaseActivity implements YouAreHereBaseVi
         }
     }
 
+    @OnClick(R.id.imgList)
+    public void onListClick() {
+        if (articles.size() == 0) {
+            showMessage(R.string.no_data_found);
+        } else {
+            startActivity(ViewArticlesActivity.getStartIntent(this, articles));
+        }
+    }
+
+    @OnClick(R.id.imgSearch)
+    public void onSearchClick() {
+        try {
+            Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN)
+                    .build(this);
+            startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE);
+        } catch (GooglePlayServicesRepairableException e) {
+
+        } catch (GooglePlayServicesNotAvailableException e) {
+
+        }
+    }
+
+    @OnClick(R.id.imgMyLocation)
+    public void onMyLocationClick() {
+        checkLocationPermission();
+    }
+
     @Override
     public void onCheckUserStatusSuccess(User user) {
         if (user != null) {
@@ -240,6 +323,43 @@ public class YouAreHereActivity extends BaseActivity implements YouAreHereBaseVi
 
         mTypeAdapter.notifyDataSetChanged();
         mSubTypeAdapter.notifyDataSetChanged();
+
+        checkLocationPermission();
+    }
+
+
+    @Override
+    public void onSelectTypeSuccess(SelectTypeResponse response) {
+        this.mSubTypes.clear();
+        this.mSubTypes.addAll(response.getSubTypes());
+        if (this.mSubTypes.size() > 0) {
+            this.mSubTypes.get(0).setSelected(true);
+            mCurrentSubType = this.mSubTypes.get(0);
+        }
+        mSubTypeAdapter.notifyDataSetChanged();
+        exploreArticle();
+    }
+
+    @Override
+    public void onExploreArticleSuccess(List<Article> articles) {
+        this.articles.clear();
+        this.articles.addAll(articles);
+        clearAllMarkers();
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        for (Article data : articles) {
+            LatLng latLng = new LatLng(data.getLat(), data.getLng());
+            builder.include(latLng);
+            Marker marker = mGoogleMap.addMarker(new MarkerOptions()
+                    .position(latLng)
+                    .title(data.getTitle())
+                    .snippet(data.getDescription())
+                    .icon(BitmapDescriptorFactory.fromBitmap(Utils.createBitmapWithSize(this, getIcon(), 55, 60))));
+            markers.add(marker);
+            markerMap.put(marker, data);
+        }
+        int padding = 30;
+        mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), padding));
+        mGoogleMap.setInfoWindowAdapter(new MapInfoWindowAdapter(this, markerMap));
     }
 
     private boolean isUserLogged() {
@@ -254,8 +374,174 @@ public class YouAreHereActivity extends BaseActivity implements YouAreHereBaseVi
         drawer.closeDrawer(Gravity.START);
     }
 
+    @SuppressLint("MissingPermission")
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mGoogleMap = googleMap;
+
+        mGoogleMap.getUiSettings().setAllGesturesEnabled(true);
+        mGoogleMap.getUiSettings().setCompassEnabled(false);
+        mGoogleMap.getUiSettings().setZoomControlsEnabled(false);
+        mGoogleMap.getUiSettings().setMapToolbarEnabled(false);
+        mGoogleMap.setOnInfoWindowClickListener(this);
+        mGoogleMap.getUiSettings().setMyLocationButtonEnabled(false);
+        mGoogleMap.setMyLocationEnabled(false);
+        mGoogleMap.setOnMarkerClickListener(this);
+        mGoogleMap.setMaxZoomPreference(17.0f);
+    }
+
+    private void checkLocationPermission() {
+        Dexter.withActivity(this)
+                .withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+                .withListener(locationPermissionListener)
+                .withErrorListener(new ErrorPermissionRequestListener(this))
+                .check();
+    }
+
+    private void createPermissionListener() {
+        final ViewGroup viewGroup = (ViewGroup) ((ViewGroup) this
+                .findViewById(android.R.id.content)).getChildAt(0);
+        PermissionListener feedbackViewPermissionListener = new SinglePermissionListener(this);
+        locationPermissionListener = new CompositePermissionListener(feedbackViewPermissionListener,
+                SnackbarOnDeniedPermissionListener.Builder.with(viewGroup,
+                        R.string.message_camera_permission_denied)
+                        .withOpenSettingsButton(R.string.setting)
+                        .withCallback(new Snackbar.Callback() {
+                            @Override
+                            public void onShown(Snackbar snackbar) {
+                                super.onShown(snackbar);
+                            }
+
+                            @Override
+                            public void onDismissed(Snackbar snackbar, int event) {
+                                super.onDismissed(snackbar, event);
+                            }
+                        })
+                        .build());
+    }
+
+    @Override
+    public void onPermissionError(String error) {
+        AppLogger.d(TAG, "Permission requested error: " + error);
+    }
+
+    @Override
+    public void onPermissionGranted(String permissionName) {
+        AppLogger.d(TAG, "Permission granted: " + permissionName);
+        if (permissionName.equals(Manifest.permission.ACCESS_FINE_LOCATION)) {
+            if (ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED) {
+                if (manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                    mFusedLocationClient.getLastLocation()
+                            .addOnSuccessListener(this, location -> {
+                                if (location != null) {
+                                    this.mLocation = location;
+                                    exploreArticle();
+                                }
+                            });
+                } else {
+                    showAskForGPS();
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onPermissionDenied(String permissionName, boolean isPermanentDenied) {
+        AppLogger.d(TAG, "Permission denied: " + permissionName, ", Permanent denied: " + isPermanentDenied);
+        exploreArticle();
+    }
+
+    @Override
+    public void onPermissionRationale(PermissionToken token) {
+        showConfirmDialog(getString(R.string.permission), getString(R.string.message_permission_rational), null, getString(android.R.string.cancel), new DialogCallback<AppDialog>() {
+            @Override
+            public void onNegative(AppDialog dialog) {
+                dialog.dismissDialog(AppDialog.TAG);
+                token.cancelPermissionRequest();
+            }
+
+            @Override
+            public void onPositive(AppDialog dialog, Object o) {
+                dialog.dismissDialog(AppDialog.TAG);
+                token.continuePermissionRequest();
+            }
+        });
+    }
+
+    private void showAskForGPS() {
+        showConfirmDialog(getString(R.string.location),
+                getString(R.string.message_ask_enable_location),
+                null,
+                getString(android.R.string.cancel),
+                new DialogCallback<AppDialog>() {
+                    @Override
+                    public void onNegative(AppDialog dialog) {
+                        dialog.dismissDialog(AppDialog.TAG);
+                    }
+
+                    @Override
+                    public void onPositive(AppDialog dialog, Object o) {
+                        dialog.dismissDialog(AppDialog.TAG);
+                        startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                    }
+                });
+    }
+
+    private void exploreArticle() {
+        double lat = mLocation != null ? mLocation.getLatitude() : 0.0;
+        double lng = mLocation != null ? mLocation.getLongitude() : 0.0;
+        mPresenter.exploreArticle(lat, lng, mCurrentType.getId(), mCurrentSubType.getId());
+    }
+
+    private void clearAllMarkers() {
+        if (markers.size() <= 0) return;
+        for (Marker marker : markers) {
+            marker.remove();
+        }
+        markerMap.clear();
+        markers.clear();
+    }
+
+    private int getIcon() {
+        int icon = R.drawable.ic_marker;
+        if (mCurrentType.getId() == ArticleMarkerType.PLACES.getValue()) {
+            icon = R.drawable.ic_marker;
+        } else if (mCurrentType.getId() == ArticleMarkerType.ROOM.getValue()) {
+            icon = R.drawable.ic_marker_hotel;
+        } else if (mCurrentType.getId() == ArticleMarkerType.RESTAURANT.getValue()) {
+            icon = R.drawable.ic_marker_restaurant;
+        } else if (mCurrentType.getId() == ArticleMarkerType.SHOPPING.getValue()) {
+            icon = R.drawable.ic_marker_shopping;
+        }
+        return icon;
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        marker.showInfoWindow();
+        new Handler().postDelayed(() -> marker.showInfoWindow(), 200);
+        return true;
+    }
+
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+        Article data = markerMap.get(marker);
+        startActivity(DetailActivity.getStartIntent(this, data));
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != RESULT_OK) return;
+        if (requestCode == PLACE_AUTOCOMPLETE_REQUEST_CODE) {
+            Place place = PlaceAutocomplete.getPlace(this, data);
+            mLocation = new Location("");
+            mLocation.setLatitude(place.getLatLng().latitude);
+            mLocation.setLongitude(place.getLatLng().longitude);
+            mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(place.getLatLng(), 10));
+            exploreArticle();
+        }
     }
 }

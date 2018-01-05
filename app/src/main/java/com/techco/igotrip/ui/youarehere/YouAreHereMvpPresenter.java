@@ -15,4 +15,6 @@ public interface YouAreHereMvpPresenter<V extends YouAreHereBaseView> extends Mv
     void getExploreData();
     void checkUserStatus();
     void logout();
+    void selectType(int typeId);
+    void exploreArticle(double lat, double lng, int typeId, int houseTypeId);
 }
