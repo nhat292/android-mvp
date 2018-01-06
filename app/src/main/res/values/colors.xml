@@ -18,6 +18,7 @@
     <color name="colorHorizontalLine">#7c7c7c</color>
     <color name="colorArticleTitle">#f7710c</color>
     <color name="colorBgCircle">#f7ab17</color>
+    <color name="colorBgLayoutButtonAddPictures">#a5dbef</color>
 
 
     <color name="light_gray">#dbdbdb</color>
@@ -373,6 +374,6 @@
     <color name="md_yellow_A700">#FFD600</color>
 
     <color name="transparent_black">#c4000000</color>
-    <color name="transparent_white">#c4ffffff</color>
+    <color name="transparent_white">#4Dffffff</color>
     <color name="transparent_md_amber_500">#99FFC107</color>
 </resources>

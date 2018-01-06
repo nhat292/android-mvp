@@ -47,6 +47,7 @@ import com.techco.igotrip.ui.detail.DetailActivity;
 import com.techco.igotrip.ui.dialog.DialogCallback;
 import com.techco.igotrip.ui.dialog.app.AppDialog;
 import com.techco.igotrip.ui.dialog.simplelist.SimpleListDialog;
+import com.techco.igotrip.ui.post.PostActivity;
 import com.techco.igotrip.utils.permission.ErrorPermissionRequestListener;
 import com.techco.igotrip.utils.permission.PermissionResultListener;
 import com.techco.igotrip.utils.permission.SinglePermissionListener;
@@ -209,7 +210,7 @@ public class ExperienceActivity extends BaseActivity implements ExperienceBaseVi
 
     @OnClick(R.id.imgRight)
     public void onRightClick() {
-
+        startActivity(PostActivity.getStartIntent(this));
     }
 
     @OnClick(R.id.btnReload)

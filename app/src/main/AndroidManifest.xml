@@ -155,6 +155,23 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name="com.techco.igotrip.ui.post.PostActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"  />
+
+        <activity
+            android:name="com.techco.igotrip.ui.addpictures.AddPicturesActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.techco.igotrip.ui.direction.DirectionActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="b1b1c634e84f884d1e7536228da192e390266076" />

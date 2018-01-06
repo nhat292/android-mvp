@@ -62,6 +62,7 @@ import com.techco.igotrip.ui.favorite.FavoriteActivity;
 import com.techco.igotrip.ui.info.InfoActivity;
 import com.techco.igotrip.ui.login.LoginActivity;
 import com.techco.igotrip.ui.mytrip.MyTripActivity;
+import com.techco.igotrip.ui.post.PostActivity;
 import com.techco.igotrip.ui.viewarticles.ViewArticlesActivity;
 import com.techco.igotrip.utils.permission.ErrorPermissionRequestListener;
 import com.techco.igotrip.utils.permission.PermissionResultListener;
@@ -198,7 +199,7 @@ public class YouAreHereActivity extends BaseActivity implements YouAreHereBaseVi
 
     @OnClick(R.id.imgRight)
     public void onRightClick() {
-
+        mPresenter.onPostClick();
     }
 
     @OnClick(R.id.btnMenuInfo)
@@ -283,6 +284,16 @@ public class YouAreHereActivity extends BaseActivity implements YouAreHereBaseVi
     @OnClick(R.id.imgMyLocation)
     public void onMyLocationClick() {
         checkLocationPermission();
+    }
+
+    @Override
+    public void openLogin() {
+        startActivity(LoginActivity.getStartIntent(this));
+    }
+
+    @Override
+    public void openPost() {
+        startActivity(PostActivity.getStartIntent(this));
     }
 
     @Override

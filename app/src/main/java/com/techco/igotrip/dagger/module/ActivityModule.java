@@ -22,6 +22,9 @@ import com.techco.igotrip.ui.detail.DetailPresenter;
 import com.techco.igotrip.ui.dialog.rating.RatingDialogBaseView;
 import com.techco.igotrip.ui.dialog.rating.RatingDialogMvpPresenter;
 import com.techco.igotrip.ui.dialog.rating.RatingDialogPresenter;
+import com.techco.igotrip.ui.direction.DirectionBaseView;
+import com.techco.igotrip.ui.direction.DirectionMvpPresenter;
+import com.techco.igotrip.ui.direction.DirectionPresenter;
 import com.techco.igotrip.ui.experience.ExperienceBaseView;
 import com.techco.igotrip.ui.experience.ExperienceMvpPresenter;
 import com.techco.igotrip.ui.experience.ExperiencePresenter;
@@ -46,6 +49,9 @@ import com.techco.igotrip.ui.menu.MenuPresenter;
 import com.techco.igotrip.ui.mytrip.MyTripBaseView;
 import com.techco.igotrip.ui.mytrip.MyTripMvpPresenter;
 import com.techco.igotrip.ui.mytrip.MyTripPresenter;
+import com.techco.igotrip.ui.post.PostBaseView;
+import com.techco.igotrip.ui.post.PostMvpPresenter;
+import com.techco.igotrip.ui.post.PostPresenter;
 import com.techco.igotrip.ui.provincedetail.ProvinceDetailBaseView;
 import com.techco.igotrip.ui.provincedetail.ProvinceDetailMvpPresenter;
 import com.techco.igotrip.ui.provincedetail.ProvinceDetailPresenter;
@@ -229,6 +235,20 @@ public class ActivityModule {
     @PerActivity
     ViewArticlesMvpPresenter<ViewArticlesBaseView> provideViewArticlesPresenter(
             ViewArticlesPresenter<ViewArticlesBaseView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    PostMvpPresenter<PostBaseView> providePostPresenter(
+            PostPresenter<PostBaseView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    DirectionMvpPresenter<DirectionBaseView> provideDirectionPresenter(
+            DirectionPresenter<DirectionBaseView> presenter) {
         return presenter;
     }
 

@@ -86,4 +86,12 @@
     <!--MyTrip-->
     <dimen name="my_trip_item_height">60dp</dimen>
     <dimen name="img_delete_item_size">35dp</dimen>
+
+    <!--Post-->
+    <dimen name="map_post_height">250dp</dimen>
+
+    <!--Add pictures-->
+    <dimen name="layout_button_height">55dp</dimen>
+    <dimen name="item_spacing">3dp</dimen>
+
 </resources>

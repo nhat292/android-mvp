@@ -16,12 +16,17 @@ import java.util.List;
 
 public class SimpleListDialogAdapter extends RecyclerView.Adapter<SimpleListDialogViewHolder> {
 
+    public static final int TEXT_ALIGN_TYPE_CENTER = 0;
+    public static final int TEXT_ALIGN_TYPE_LEFT = 1;
+
     private List<String> datas;
     private OnItemClickListener listener;
+    private int textAlignType;
 
-    public SimpleListDialogAdapter(List<String> datas, OnItemClickListener listener) {
+    public SimpleListDialogAdapter(List<String> datas, OnItemClickListener listener, int textAlignType) {
         this.datas = datas;
         this.listener = listener;
+        this.textAlignType = textAlignType;
     }
 
 
@@ -29,18 +34,22 @@ public class SimpleListDialogAdapter extends RecyclerView.Adapter<SimpleListDial
     public SimpleListDialogViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.simple_item, null);
         RecyclerView.LayoutParams layoutParams = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                (int) parent.getContext().getResources().getDimension(R.dimen.dialog_simple_item_height));
+                ViewGroup.LayoutParams.WRAP_CONTENT);
         view.setLayoutParams(layoutParams);
         return new SimpleListDialogViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(SimpleListDialogViewHolder holder, int position) {
-        holder.bind(datas, position, listener);
+        holder.bind(datas, position, listener, textAlignType);
     }
 
     @Override
     public int getItemCount() {
         return datas.size();
+    }
+
+    public void setTextAlignType(int textAlignType) {
+        this.textAlignType = textAlignType;
     }
 }

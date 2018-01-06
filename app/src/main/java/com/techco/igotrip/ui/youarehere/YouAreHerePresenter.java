@@ -123,4 +123,13 @@ public class YouAreHerePresenter<V extends YouAreHereBaseView> extends BasePrese
                     }
                 }));
     }
+
+    @Override
+    public void onPostClick() {
+        if(getDataManager().getUserInfo() != null) {
+            getMvpView().openPost();
+        } else {
+            getMvpView().openLogin();
+        }
+    }
 }

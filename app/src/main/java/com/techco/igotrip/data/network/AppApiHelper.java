@@ -7,14 +7,17 @@ import com.techco.igotrip.data.network.model.response.ArticleResponse;
 import com.techco.igotrip.data.network.model.response.CommentListResponse;
 import com.techco.igotrip.data.network.model.response.CommentResponse;
 import com.techco.igotrip.data.network.model.response.CreateShareLinkResponse;
+import com.techco.igotrip.data.network.model.response.DResponseResult;
 import com.techco.igotrip.data.network.model.response.ExploreDataResponse;
 import com.techco.igotrip.data.network.model.response.FirstDataResponse;
 import com.techco.igotrip.data.network.model.response.GetCommentCountResponse;
 import com.techco.igotrip.data.network.model.response.JourneyResponse;
+import com.techco.igotrip.data.network.model.response.PlacesResponse;
 import com.techco.igotrip.data.network.model.response.ProvinceResponse;
 import com.techco.igotrip.data.network.model.response.SearchPlaceResponse;
 import com.techco.igotrip.data.network.model.response.SelectTypeResponse;
 import com.techco.igotrip.data.network.model.response.SimpleDataResponse;
+import com.techco.igotrip.data.network.model.response.TypesResponse;
 import com.techco.igotrip.data.network.model.response.UserResponse;
 
 import java.util.Map;
@@ -456,6 +459,40 @@ public class AppApiHelper implements ApiHelper {
                 .addBodyParameter(params)
                 .build()
                 .getObjectObservable(ArticleResponse.class);
+    }
+
+    @Override
+    public Observable<PlacesResponse> searchPlacesPost(String url) {
+        return Rx2AndroidNetworking.get(url)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .build()
+                .getObjectObservable(PlacesResponse.class);
+    }
+
+    @Override
+    public Observable<TypesResponse> getType() {
+        return Rx2AndroidNetworking.get(ApiEndPoint.ENDPOINT_GET_TYPES)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .build()
+                .getObjectObservable(TypesResponse.class);
+    }
+
+    @Override
+    public Observable<SimpleDataResponse> postArticle(Map<String, String> params) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_POST_ARTICLE)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .addBodyParameter(params)
+                .build()
+                .getObjectObservable(SimpleDataResponse.class);
+    }
+
+
+    @Override
+    public Observable<DResponseResult> searchDirection(String url) {
+        return Rx2AndroidNetworking.get(url)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .build()
+                .getObjectObservable(DResponseResult.class);
     }
 }
 

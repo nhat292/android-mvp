@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_background_launch">
+
+    <include
+        android:id="@+id/navBar"
+        layout="@layout/nav_layout" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/navBar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/map_post_height"
+                android:background="@drawable/bg_border_black">
+
+                <fragment
+                    android:id="@+id/map"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <ImageView
+                    android:id="@+id/imgMyLocation"
+                    android:layout_width="@dimen/img_circle_size"
+                    android:layout_height="@dimen/img_circle_size"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/margin_padding_small"
+                    android:layout_marginTop="@dimen/margin_padding_small"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="@dimen/margin_padding_very_small"
+                    android:src="@drawable/ic_location" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_padding_normal"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/TextStyle.Title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/post_title"
+                    android:textAllCaps="true" />
+
+                <EditText
+                    android:id="@+id/editTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="@dimen/margin_padding_very_small"
+                    android:background="@color/transparent_white"
+                    android:gravity="top"
+                    android:imeOptions="actionNext"
+                    android:inputType="textMultiLine|textNoSuggestions"
+                    android:padding="@dimen/margin_padding_very_small"
+                    android:textColor="@color/white"
+                    android:textCursorDrawable="@drawable/edittext_cursor_white" />
+
+                <TextView
+                    style="@style/TextStyle.Title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_padding_normal"
+                    android:text="@string/post_description"
+                    android:textAllCaps="true" />
+
+                <EditText
+                    android:id="@+id/editDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="@dimen/margin_padding_very_small"
+                    android:background="@color/transparent_white"
+                    android:gravity="top"
+                    android:imeOptions="actionNext"
+                    android:inputType="textMultiLine|textNoSuggestions"
+                    android:padding="@dimen/margin_padding_very_small"
+                    android:textColor="@color/white"
+                    android:textCursorDrawable="@drawable/edittext_cursor_white" />
+
+                <TextView
+                    style="@style/TextStyle.Title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_padding_normal"
+                    android:text="@string/post_type"
+                    android:textAllCaps="true" />
+
+                <Button
+                    android:id="@+id/btnSelectType"
+                    style="@style/Button.Primary"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="@dimen/margin_padding_very_small"
+                    android:background="@drawable/button_primary_bg_trans"
+                    android:text="@string/post_select_type"
+                    android:textSize="@dimen/text_size_normal" />
+
+                <TextView
+                    style="@style/TextStyle.Title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_padding_normal"
+                    android:text="@string/post_pictures"
+                    android:textAllCaps="true" />
+
+                <Button
+                    android:id="@+id/btnAddPictures"
+                    style="@style/Button.Primary"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="@dimen/margin_padding_very_small"
+                    android:background="@drawable/button_primary_bg_trans"
+                    android:text="@string/post_add_pictures"
+                    android:textSize="@dimen/text_size_normal" />
+
+                <Button
+                    android:id="@+id/btnSubmit"
+                    style="@style/Button.Primary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_padding_very_large"
+                    android:text="@string/submit_text"
+                    android:textSize="@dimen/text_size_large" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

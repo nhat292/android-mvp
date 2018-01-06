@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rlItem"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dialog_simple_item_height"
+    android:layout_height="wrap_content"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?attr/selectableItemBackground">
@@ -10,10 +10,9 @@
     <TextView
         android:id="@+id/txtContent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center"
-        android:maxLines="1"
-        android:singleLine="true"
+        android:padding="@dimen/margin_padding_small"
         android:text="Item"
         android:textColor="@color/accent_black"
         android:textSize="@dimen/text_size_normal" />

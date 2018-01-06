@@ -107,6 +107,12 @@ public final class ApiEndPoint {
     public static String ENDPOINT_GET_ARTICLES_NEARBY = BASE_URL
             + "api/v1/articles-nearby";
 
+    public static String ENDPOINT_GET_TYPES = BASE_URL
+            + "api/v1/get-type";
+
+    public static String ENDPOINT_POST_ARTICLE = BASE_URL
+            + "api/v1/post-article";
+
     public static void changeBaseUrl(String baseUrl) {
         BASE_URL = baseUrl;
         ENDPOINT_FIRST_DATA = BASE_URL + "api/v1/first-data";
@@ -140,6 +146,8 @@ public final class ApiEndPoint {
         ENDPOINT_ARTICLE_PROVINCE = BASE_URL + "api/v1/articles-province";
         ENDPOINT_GET_PROVINCES = BASE_URL + "api/v1/get-provinces-by-nation";
         ENDPOINT_GET_ARTICLES_NEARBY = BASE_URL + "api/v1/articles-nearby";
+        ENDPOINT_GET_TYPES = BASE_URL + "api/v1/get-type";
+        ENDPOINT_POST_ARTICLE = BASE_URL + "api/v1/post-article";
     }
 
     private ApiEndPoint() {

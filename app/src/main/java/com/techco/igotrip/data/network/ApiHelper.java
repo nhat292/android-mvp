@@ -6,14 +6,17 @@ import com.techco.igotrip.data.network.model.response.ArticleResponse;
 import com.techco.igotrip.data.network.model.response.CommentListResponse;
 import com.techco.igotrip.data.network.model.response.CommentResponse;
 import com.techco.igotrip.data.network.model.response.CreateShareLinkResponse;
+import com.techco.igotrip.data.network.model.response.DResponseResult;
 import com.techco.igotrip.data.network.model.response.ExploreDataResponse;
 import com.techco.igotrip.data.network.model.response.FirstDataResponse;
 import com.techco.igotrip.data.network.model.response.GetCommentCountResponse;
 import com.techco.igotrip.data.network.model.response.JourneyResponse;
+import com.techco.igotrip.data.network.model.response.PlacesResponse;
 import com.techco.igotrip.data.network.model.response.SearchPlaceResponse;
 import com.techco.igotrip.data.network.model.response.ProvinceResponse;
 import com.techco.igotrip.data.network.model.response.SelectTypeResponse;
 import com.techco.igotrip.data.network.model.response.SimpleDataResponse;
+import com.techco.igotrip.data.network.model.response.TypesResponse;
 import com.techco.igotrip.data.network.model.response.UserResponse;
 
 import java.util.Map;
@@ -92,4 +95,12 @@ public interface ApiHelper {
     Observable<ProvinceResponse> getProvinces(Map<String, String> params);
 
     Observable<ArticleResponse> getArticlesNearBy(Map<String, String> params);
+
+    Observable<PlacesResponse> searchPlacesPost(String url);
+
+    Observable<TypesResponse> getType();
+
+    Observable<SimpleDataResponse> postArticle(Map<String, String> params);
+
+    Observable<DResponseResult> searchDirection(String url);
 }

@@ -43,6 +43,7 @@ import com.techco.igotrip.ui.custom.circleindicator.CirclePageIndicator;
 import com.techco.igotrip.ui.custom.views.MaterialBadgeTextView;
 import com.techco.igotrip.ui.dialog.DialogCallback;
 import com.techco.igotrip.ui.dialog.simplelist.SimpleListDialog;
+import com.techco.igotrip.ui.direction.DirectionActivity;
 import com.techco.igotrip.ui.login.LoginActivity;
 
 import java.util.ArrayList;
@@ -268,6 +269,11 @@ public class DetailActivity extends BaseActivity implements DetailBaseView, OnMa
     @OnClick(R.id.btnEdit)
     public void onEditClick() {
 
+    }
+
+    @OnClick(R.id.imgDirection)
+    public void onDirectionClick() {
+        startActivity(DirectionActivity.getStartIntent(this, article.getLat(), article.getLng()));
     }
 
     @Override

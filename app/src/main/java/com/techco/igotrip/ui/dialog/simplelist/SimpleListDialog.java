@@ -34,6 +34,8 @@ public class SimpleListDialog extends BaseDialog {
     @BindView(R.id.recyclerList)
     RecyclerView recyclerList;
 
+    private SimpleListDialogAdapter adapter;
+
     public static SimpleListDialog newInstance() {
         SimpleListDialog fragment = new SimpleListDialog();
         Bundle bundle = new Bundle();
@@ -57,11 +59,19 @@ public class SimpleListDialog extends BaseDialog {
 
     private String title;
     private List<String> datas;
+    private int textAlignType = SimpleListDialogAdapter.TEXT_ALIGN_TYPE_CENTER;
 
-    public void show(FragmentManager fragmentManager, String title,  List<String> datas) {
+    public void show(FragmentManager fragmentManager, String title, List<String> datas) {
         super.show(fragmentManager, TAG);
         this.title = title;
         this.datas = datas;
+    }
+
+    public void show(FragmentManager fragmentManager, String title, List<String> datas, int textAlignType) {
+        super.show(fragmentManager, TAG);
+        this.title = title;
+        this.datas = datas;
+        this.textAlignType = textAlignType;
     }
 
     @Override
@@ -72,11 +82,10 @@ public class SimpleListDialog extends BaseDialog {
             txtTitle.setVisibility(View.GONE);
         }
 
-        SimpleListDialogAdapter adapter = new SimpleListDialogAdapter(datas, ((object, position) -> {
+        adapter = new SimpleListDialogAdapter(datas, ((object, position) -> {
             callback.onPositive(this, position);
-        }));
+        }), textAlignType);
         recyclerList.setAdapter(adapter);
-
     }
 
     @OnClick(R.id.btnCancel)

@@ -20,4 +20,6 @@ public interface YouAreHereBaseView extends BaseView {
     void onGetExploreDataSuccess(ExploreDataResponse response);
     void onSelectTypeSuccess(SelectTypeResponse response);
     void onExploreArticleSuccess(List<Article> articles);
+    void openLogin();
+    void openPost();
 }

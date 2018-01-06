@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.techco.igotrip.ui.custom.views.SquareRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imgItem"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ImageView
+        android:id="@+id/imgDelete"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="@dimen/margin_padding_small"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:padding="@dimen/margin_padding_very_small"
+        android:src="@drawable/ic_delete" />
+
+</com.techco.igotrip.ui.custom.views.SquareRelativeLayout>
