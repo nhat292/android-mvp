@@ -40,6 +40,7 @@ import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.single.CompositePermissionListener;
 import com.karumi.dexter.listener.single.PermissionListener;
 import com.karumi.dexter.listener.single.SnackbarOnDeniedPermissionListener;
+import com.stfalcon.frescoimageviewer.ImageViewer;
 import com.techco.common.AppLogger;
 import com.techco.common.Utils;
 import com.techco.igotrip.R;
@@ -133,6 +134,7 @@ public class YouAreHereActivity extends BaseActivity implements YouAreHereBaseVi
     private List<Marker> markers = new ArrayList<>();
     private Map<Marker, Article> markerMap = new HashMap<>();
     private ArrayList<Article> articles = new ArrayList<>();
+    private User mUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -286,6 +288,14 @@ public class YouAreHereActivity extends BaseActivity implements YouAreHereBaseVi
         checkLocationPermission();
     }
 
+
+    @OnClick(R.id.imgUser)
+    public void onUserClick() {
+        if(mUser != null && !mUser.getImage().isEmpty()) {
+            viewImage(mUser.getImage());
+        }
+    }
+
     @Override
     public void openLogin() {
         startActivity(LoginActivity.getStartIntent(this));
@@ -298,6 +308,7 @@ public class YouAreHereActivity extends BaseActivity implements YouAreHereBaseVi
 
     @Override
     public void onCheckUserStatusSuccess(User user) {
+        mUser = user;
         if (user != null) {
             isUserLogged = true;
             txtUser.setText(user.getFullName());
@@ -554,5 +565,16 @@ public class YouAreHereActivity extends BaseActivity implements YouAreHereBaseVi
             mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(place.getLatLng(), 10));
             exploreArticle();
         }
+    }
+
+    private void viewImage(String url) {
+        List<String> items = new ArrayList<>();
+        items.add(url);
+        new ImageViewer.Builder<>(this, items)
+                .setFormatter(item -> item)
+                .setStartPosition(0)
+                .allowZooming(true)
+                .allowSwipeToDismiss(true)
+                .show();
     }
 }

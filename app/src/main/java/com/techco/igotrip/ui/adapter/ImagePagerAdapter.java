@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.stfalcon.frescoimageviewer.ImageViewer;
 import com.techco.common.AppConstants;
 import com.techco.igotrip.R;
 import com.techco.igotrip.data.network.ApiEndPoint;
@@ -53,9 +54,20 @@ public class ImagePagerAdapter extends PagerAdapter {
                     .load(ApiEndPoint.BASE_URL + listItems.get(position).getImage())
                     .into(image);
         }
-        image.setOnClickListener(v -> {
-
-        });
+        image.setOnClickListener(v ->
+                new ImageViewer.Builder<>(context, listItems)
+                        .setFormatter(item -> {
+                            if (item.getImage().startsWith(AppConstants.HTTP_PREFIX)) {
+                                return item.getImage();
+                            } else {
+                                return ApiEndPoint.BASE_URL + item.getImage();
+                            }
+                        })
+                        .setStartPosition(position)
+                        .allowZooming(true)
+                        .allowSwipeToDismiss(true)
+                        .show()
+        );
         container.addView(view);
         return view;
     }

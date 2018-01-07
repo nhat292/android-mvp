@@ -5,7 +5,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Location;
+import android.graphics.Color;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -18,9 +18,16 @@ import android.widget.TextView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.single.CompositePermissionListener;
@@ -29,12 +36,16 @@ import com.karumi.dexter.listener.single.SnackbarOnDeniedPermissionListener;
 import com.techco.common.AppLogger;
 import com.techco.igotrip.R;
 import com.techco.igotrip.data.network.model.response.DResponseResult;
+import com.techco.igotrip.ui.adapter.DirectionAdapter;
 import com.techco.igotrip.ui.base.BaseActivity;
 import com.techco.igotrip.ui.dialog.DialogCallback;
 import com.techco.igotrip.ui.dialog.app.AppDialog;
 import com.techco.igotrip.utils.permission.ErrorPermissionRequestListener;
 import com.techco.igotrip.utils.permission.PermissionResultListener;
 import com.techco.igotrip.utils.permission.SinglePermissionListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -81,12 +92,12 @@ public class DirectionActivity extends BaseActivity implements DirectionBaseView
     LinearLayout llTop;
 
     private double lat, lng;
-    private Location location;
     private PermissionListener locationPermissionListener;
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationManager manager;
     private DResponseResult responseResult;
     private GoogleMap mGoogleMap;
+    private List<Marker> markers = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,6 +169,44 @@ public class DirectionActivity extends BaseActivity implements DirectionBaseView
         txtDuration.setText(String.format(getString(R.string.duration_format), responseResult.getRoutes().get(0).getLegs().get(0).getDuration().getText()));
         txtStart.setText(String.format(getString(R.string.start_format), responseResult.getRoutes().get(0).getLegs().get(0).getStartAddress()));
         txtEnd.setText(String.format(getString(R.string.end_format), responseResult.getRoutes().get(0).getLegs().get(0).getEndAddress()));
+
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+
+        LatLng originalLatLng = new LatLng(responseResult.getRoutes().get(0).getLegs().get(0).getStartLocation().getLat(),
+                responseResult.getRoutes().get(0).getLegs().get(0).getStartLocation().getLng());
+        builder.include(originalLatLng);
+        Marker marker1 = mGoogleMap.addMarker(new MarkerOptions()
+                .position(originalLatLng)
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+        markers.add(marker1);
+
+        LatLng destinationLatLng = new LatLng(responseResult.getRoutes().get(0).getLegs().get(0).getEndLocation().getLat(),
+                responseResult.getRoutes().get(0).getLegs().get(0).getEndLocation().getLng());
+        builder.include(destinationLatLng);
+        Marker marker2 = mGoogleMap.addMarker(new MarkerOptions()
+                .position(destinationLatLng)
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+        markers.add(marker2);
+
+        int padding = 60;
+        mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), padding));
+
+        PolylineOptions options = new PolylineOptions()
+                .width(8)
+                .color(Color.RED);
+        List<LatLng> pointList = new ArrayList<>();
+        for (int i = 0; i < responseResult.getRoutes().get(0).getLegs().get(0).getSteps().size(); i++) {
+            String points = responseResult.getRoutes().get(0).getLegs().get(0).getSteps().get(i).getPolyLine().getPoints();
+            List<LatLng> singlePolyline = decodePoly(points);
+            for (LatLng direction : singlePolyline){
+                pointList.add(direction);
+            }
+        }
+        options.addAll(pointList);
+        mGoogleMap.addPolyline(options);
+
+        recyclerDirection.setAdapter(new DirectionAdapter(responseResult.getRoutes().get(0).getLegs().get(0).getSteps(), null));
+
     }
 
     private void checkLocationPermission() {
@@ -206,7 +255,6 @@ public class DirectionActivity extends BaseActivity implements DirectionBaseView
                     mFusedLocationClient.getLastLocation()
                             .addOnSuccessListener(this, location -> {
                                 if (location != null) {
-                                    this.location = location;
                                     String query = "origin=" + location.getLatitude() + "," + location.getLongitude() +
                                             "&destination=" + lat + "," + lng;
                                     mPresenter.searchDirection(query);
@@ -267,5 +315,40 @@ public class DirectionActivity extends BaseActivity implements DirectionBaseView
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mGoogleMap = googleMap;
+
+        mGoogleMap.getUiSettings().setAllGesturesEnabled(true);
+        mGoogleMap.getUiSettings().setCompassEnabled(false);
+        mGoogleMap.getUiSettings().setMapToolbarEnabled(false);
+        mGoogleMap.getUiSettings().setMyLocationButtonEnabled(false);
+        mGoogleMap.setMaxZoomPreference(17.0f);
+    }
+
+    private List<LatLng> decodePoly(String encoded) {
+        List<LatLng> poly = new ArrayList<>();
+        int index = 0, len = encoded.length();
+        int lat = 0, lng = 0;
+        while (index < len) {
+            int b, shift = 0, result = 0;
+            do {
+                b = encoded.charAt(index++) - 63;
+                result |= (b & 0x1f) << shift;
+                shift += 5;
+            } while (b >= 0x20);
+            int dlat = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
+            lat += dlat;
+            shift = 0;
+            result = 0;
+            do {
+                b = encoded.charAt(index++) - 63;
+                result |= (b & 0x1f) << shift;
+                shift += 5;
+            } while (b >= 0x20);
+            int dlng = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
+            lng += dlng;
+            LatLng p = new LatLng((((double) lat / 1E5)),
+                    (((double) lng / 1E5)));
+            poly.add(p);
+        }
+        return poly;
     }
 }

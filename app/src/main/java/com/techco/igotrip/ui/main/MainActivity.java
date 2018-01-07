@@ -17,6 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.stfalcon.frescoimageviewer.ImageViewer;
 import com.techco.common.Utils;
 import com.techco.igotrip.R;
 import com.techco.igotrip.data.network.model.object.Continent;
@@ -43,6 +44,7 @@ import com.techco.igotrip.utils.NationComparator;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -102,6 +104,7 @@ public class MainActivity extends BaseActivity implements MainBaseView, SwipeRef
     private boolean isUserLogged = false;
     private ArrayList<Province> provinces = new ArrayList<>();
     private ProvinceMainAdapter provinceMainAdapter;
+    private User mUser;
 
 
     public static Intent getStartIntent(Context context) {
@@ -237,6 +240,13 @@ public class MainActivity extends BaseActivity implements MainBaseView, SwipeRef
         onCountryClick();
     }
 
+    @OnClick(R.id.imgUser)
+    public void onUserClick() {
+        if(mUser != null && !mUser.getImage().isEmpty()) {
+            viewImage(mUser.getImage());
+        }
+    }
+
     @Override
     public void onRefresh() {
         mPresenter.selectNation(nationId, false, false);
@@ -312,6 +322,7 @@ public class MainActivity extends BaseActivity implements MainBaseView, SwipeRef
 
     @Override
     public void onCheckUserStatusSuccess(User user) {
+        mUser = user;
         if (user != null) {
             isUserLogged = true;
             txtUser.setText(user.getFullName());
@@ -339,5 +350,16 @@ public class MainActivity extends BaseActivity implements MainBaseView, SwipeRef
 
     private void closeLeftMenu() {
         drawer.closeDrawer(Gravity.START);
+    }
+
+    private void viewImage(String url) {
+        List<String> items = new ArrayList<>();
+        items.add(url);
+        new ImageViewer.Builder<>(this, items)
+                .setFormatter(item -> item)
+                .setStartPosition(0)
+                .allowZooming(true)
+                .allowSwipeToDismiss(true)
+                .show();
     }
 }

@@ -29,6 +29,7 @@ import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.single.CompositePermissionListener;
 import com.karumi.dexter.listener.single.PermissionListener;
 import com.karumi.dexter.listener.single.SnackbarOnDeniedPermissionListener;
+import com.stfalcon.frescoimageviewer.ImageViewer;
 import com.techco.common.AppLogger;
 import com.techco.common.CommonUtils;
 import com.techco.common.RegularUtil;
@@ -282,7 +283,7 @@ public class InfoActivity extends BaseActivity implements InfoBaseView, Permissi
                     int position = (int) o;
                     if (position == 0) {
                         if (hasView) {
-                            //View image
+                            viewImage(user.getImage());
                         } else {
                             checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE, readExternalStoragePermissionListener);
                         }
@@ -298,8 +299,19 @@ public class InfoActivity extends BaseActivity implements InfoBaseView, Permissi
                 }
             });
         } else {
-            //View image
+            viewImage(user.getImage());
         }
+    }
+
+    private void viewImage(String url) {
+        List<String> items = new ArrayList<>();
+        items.add(url);
+        new ImageViewer.Builder<>(this, items)
+                .setFormatter(item -> item)
+                .setStartPosition(0)
+                .allowZooming(true)
+                .allowSwipeToDismiss(true)
+                .show();
     }
 
     private void selectedGender(boolean isMale) {

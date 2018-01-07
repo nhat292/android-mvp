@@ -134,6 +134,9 @@ dependencies {
     //Custom crashes
     implementation "cat.ereza:customactivityoncrash:$rootProject.customCrashVersion"
 
+    implementation "com.facebook.fresco:fresco:1.2.0"
+    implementation 'com.github.stfalcon:frescoimageviewer:0.5.0'
+
     //Import modules
     implementation project(':common')
 }

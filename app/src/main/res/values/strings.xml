@@ -216,6 +216,7 @@
     <string name="start_format">Start: %s</string>
     <string name="end_format">End: %s</string>
     <string name="message_error_direction">Could not determine directions to this location</string>
+    <string name="step_format">Step %d</string>
 
     <!--Keys-->
     <string name="google_map_key">AIzaSyDGNHKSfoTrZhiH0vnq5WddwUMQadIdr8o</string>

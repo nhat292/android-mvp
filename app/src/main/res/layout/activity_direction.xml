@@ -124,6 +124,6 @@
         android:overScrollMode="ifContentScrolls"
         android:scrollbars="vertical"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-        tools:listitem="@layout/main_province_item" />
+        tools:listitem="@layout/direction_item" />
 
 </RelativeLayout>

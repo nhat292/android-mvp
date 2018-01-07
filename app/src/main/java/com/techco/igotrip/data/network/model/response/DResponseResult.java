@@ -169,6 +169,9 @@ public class DResponseResult {
         @SerializedName("travel_mode")
         @Expose
         private String travelMode;
+        @SerializedName("polyline")
+        @Expose
+        private DOverviewPolyLine polyLine;
 
         public DDistance getDistance() {
             return distance;
@@ -216,6 +219,14 @@ public class DResponseResult {
 
         public void setTravelMode(String travelMode) {
             this.travelMode = travelMode;
+        }
+
+        public DOverviewPolyLine getPolyLine() {
+            return polyLine;
+        }
+
+        public void setPolyLine(DOverviewPolyLine polyLine) {
+            this.polyLine = polyLine;
         }
     }
 
