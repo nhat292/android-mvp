@@ -17,6 +17,7 @@ import com.techco.igotrip.ui.base.BaseActivity;
 import com.techco.igotrip.ui.createtrip.CreateTripActivity;
 import com.techco.igotrip.ui.dialog.DialogCallback;
 import com.techco.igotrip.ui.dialog.app.AppDialog;
+import com.techco.igotrip.ui.journey.JourneyActivity;
 import com.techco.igotrip.ui.viewholder.JourneyViewHolder;
 
 import java.util.ArrayList;
@@ -97,7 +98,7 @@ public class MyTripActivity extends BaseActivity implements MyTripBaseView, Swip
         adapter = new JourneyAdapter(journeys, ((object, position) -> {
             short type = (short) object;
             if (type == JourneyViewHolder.TYPE_ITEM) {
-
+                startActivity(JourneyActivity.getStartIntent(MyTripActivity.this, journeys.get(position)));
             } else {
                 showConfirmDialog(
                         getString(R.string.confirm_title),

@@ -243,6 +243,16 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public Observable<ArticleResponse> loadJourneyArticles(Map<String, String> params) {
+        return mApiHelper.loadJourneyArticles(params);
+    }
+
+    @Override
+    public Observable<SimpleDataResponse> updateIndex(Map<String, String> params) {
+        return mApiHelper.updateIndex(params);
+    }
+
+    @Override
     public void setUserInfo(User user) {
         mPreferencesHelper.setUserInfo(user);
     }

@@ -14,7 +14,6 @@ import com.techco.igotrip.BuildConfig;
 import com.techco.igotrip.R;
 import com.techco.igotrip.data.network.model.object.Article;
 
-import java.text.DecimalFormat;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -50,20 +49,29 @@ public class MapInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
         if (data != null) {
             if (!data.getImage().isEmpty()) {
                 if (data.getImage().startsWith(AppConstants.HTTP_PREFIX)) {
-                    Glide.with(context).load(data.getImage()).into(imgArticle);
+                    Glide.with(context)
+                            .load(data.getImage())
+                            .centerCrop()
+                            .dontAnimate()
+                            .into(imgArticle);
                 } else {
-                    Glide.with(context).load(BuildConfig.BASE_URL + data.getImage()).into(imgArticle);
+                    Glide.with(context)
+                            .load(BuildConfig.BASE_URL + data.getImage())
+                            .centerCrop()
+                            .dontAnimate()
+                            .into(imgArticle);
                 }
             } else {
             }
             txtTitle.setText(data.getTitle());
-            DecimalFormat df = new DecimalFormat("#.#");
             double distance = data.getDistance();
-            String distanceStr = distance + " m";
-            if (distance > 1000) {
-                distanceStr = df.format(distance / 1000) + " km";
+            String distanceStr;
+            if (distance >= 1.0) {
+                distanceStr = String.format("%.2f", distance) + " km";
+            } else {
+                distanceStr = (int) (distance * 1000.0) + " m";
             }
-            txtDistance.setText("Distance: " + distanceStr);
+            txtDistance.setText(String.format(context.getString(R.string.distance_format), distanceStr));
             return contentView;
         }
         return null;

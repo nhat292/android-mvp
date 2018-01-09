@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
@@ -365,7 +366,7 @@ public class PostActivity extends BaseActivity implements PostBaseView, OnMapRea
                                 }
                             });
                 } else {
-                    showAskForGPS();
+                    new Handler().postDelayed(() -> showAskForGPS(), 500);
                 }
             }
         }

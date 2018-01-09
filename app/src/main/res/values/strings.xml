@@ -219,6 +219,6 @@
     <string name="step_format">Step %d</string>
 
     <!--Keys-->
-    <string name="google_map_key">AIzaSyDGNHKSfoTrZhiH0vnq5WddwUMQadIdr8o</string>
+    <string name="google_maps_api_key">AIzaSyAJOvRk0MZNb4K9mixlVJgmhEH7C3_rDNI</string>
 
 </resources>

@@ -1,5 +1,8 @@
 package com.techco.igotrip.data.network.model.object;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -7,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by Nhat on 12/31/17.
  */
 
-public class Journey {
+public class Journey implements Parcelable {
     @SerializedName("id")
     @Expose
     private int id;
@@ -23,6 +26,26 @@ public class Journey {
     @SerializedName("updated_at")
     @Expose
     private String updatedAt;
+
+    protected Journey(Parcel in) {
+        id = in.readInt();
+        name = in.readString();
+        description = in.readString();
+        createdAt = in.readString();
+        updatedAt = in.readString();
+    }
+
+    public static final Creator<Journey> CREATOR = new Creator<Journey>() {
+        @Override
+        public Journey createFromParcel(Parcel in) {
+            return new Journey(in);
+        }
+
+        @Override
+        public Journey[] newArray(int size) {
+            return new Journey[size];
+        }
+    };
 
     public int getId() {
         return id;
@@ -62,5 +85,19 @@ public class Journey {
 
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(id);
+        parcel.writeString(name);
+        parcel.writeString(description);
+        parcel.writeString(createdAt);
+        parcel.writeString(updatedAt);
     }
 }

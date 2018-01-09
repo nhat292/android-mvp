@@ -12,6 +12,7 @@ import com.techco.igotrip.ui.direction.DirectionActivity;
 import com.techco.igotrip.ui.experience.ExperienceActivity;
 import com.techco.igotrip.ui.favorite.FavoriteActivity;
 import com.techco.igotrip.ui.info.InfoActivity;
+import com.techco.igotrip.ui.journey.JourneyActivity;
 import com.techco.igotrip.ui.launch.LaunchActivity;
 import com.techco.igotrip.ui.login.LoginActivity;
 import com.techco.igotrip.ui.main.MainActivity;
@@ -58,5 +59,6 @@ public interface ActivityComponent {
     void inject(ViewArticlesActivity activity);
     void inject(PostActivity activity);
     void inject(DirectionActivity activity);
+    void inject(JourneyActivity activity);
 
 }

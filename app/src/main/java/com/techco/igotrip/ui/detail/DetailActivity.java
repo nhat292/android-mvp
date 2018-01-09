@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -170,8 +171,9 @@ public class DetailActivity extends BaseActivity implements DetailBaseView, OnMa
 
         article = getIntent().getParcelableExtra(EXTRA_ARTICLE);
         txtTitle.setText(article.getTitle());
-        txtAddress.setText("        " + article.getAddressDetail());
+        txtAddress.setText("            " + article.getAddressDetail());
         txtDescription.setText(CommonUtils.fromHtml(article.getDescription()));
+        txtDescription.setMovementMethod(LinkMovementMethod.getInstance());
         txtBadgeCount.setBadgeCount(article.getFavoriteCount());
         txtDate.setText(CommonUtils.getPostDate(article.getUpdatedAt()));
         updateStatus();

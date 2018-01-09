@@ -307,6 +307,7 @@ public class ShowMapActivity extends BaseActivity implements ShowMapBaseView, On
             mLng = result.getGeometry().getLocation().getLng();
             exploreArticle();
         } else {
+            hideLoading();
             showSimpleDialog(getString(R.string.error_title), getString(R.string.message_unknown_error));
         }
     }
@@ -315,22 +316,27 @@ public class ShowMapActivity extends BaseActivity implements ShowMapBaseView, On
     public void onGetArticlesSuccess(List<Article> articles) {
         this.articles.clear();
         this.articles.addAll(articles);
-        clearAllMarkers();
-        LatLngBounds.Builder builder = new LatLngBounds.Builder();
-        for (Article data : articles) {
-            LatLng latLng = new LatLng(data.getLat(), data.getLng());
-            builder.include(latLng);
-            Marker marker = mGoogleMap.addMarker(new MarkerOptions()
-                    .position(latLng)
-                    .title(data.getTitle())
-                    .snippet(data.getDescription())
-                    .icon(BitmapDescriptorFactory.fromBitmap(Utils.createBitmapWithSize(this, getIcon(), 55, 60))));
-            markers.add(marker);
-            markerMap.put(marker, data);
+        if (this.articles.size() == 0) {
+            showMessage(R.string.no_data_found);
         }
-        int padding = 30;
-        mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), padding));
-        mGoogleMap.setInfoWindowAdapter(new MapInfoWindowAdapter(this, markerMap));
+        clearAllMarkers();
+        if (this.articles.size() > 0) {
+            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+            for (Article data : this.articles) {
+                LatLng latLng = new LatLng(data.getLat(), data.getLng());
+                builder.include(latLng);
+                Marker marker = mGoogleMap.addMarker(new MarkerOptions()
+                        .position(latLng)
+                        .title(data.getTitle())
+                        .snippet(data.getDescription())
+                        .icon(BitmapDescriptorFactory.fromBitmap(Utils.createBitmapWithSize(this, getIcon(), 55, 60))));
+                markers.add(marker);
+                markerMap.put(marker, data);
+            }
+            int padding = 30;
+            mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), padding));
+            mGoogleMap.setInfoWindowAdapter(new MapInfoWindowAdapter(this, markerMap));
+        }
     }
 
     @Override

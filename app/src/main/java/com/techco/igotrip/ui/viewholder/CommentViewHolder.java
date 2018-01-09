@@ -53,6 +53,7 @@ public class CommentViewHolder extends BaseViewHolder {
                 .load(comment.getUserImage())
                 .placeholder(R.drawable.bg_avatar)
                 .error(R.drawable.bg_avatar)
+                .centerCrop()
                 .into(imgAvatar);
         if (comment.getEdited() == Comment.EDITED) {
             String content = comment.getContent() + " <font color=\"#f44336\">(Edited)</font>";

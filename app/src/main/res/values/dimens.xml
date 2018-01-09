@@ -59,6 +59,7 @@
     <!--Login-->
     <dimen name="img_close_size">45dp</dimen>
     <dimen name="btn_login_social_height">35dp</dimen>
+    <dimen name="login_margin_top">50dp</dimen>
 
     <!--Register-->
     <dimen name="segment_gender_width">130dp</dimen>
@@ -93,5 +94,8 @@
     <!--Add pictures-->
     <dimen name="layout_button_height">55dp</dimen>
     <dimen name="item_spacing">3dp</dimen>
+
+    <!--Journey-->
+    <dimen name="item_black_dim_height">45dp</dimen>
 
 </resources>

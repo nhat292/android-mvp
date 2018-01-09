@@ -46,7 +46,7 @@ public class ShowMapPresenter<V extends ShowMapBaseView> extends BasePresenter<V
                 .getExploreData().subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(response -> {
-                    getMvpView().hideLoading();
+                    //getMvpView().hideLoading();
                     getMvpView().onGetExploreDataSuccess(response);
                 }, throwable -> {
                     if (!isViewAttached()) {
@@ -69,7 +69,7 @@ public class ShowMapPresenter<V extends ShowMapBaseView> extends BasePresenter<V
                 .selectType(typeId).subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(response -> {
-                    getMvpView().hideLoading();
+                    //getMvpView().hideLoading();
                     getMvpView().onSelectTypeSuccess(response);
                 }, throwable -> {
                     if (!isViewAttached()) {
@@ -103,7 +103,7 @@ public class ShowMapPresenter<V extends ShowMapBaseView> extends BasePresenter<V
                 .searchPlaces(url).subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(response -> {
-                    getMvpView().hideLoading();
+                    //getMvpView().hideLoading();
                     getMvpView().onSearchPlacesSuccess(response);
                 }, throwable -> {
                     if (!isViewAttached()) {

@@ -9,6 +9,7 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
@@ -423,9 +424,11 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
                                 }
                             });
                 } else {
-                    hideLoading();
-                    btnReload.setVisibility(View.VISIBLE);
-                    showAskForGPS();
+                    new Handler().postDelayed(() -> {
+                        hideLoading();
+                        btnReload.setVisibility(View.VISIBLE);
+                        showAskForGPS();
+                    }, 500);
                 }
             }
         }

@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
@@ -261,7 +262,9 @@ public class DirectionActivity extends BaseActivity implements DirectionBaseView
                                 }
                             });
                 } else {
-                    showAskForGPS();
+                    new Handler().postDelayed(() -> {
+                        showAskForGPS();
+                    }, 500);
                 }
             }
         }

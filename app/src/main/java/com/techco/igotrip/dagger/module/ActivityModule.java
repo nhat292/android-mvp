@@ -34,6 +34,9 @@ import com.techco.igotrip.ui.favorite.FavoritePresenter;
 import com.techco.igotrip.ui.info.InfoBaseView;
 import com.techco.igotrip.ui.info.InfoMvpPresenter;
 import com.techco.igotrip.ui.info.InfoPresenter;
+import com.techco.igotrip.ui.journey.JourneyBaseView;
+import com.techco.igotrip.ui.journey.JourneyMvpPresenter;
+import com.techco.igotrip.ui.journey.JourneyPresenter;
 import com.techco.igotrip.ui.launch.LaunchBaseView;
 import com.techco.igotrip.ui.launch.LaunchMvpPresenter;
 import com.techco.igotrip.ui.launch.LaunchPresenter;
@@ -249,6 +252,13 @@ public class ActivityModule {
     @PerActivity
     DirectionMvpPresenter<DirectionBaseView> provideDirectionPresenter(
             DirectionPresenter<DirectionBaseView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    JourneyMvpPresenter<JourneyBaseView> provideJourneyPresenter(
+            JourneyPresenter<JourneyBaseView> presenter) {
         return presenter;
     }
 

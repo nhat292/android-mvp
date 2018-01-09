@@ -49,7 +49,7 @@ public class YouAreHerePresenter<V extends YouAreHereBaseView> extends BasePrese
                 .getExploreData().subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(response -> {
-                    getMvpView().hideLoading();
+                   // getMvpView().hideLoading();
                     getMvpView().onGetExploreDataSuccess(response);
                 }, throwable -> {
                     if (!isViewAttached()) {
@@ -78,7 +78,7 @@ public class YouAreHerePresenter<V extends YouAreHereBaseView> extends BasePrese
                 .selectType(typeId).subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(response -> {
-                    getMvpView().hideLoading();
+                    //getMvpView().hideLoading();
                     getMvpView().onSelectTypeSuccess(response);
                 }, throwable -> {
                     if (!isViewAttached()) {

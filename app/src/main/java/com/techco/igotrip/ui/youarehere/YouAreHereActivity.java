@@ -2,7 +2,6 @@
 package com.techco.igotrip.ui.youarehere;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -31,6 +30,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
@@ -291,7 +291,7 @@ public class YouAreHereActivity extends BaseActivity implements YouAreHereBaseVi
 
     @OnClick(R.id.imgUser)
     public void onUserClick() {
-        if(mUser != null && !mUser.getImage().isEmpty()) {
+        if (mUser != null && !mUser.getImage().isEmpty()) {
             viewImage(mUser.getImage());
         }
     }
@@ -366,22 +366,27 @@ public class YouAreHereActivity extends BaseActivity implements YouAreHereBaseVi
     public void onExploreArticleSuccess(List<Article> articles) {
         this.articles.clear();
         this.articles.addAll(articles);
-        clearAllMarkers();
-        LatLngBounds.Builder builder = new LatLngBounds.Builder();
-        for (Article data : articles) {
-            LatLng latLng = new LatLng(data.getLat(), data.getLng());
-            builder.include(latLng);
-            Marker marker = mGoogleMap.addMarker(new MarkerOptions()
-                    .position(latLng)
-                    .title(data.getTitle())
-                    .snippet(data.getDescription())
-                    .icon(BitmapDescriptorFactory.fromBitmap(Utils.createBitmapWithSize(this, getIcon(), 55, 60))));
-            markers.add(marker);
-            markerMap.put(marker, data);
+        if (this.articles.size() == 0) {
+            showMessage(R.string.no_data_found);
         }
-        int padding = 30;
-        mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), padding));
-        mGoogleMap.setInfoWindowAdapter(new MapInfoWindowAdapter(this, markerMap));
+        clearAllMarkers();
+        if (this.articles.size() > 0) {
+            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+            for (Article data : this.articles) {
+                LatLng latLng = new LatLng(data.getLat(), data.getLng());
+                builder.include(latLng);
+                Marker marker = mGoogleMap.addMarker(new MarkerOptions()
+                        .position(latLng)
+                        .title(data.getTitle())
+                        .snippet(data.getDescription())
+                        .icon(BitmapDescriptorFactory.fromBitmap(Utils.createBitmapWithSize(this, getIcon(), 55, 60))));
+                markers.add(marker);
+                markerMap.put(marker, data);
+            }
+            int padding = 30;
+            mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), padding));
+            mGoogleMap.setInfoWindowAdapter(new MapInfoWindowAdapter(this, markerMap));
+        }
     }
 
     private boolean isUserLogged() {
@@ -396,7 +401,6 @@ public class YouAreHereActivity extends BaseActivity implements YouAreHereBaseVi
         drawer.closeDrawer(Gravity.START);
     }
 
-    @SuppressLint("MissingPermission")
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mGoogleMap = googleMap;
@@ -407,7 +411,6 @@ public class YouAreHereActivity extends BaseActivity implements YouAreHereBaseVi
         mGoogleMap.getUiSettings().setMapToolbarEnabled(false);
         mGoogleMap.setOnInfoWindowClickListener(this);
         mGoogleMap.getUiSettings().setMyLocationButtonEnabled(false);
-        mGoogleMap.setMyLocationEnabled(false);
         mGoogleMap.setOnMarkerClickListener(this);
         mGoogleMap.setMaxZoomPreference(17.0f);
     }
@@ -454,16 +457,21 @@ public class YouAreHereActivity extends BaseActivity implements YouAreHereBaseVi
             if (ContextCompat.checkSelfPermission(this,
                     Manifest.permission.ACCESS_FINE_LOCATION)
                     == PackageManager.PERMISSION_GRANTED) {
+                mGoogleMap.setMyLocationEnabled(true);
                 if (manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
                     mFusedLocationClient.getLastLocation()
                             .addOnSuccessListener(this, location -> {
                                 if (location != null) {
                                     this.mLocation = location;
+                                    zoomToLocation(mLocation.getLatitude(), mLocation.getLongitude());
                                     exploreArticle();
                                 }
                             });
                 } else {
-                    showAskForGPS();
+                    new Handler().postDelayed(() -> {
+                        hideLoading();
+                        showAskForGPS();
+                    }, 500);
                 }
             }
         }
@@ -576,5 +584,16 @@ public class YouAreHereActivity extends BaseActivity implements YouAreHereBaseVi
                 .allowZooming(true)
                 .allowSwipeToDismiss(true)
                 .show();
+    }
+
+    private void zoomToLocation(double lat, double lng) {
+        LatLng latLng = new LatLng(lat, lng);
+        CameraPosition cameraPosition =
+                new CameraPosition.Builder().target(latLng)
+                        .zoom(10.0f)
+                        .bearing(0)
+                        .tilt(25)
+                        .build();
+        mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
     }
 }

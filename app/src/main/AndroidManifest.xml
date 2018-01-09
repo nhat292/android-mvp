@@ -31,7 +31,7 @@
         <!--GOOGLE MAPS-->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_map_key" />
+            android:value="@string/google_maps_api_key" />
 
         <activity
             android:name="com.facebook.FacebookActivity"
@@ -169,6 +169,11 @@
 
         <activity
             android:name="com.techco.igotrip.ui.direction.DirectionActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.techco.igotrip.ui.journey.JourneyActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 
