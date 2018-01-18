@@ -1,11 +1,11 @@
 <resources xmlns:android="http://schemas.android.com/tools">
 
     <!--Facebook Login-->
-    <string name="facebook_app_id">497778373927201</string>
-    <string name="fb_login_protocol_scheme">fb497778373927201</string>
+    <string name="facebook_app_id">729057740617416</string>
+    <string name="fb_login_protocol_scheme">fb729057740617416</string>
     <!--Twitter Login-->
-    <string name="twitter_consumer_key">hUzSjhnKc4NslYutnrOQH78tD</string>
-    <string name="twitter_consumer_secret_key">1V33UUxeWMYJdCIYswOqLSFgUt4DuS9WrIVWNNjApk9pNthsva</string>
+    <string name="twitter_consumer_key">vB92b5Y9G7TXMbJieJ2gxhUpN</string>
+    <string name="twitter_consumer_secret_key">I1iapguZX0yH45BZJviYdym4flXie7MTevezlSj3JmasIBXMd6</string>
 
 
     <string name="navigation_drawer_open">Open navigation drawer</string>

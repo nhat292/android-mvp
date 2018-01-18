@@ -250,6 +250,7 @@
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground"
                 android:orientation="vertical"
+                android:layout_marginBottom="@dimen/margin_padding_large"
                 android:padding="@dimen/margin_padding_very_small">
 
                 <TextView
@@ -273,7 +274,7 @@
             <Button
                 android:id="@+id/btnUpdate"
                 style="@style/Button.Primary"
-                android:layout_marginTop="@dimen/margin_padding_very_large"
+                android:layout_marginBottom="@dimen/margin_padding_normal"
                 android:text="@string/update_text"
                 android:textSize="@dimen/text_size_large"
                 android:visibility="gone" />
@@ -282,7 +283,6 @@
                 android:id="@+id/btnChangePassword"
                 style="@style/Button.Primary"
                 android:layout_marginBottom="@dimen/margin_padding_normal"
-                android:layout_marginTop="@dimen/margin_padding_normal"
                 android:text="@string/change_password_text"
                 android:textSize="@dimen/text_size_large" />
 

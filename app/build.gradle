@@ -131,6 +131,9 @@ dependencies {
 
     implementation "com.google.android.gms:play-services-places:$googleServiceVersion"
 
+    implementation "com.google.firebase:firebase-core:$firebaseVersion"
+    implementation "com.google.firebase:firebase-messaging:$firebaseVersion"
+
     //Custom crashes
     implementation "cat.ereza:customactivityoncrash:$rootProject.customCrashVersion"
 

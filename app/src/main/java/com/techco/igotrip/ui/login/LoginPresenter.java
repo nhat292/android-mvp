@@ -12,6 +12,7 @@ import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.techco.common.AppLogger;
 import com.techco.igotrip.App;
 import com.techco.igotrip.R;
@@ -92,7 +93,7 @@ public class LoginPresenter<V extends LoginBaseView> extends BasePresenter<V>
         params.put("user_name", username);
         params.put("password", password);
         params.put("device_type", "android");
-        params.put("device_id", "");
+        params.put("device_id", FirebaseInstanceId.getInstance().getToken());
         getCompositeDisposable().add(getDataManager()
                 .login(params)
                 .subscribeOn(getSchedulerProvider().io())

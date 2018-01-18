@@ -7,7 +7,9 @@ import android.util.Log;
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.interceptors.HttpLoggingInterceptor.Level;
 import com.crashlytics.android.Crashlytics;
+import com.facebook.FacebookSdk;
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.google.firebase.FirebaseApp;
 import com.techco.common.AppLogger;
 import com.techco.igotrip.dagger.component.ApplicationComponent;
 import com.techco.igotrip.dagger.component.DaggerApplicationComponent;
@@ -35,9 +37,6 @@ public class App extends Application {
     @Inject
     DataManager mDataManager;
 
-    /*@Inject
-    CalligraphyConfig mCalligraphyConfig;*/
-
     private ApplicationComponent mApplicationComponent;
 
     private static App instance;
@@ -47,6 +46,8 @@ public class App extends Application {
         super.onCreate();
         instance = this;
         Fabric.with(this, new Crashlytics());
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        FirebaseApp.initializeApp(getApplicationContext());
         TwitterConfig config = new TwitterConfig.Builder(this)
                 .logger(new DefaultLogger(Log.DEBUG))
                 .twitterAuthConfig(new TwitterAuthConfig(getString(R.string.twitter_consumer_key),
@@ -63,7 +64,6 @@ public class App extends Application {
         if (BuildConfig.DEBUG) {
             AndroidNetworking.enableLogging(Level.BODY);
         }
-        //CalligraphyConfig.initDefault(mCalligraphyConfig);
         CaocConfig.Builder.create()
                 .backgroundMode(CaocConfig.BACKGROUND_MODE_SILENT) //default: CaocConfig.BACKGROUND_MODE_SHOW_CUSTOM
                 .trackActivities(true) //default: false

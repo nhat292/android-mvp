@@ -93,13 +93,4 @@ public class ApplicationModule {
                 preferencesHelper.getUserInfo() != null ? (long) preferencesHelper.getUserInfo().getId() : 0,
                 preferencesHelper.getUserInfo() != null ? preferencesHelper.getUserInfo().getToken() : "");
     }
-
-    /*@Provides
-    @Singleton
-    CalligraphyConfig provideCalligraphyDefaultConfig() {
-        return new CalligraphyConfig.Builder()
-                .setDefaultFontPath("fonts/source-sans-pro/SourceSansPro-Regular.ttf")
-                .setFontAttrId(R.attr.fontPath)
-                .build();
-    }*/
 }

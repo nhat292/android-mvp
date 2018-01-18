@@ -161,23 +161,43 @@ public class ExperienceActivity extends BaseActivity implements ExperienceBaseVi
                 pagerArticle.setCurrentItem(0);
                 pagerArticle.setOffscreenPageLimit(0);
 
-                pagerArticle.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-                    @Override
-                    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                        AppLogger.d(getClass().getSimpleName(), "onPageScrolled");
-                        txtArticleTitle.setText(articles.get(position).getTitle());
-                    }
+                if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+                    pagerArticle.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                        @Override
+                        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                            AppLogger.d(getClass().getSimpleName(), "onPageScrolled");
+                            txtArticleTitle.setText(articles.get(position).getTitle());
+                        }
 
-                    @Override
-                    public void onPageSelected(int position) {
-                        AppLogger.d(getClass().getSimpleName(), "onPageSelected");
-                    }
+                        @Override
+                        public void onPageSelected(int position) {
+                            AppLogger.d(getClass().getSimpleName(), "onPageSelected");
+                        }
 
-                    @Override
-                    public void onPageScrollStateChanged(int state) {
-                        AppLogger.d(getClass().getSimpleName(), "onPageScrollStateChanged");
-                    }
-                });
+                        @Override
+                        public void onPageScrollStateChanged(int state) {
+                            AppLogger.d(getClass().getSimpleName(), "onPageScrollStateChanged");
+                        }
+                    });
+                } else {
+                    pagerArticle.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                        @Override
+                        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                            AppLogger.d(getClass().getSimpleName(), "onPageScrolled");
+                            txtArticleTitle.setText(articles.get(position).getTitle());
+                        }
+
+                        @Override
+                        public void onPageSelected(int position) {
+                            AppLogger.d(getClass().getSimpleName(), "onPageSelected");
+                        }
+
+                        @Override
+                        public void onPageScrollStateChanged(int state) {
+                            AppLogger.d(getClass().getSimpleName(), "onPageScrollStateChanged");
+                        }
+                    });
+                }
             }
         });
 

@@ -65,4 +65,5 @@ ext {
 
     facebookSDKShareVersion = '[4,5)'
     googleMapVersion = '11.0.2'
+    firebaseVersion = '11.0.2'
 }

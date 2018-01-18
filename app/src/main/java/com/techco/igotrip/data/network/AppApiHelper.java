@@ -185,7 +185,7 @@ public class AppApiHelper implements ApiHelper {
     public Observable<ArticleResponse> exploreArticle(Map<String, String> params) {
         return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_EXPLORE_ARTICLE)
                 .addHeaders(mApiHeader.getProtectedApiHeader())
-                .addBodyParameter(params)
+                .addUrlEncodeFormBodyParameter(params)
                 .build()
                 .getObjectObservable(ArticleResponse.class);
     }

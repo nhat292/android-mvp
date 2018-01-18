@@ -205,28 +205,54 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
                 pagerArticle.addOnPageChangeListener(carouselPagerAdapter);
                 pagerArticle.setCurrentItem(0);
                 pagerArticle.setOffscreenPageLimit(0);
-                pagerArticle.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-                    @Override
-                    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                        AppLogger.d(getClass().getSimpleName(), "onPageScrolled");
-                        txtArticleTitle.setText(articles.get(position).getTitle());
-                        if (position == articles.size() - 1 && enableLazyLoad) {
-                            enableLazyLoad = false;
-                            resultOfLazyLoad = true;
-                            exploreArticle();
+
+                if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+                    pagerArticle.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                        @Override
+                        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                            AppLogger.d(getClass().getSimpleName(), "onPageScrolled");
+                            txtArticleTitle.setText(articles.get(position).getTitle());
+                            if (position == articles.size() - 1 && enableLazyLoad) {
+                                enableLazyLoad = false;
+                                resultOfLazyLoad = true;
+                                exploreArticle();
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onPageSelected(int position) {
-                        AppLogger.d(getClass().getSimpleName(), "onPageSelected");
-                    }
+                        @Override
+                        public void onPageSelected(int position) {
+                            AppLogger.d(getClass().getSimpleName(), "onPageSelected");
+                        }
 
-                    @Override
-                    public void onPageScrollStateChanged(int state) {
-                        AppLogger.d(getClass().getSimpleName(), "onPageScrollStateChanged");
-                    }
-                });
+                        @Override
+                        public void onPageScrollStateChanged(int state) {
+                            AppLogger.d(getClass().getSimpleName(), "onPageScrollStateChanged");
+                        }
+                    });
+                } else {
+                    pagerArticle.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                        @Override
+                        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                            AppLogger.d(getClass().getSimpleName(), "onPageScrolled");
+                            txtArticleTitle.setText(articles.get(position).getTitle());
+                            if (position == articles.size() - 1 && enableLazyLoad) {
+                                enableLazyLoad = false;
+                                resultOfLazyLoad = true;
+                                exploreArticle();
+                            }
+                        }
+
+                        @Override
+                        public void onPageSelected(int position) {
+                            AppLogger.d(getClass().getSimpleName(), "onPageSelected");
+                        }
+
+                        @Override
+                        public void onPageScrollStateChanged(int state) {
+                            AppLogger.d(getClass().getSimpleName(), "onPageScrollStateChanged");
+                        }
+                    });
+                }
             }
         });
 
@@ -361,7 +387,7 @@ public class ProvinceDetailActivity extends BaseActivity implements ProvinceDeta
                 if (position == 0) {
                     startActivityForResult(CreateTripActivity.getStartIntent(ProvinceDetailActivity.this, articles.get(position).getId()), REQUEST_ADD_TRIP);
                 } else {
-                    mPresenter.actionTrip(articles.get(position).getId(), journeys.get(position - 1).getId(), true);
+                    mPresenter.actionTrip(articles.get(ProvinceDetailActivity.this.position).getId(), journeys.get(position - 1).getId(), true);
                 }
             }
         });

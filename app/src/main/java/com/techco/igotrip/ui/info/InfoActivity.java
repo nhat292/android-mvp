@@ -109,6 +109,8 @@ public class InfoActivity extends BaseActivity implements InfoBaseView, Permissi
     TextView txtAccountType;
     @BindView(R.id.btnUpdate)
     Button btnUpdate;
+    @BindView(R.id.btnChangePassword)
+    Button btnChangePassword;
 
     private User user;
     private PermissionListener cameraPermissionListener, readExternalStoragePermissionListener;
@@ -158,6 +160,11 @@ public class InfoActivity extends BaseActivity implements InfoBaseView, Permissi
         txtBirthday.setText(this.user.getBirthday().isEmpty() ? getString(R.string.add_your_birthday) : this.user.getBirthday());
         txtAddress.setText(this.user.getAddress().isEmpty() ? getString(R.string.add_your_address) : this.user.getAddress());
         txtAccountType.setText(this.user.getAccountType() == User.FACEBOOK ? "FACEBOOK" : this.user.getAccountType() == User.TWITTER ? "TWITTER" : "APP");
+        if(this.user.getAccountType() == User.NORMAL) {
+            btnChangePassword.setVisibility(View.VISIBLE);
+        } else {
+            btnChangePassword.setVisibility(View.GONE);
+        }
         if (this.user.getGender() == User.MALE) {
             selectedGender(true);
         } else {

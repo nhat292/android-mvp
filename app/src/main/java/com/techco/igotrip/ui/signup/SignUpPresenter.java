@@ -2,6 +2,7 @@
 package com.techco.igotrip.ui.signup;
 
 import com.androidnetworking.error.ANError;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.techco.common.RegularUtil;
 import com.techco.igotrip.App;
 import com.techco.igotrip.R;
@@ -71,7 +72,7 @@ public class SignUpPresenter<V extends SignUpBaseView> extends BasePresenter<V>
         params.put("password", password);
         params.put("gender", String.valueOf(gender));
         params.put("device_type", "android");
-        params.put("device_id", "");
+        params.put("device_id", FirebaseInstanceId.getInstance().getToken());
         getCompositeDisposable().add(getDataManager()
                 .signUp(params)
                 .subscribeOn(getSchedulerProvider().io())
