@@ -486,6 +486,15 @@ public class AppApiHelper implements ApiHelper {
                 .getObjectObservable(SimpleDataResponse.class);
     }
 
+    @Override
+    public Observable<SimpleDataResponse> updateArticle(Map<String, String> params) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_UPDATE_ARTICLE)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .addUrlEncodeFormBodyParameter(params)
+                .build()
+                .getObjectObservable(SimpleDataResponse.class);
+    }
+
 
     @Override
     public Observable<DResponseResult> searchDirection(String url) {

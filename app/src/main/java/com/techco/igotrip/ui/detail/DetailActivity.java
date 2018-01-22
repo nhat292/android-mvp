@@ -46,6 +46,7 @@ import com.techco.igotrip.ui.dialog.DialogCallback;
 import com.techco.igotrip.ui.dialog.simplelist.SimpleListDialog;
 import com.techco.igotrip.ui.direction.DirectionActivity;
 import com.techco.igotrip.ui.login.LoginActivity;
+import com.techco.igotrip.ui.post.PostActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -270,7 +271,10 @@ public class DetailActivity extends BaseActivity implements DetailBaseView, OnMa
 
     @OnClick(R.id.btnEdit)
     public void onEditClick() {
-
+        Intent intent = new Intent(this, PostActivity.class);
+        intent.putExtra("ARTICLE", article);
+        startActivity(intent);
+        finish();
     }
 
     @OnClick(R.id.imgDirection)

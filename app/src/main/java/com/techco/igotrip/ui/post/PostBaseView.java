@@ -19,4 +19,5 @@ public interface PostBaseView extends BaseView {
     void onGetTypesSuccess(List<Type> types);
     void onSelectTypeSuccess(List<SubType> subTypes);
     void onPostArticleSuccess();
+    void onUpdateArticleSuccess();
 }

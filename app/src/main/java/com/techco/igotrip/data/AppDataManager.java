@@ -238,6 +238,11 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public Observable<SimpleDataResponse> updateArticle(Map<String, String> params) {
+        return mApiHelper.updateArticle(params);
+    }
+
+    @Override
     public Observable<DResponseResult> searchDirection(String url) {
         return mApiHelper.searchDirection(url);
     }

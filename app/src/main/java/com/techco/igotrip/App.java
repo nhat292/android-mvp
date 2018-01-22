@@ -8,7 +8,6 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.interceptors.HttpLoggingInterceptor.Level;
 import com.crashlytics.android.Crashlytics;
 import com.facebook.FacebookSdk;
-import com.facebook.drawee.backends.pipeline.Fresco;
 import com.google.firebase.FirebaseApp;
 import com.techco.common.AppLogger;
 import com.techco.igotrip.dagger.component.ApplicationComponent;
@@ -55,7 +54,6 @@ public class App extends Application {
                 .debug(true)
                 .build();
         Twitter.initialize(config);
-        Fresco.initialize(this);
         mApplicationComponent = DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this)).build();
         mApplicationComponent.inject(this);

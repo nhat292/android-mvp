@@ -23,4 +23,5 @@ public interface PostMvpPresenter<V extends PostBaseView> extends MvpPresenter<V
     void getTypes();
     void selectType(int typeId);
     void postArticle(LatLng latLng, String address, String title, String description, Type type, SubType subType, List<Bitmap> bitmaps);
+    void updateArticle(int articleId, LatLng latLng, String address, String title, String description, Type type, SubType subType, List<Bitmap> bitmaps);
 }

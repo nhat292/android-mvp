@@ -102,6 +102,8 @@ public interface ApiHelper {
 
     Observable<SimpleDataResponse> postArticle(Map<String, String> params);
 
+    Observable<SimpleDataResponse> updateArticle(Map<String, String> params);
+
     Observable<DResponseResult> searchDirection(String url);
 
     Observable<ArticleResponse> loadJourneyArticles(Map<String, String> params);

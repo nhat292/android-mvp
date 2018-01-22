@@ -113,6 +113,9 @@ public final class ApiEndPoint {
     public static String ENDPOINT_POST_ARTICLE = BASE_URL
             + "api/v1/post-article";
 
+    public static String ENDPOINT_UPDATE_ARTICLE = BASE_URL
+            + "api/v1/update-article";
+
     public static String ENDPOINT_JOURNEY_ARTICLES = BASE_URL
             + "api/v1/get-journey-articles";
 
@@ -154,6 +157,7 @@ public final class ApiEndPoint {
         ENDPOINT_GET_ARTICLES_NEARBY = BASE_URL + "api/v1/articles-nearby";
         ENDPOINT_GET_TYPES = BASE_URL + "api/v1/get-type";
         ENDPOINT_POST_ARTICLE = BASE_URL + "api/v1/post-article";
+        ENDPOINT_UPDATE_ARTICLE = BASE_URL + "api/v1/update-article";
         ENDPOINT_JOURNEY_ARTICLES = BASE_URL + "api/v1/get-journey-articles";
         ENDPOINT_UPDATE_INDEX = BASE_URL + "api/v1/update-index";
     }

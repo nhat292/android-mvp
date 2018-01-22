@@ -177,6 +177,8 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />
 
+        <activity android:name=".ui.viewimage.ViewImageActivity"/>
+
         <activity
             android:name="com.techco.igotrip.ui.addpictures.AddPicturesActivity"
             android:launchMode="singleTop"

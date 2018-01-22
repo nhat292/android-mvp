@@ -166,4 +166,51 @@ public class PostPresenter<V extends PostBaseView> extends BasePresenter<V>
                 }));
 
     }
+
+    @Override
+    public void updateArticle(int articleId, LatLng latLng, String address, String title, String description, Type type, SubType subType, List<Bitmap> bitmaps) {
+        if (title.isEmpty()) {
+            getMvpView().showSimpleDialog(App.getInstance().getString(R.string.error_title), App.getInstance().getString(R.string.message_enter_title));
+            return;
+        }
+        getMvpView().showLoading();
+        Map<String, String> params = new HashMap<>();
+        params.put("action", "");
+        params.put("id", String.valueOf(articleId));
+        params.put("user_id", String.valueOf(getDataManager().getUserInfo().getId()));
+        params.put("lat", String.valueOf(latLng.latitude));
+        params.put("lng", String.valueOf(latLng.longitude));
+        if(type != null) {
+            params.put("type_id", String.valueOf(type.getId()));
+            params.put("house_type_id", String.valueOf(subType.getId()));
+        }
+        params.put("nation_id", "0");
+        params.put("province_id", "0");
+        params.put("address_detail", address);
+        params.put("title", title);
+        params.put("description", description);
+        String imgStr = "";
+        for (Bitmap b : bitmaps) {
+            String img64 = Utils.getEncoded64ImageStringFromBitmap(b);
+            imgStr += img64 + "imagepost";
+        }
+        params.put("images", imgStr);
+        getCompositeDisposable().add(getDataManager()
+                .updateArticle(params).subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(response -> {
+                    getMvpView().hideLoading();
+                    getMvpView().onUpdateArticleSuccess();
+                }, throwable -> {
+                    if (!isViewAttached()) {
+                        return;
+                    }
+                    getMvpView().hideLoading();
+                    // handle the error here
+                    if (throwable instanceof ANError) {
+                        ANError anError = (ANError) throwable;
+                        handleApiError(anError);
+                    }
+                }));
+    }
 }

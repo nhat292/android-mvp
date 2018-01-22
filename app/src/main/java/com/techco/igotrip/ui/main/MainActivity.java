@@ -17,7 +17,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.stfalcon.frescoimageviewer.ImageViewer;
 import com.techco.common.Utils;
 import com.techco.igotrip.R;
 import com.techco.igotrip.data.network.model.object.Continent;
@@ -40,11 +39,11 @@ import com.techco.igotrip.ui.mytrip.MyTripActivity;
 import com.techco.igotrip.ui.provincedetail.ProvinceDetailActivity;
 import com.techco.igotrip.ui.showmap.ShowMapActivity;
 import com.techco.igotrip.ui.viewholder.ProvinceMainViewHolder;
+import com.techco.igotrip.ui.viewimage.ViewImageActivity;
 import com.techco.igotrip.utils.NationComparator;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -242,7 +241,7 @@ public class MainActivity extends BaseActivity implements MainBaseView, SwipeRef
 
     @OnClick(R.id.imgUser)
     public void onUserClick() {
-        if(mUser != null && !mUser.getImage().isEmpty()) {
+        if (mUser != null && !mUser.getImage().isEmpty()) {
             viewImage(mUser.getImage());
         }
     }
@@ -353,13 +352,11 @@ public class MainActivity extends BaseActivity implements MainBaseView, SwipeRef
     }
 
     private void viewImage(String url) {
-        List<String> items = new ArrayList<>();
+        ArrayList<String> items = new ArrayList<>();
         items.add(url);
-        new ImageViewer.Builder<>(this, items)
-                .setFormatter(item -> item)
-                .setStartPosition(0)
-                .allowZooming(true)
-                .allowSwipeToDismiss(true)
-                .show();
+        Intent intent = new Intent(this, ViewImageActivity.class);
+        intent.putStringArrayListExtra("IMAGES", items);
+        intent.putExtra("POSITION", 0);
+        startActivity(intent);
     }
 }

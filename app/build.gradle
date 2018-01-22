@@ -1,3 +1,6 @@
+apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+
 buildscript {
     repositories {
         maven { url 'https://maven.google.com' }
@@ -8,14 +11,7 @@ buildscript {
         classpath 'io.fabric.tools:gradle:1.+'
     }
 }
-apply plugin: 'com.android.application'
-apply plugin: 'io.fabric'
 
-repositories {
-    maven { url 'https://maven.fabric.io/public' }
-}
-
-apply plugin: 'org.greenrobot.greendao'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -51,13 +47,12 @@ android {
     }
 }
 
-greendao {
-    schemaVersion 1
-}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:multidex:1.0.0'
+
+    //Import modules
+    implementation project(':common')
 
     // android support libraries
     implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
@@ -78,9 +73,6 @@ dependencies {
 
     // parser
     implementation "com.google.code.gson:gson:$rootProject.gsonVersion"
-
-    // database
-    implementation "org.greenrobot:greendao:$rootProject.greenDaoVersion"
 
     // debug database
     debugImplementation "com.amitshekhar.android:debug-db:$rootProject.debugDBVersion"
@@ -136,12 +128,6 @@ dependencies {
 
     //Custom crashes
     implementation "cat.ereza:customactivityoncrash:$rootProject.customCrashVersion"
-
-    implementation "com.facebook.fresco:fresco:1.2.0"
-    implementation 'com.github.stfalcon:frescoimageviewer:0.5.0'
-
-    //Import modules
-    implementation project(':common')
 }
 apply plugin: 'com.google.gms.google-services'
 

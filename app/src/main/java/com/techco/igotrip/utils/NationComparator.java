@@ -13,6 +13,6 @@ public class NationComparator implements Comparator<Nation> {
 
     @Override
     public int compare(Nation n1, Nation n2) {
-        return n1.getSequence() < n2.getSequence() ? 1 : n1.getSequence() < n2.getSequence() ? -1 : 0;
+        return n1.getSequence() < n2.getSequence() ? -1 : n1.getSequence() > n2.getSequence() ? 1 : 0;
     }
 }

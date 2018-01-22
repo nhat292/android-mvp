@@ -47,7 +47,11 @@ public class FirstDataResponse {
     }
 
     public static class FirstData {
+        @SerializedName("continents")
+        @Expose
         private List<Continent> continents;
+        @SerializedName("nations")
+        @Expose
         private List<Nation> nations;
 
         public List<Continent> getContinents() {

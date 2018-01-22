@@ -42,6 +42,7 @@ import com.karumi.dexter.listener.single.SnackbarOnDeniedPermissionListener;
 import com.techco.common.AppLogger;
 import com.techco.common.Utils;
 import com.techco.igotrip.R;
+import com.techco.igotrip.data.network.model.object.Article;
 import com.techco.igotrip.data.network.model.object.SubType;
 import com.techco.igotrip.data.network.model.object.Type;
 import com.techco.igotrip.data.network.model.response.PlacesResponse;
@@ -110,10 +111,18 @@ public class PostActivity extends BaseActivity implements PostBaseView, OnMapRea
     private SubType subType;
     private String address;
 
+    //Update
+    private Article mArticle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
+
+        Intent intent = getIntent();
+        if (intent.hasExtra("ARTICLE")) {
+            mArticle = intent.getParcelableExtra("ARTICLE");
+        }
 
         getActivityComponent().inject(this);
 
@@ -125,7 +134,9 @@ public class PostActivity extends BaseActivity implements PostBaseView, OnMapRea
 
         createPermissionListener();
 
-        checkLocationPermission();
+        if (mArticle == null) {
+            checkLocationPermission();
+        }
     }
 
     @Override
@@ -150,6 +161,17 @@ public class PostActivity extends BaseActivity implements PostBaseView, OnMapRea
         txtTitle.setText(getString(R.string.post));
         imgRight.setVisibility(View.VISIBLE);
         imgRight.setImageResource(R.drawable.ic_search);
+
+        //Update
+        if (mArticle != null) {
+            txtTitle.setText(getString(R.string.update));
+            btnSelectType.setText(mArticle.getArticleType() + " > " + mArticle.getArticleHouseType());
+            editTitle.setText(mArticle.getTitle());
+            editTitle.setSelection(mArticle.getTitle().length());
+            editDescription.setText(mArticle.getDescription());
+
+            address = mArticle.getAddressDetail();
+        }
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -181,14 +203,27 @@ public class PostActivity extends BaseActivity implements PostBaseView, OnMapRea
 
     @OnClick(R.id.btnSubmit)
     public void onSubmitClick() {
-        mPresenter.postArticle(
-                latLng,
-                address,
-                editTitle.getText().toString(),
-                editDescription.getText().toString(),
-                type,
-                subType,
-                bitmaps);
+        if (mArticle == null) { // Add new
+            mPresenter.postArticle(
+                    latLng,
+                    address,
+                    editTitle.getText().toString(),
+                    editDescription.getText().toString(),
+                    type,
+                    subType,
+                    bitmaps);
+        } else { //Update
+            mPresenter.updateArticle(
+                    mArticle.getId(),
+                    latLng,
+                    address,
+                    editTitle.getText().toString(),
+                    editDescription.getText().toString(),
+                    type,
+                    subType,
+                    bitmaps
+            );
+        }
     }
 
     @OnClick(R.id.imgRight)
@@ -217,6 +252,11 @@ public class PostActivity extends BaseActivity implements PostBaseView, OnMapRea
         mGoogleMap.setMyLocationEnabled(true);
         mGoogleMap.setMaxZoomPreference(17.0f);
         mGoogleMap.setOnMapClickListener(this);
+
+        if (mArticle != null) {
+            latLng = new LatLng(mArticle.getLat(), mArticle.getLng());
+            addMarker();
+        }
     }
 
     @Override
@@ -314,6 +354,20 @@ public class PostActivity extends BaseActivity implements PostBaseView, OnMapRea
             marker.remove();
         }
         showSimpleDialog(getString(R.string.success), getString(R.string.message_post_success));
+    }
+
+    @Override
+    public void onUpdateArticleSuccess() {
+        type = null;
+        tempType = null;
+        subType = null;
+        btnSelectType.setText(getString(R.string.post_select_type));
+        btnAddPictures.setText(getString(R.string.post_add_pictures));
+        bitmaps.clear();
+        if (marker != null) {
+            marker.remove();
+        }
+        showSimpleDialog(getString(R.string.success), getString(R.string.message_update_success));
     }
 
     private void checkLocationPermission() {

@@ -29,7 +29,6 @@ import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.single.CompositePermissionListener;
 import com.karumi.dexter.listener.single.PermissionListener;
 import com.karumi.dexter.listener.single.SnackbarOnDeniedPermissionListener;
-import com.stfalcon.frescoimageviewer.ImageViewer;
 import com.techco.common.AppLogger;
 import com.techco.common.CommonUtils;
 import com.techco.common.RegularUtil;
@@ -41,6 +40,7 @@ import com.techco.igotrip.ui.changepassword.ChangePasswordActivity;
 import com.techco.igotrip.ui.dialog.DialogCallback;
 import com.techco.igotrip.ui.dialog.app.AppDialog;
 import com.techco.igotrip.ui.dialog.simplelist.SimpleListDialog;
+import com.techco.igotrip.ui.viewimage.ViewImageActivity;
 import com.techco.igotrip.utils.permission.ErrorPermissionRequestListener;
 import com.techco.igotrip.utils.permission.PermissionResultListener;
 import com.techco.igotrip.utils.permission.SinglePermissionListener;
@@ -311,14 +311,12 @@ public class InfoActivity extends BaseActivity implements InfoBaseView, Permissi
     }
 
     private void viewImage(String url) {
-        List<String> items = new ArrayList<>();
+        ArrayList<String> items = new ArrayList<>();
         items.add(url);
-        new ImageViewer.Builder<>(this, items)
-                .setFormatter(item -> item)
-                .setStartPosition(0)
-                .allowZooming(true)
-                .allowSwipeToDismiss(true)
-                .show();
+        Intent intent = new Intent(this, ViewImageActivity.class);
+        intent.putStringArrayListExtra("IMAGES", items);
+        intent.putExtra("POSITION", 0);
+        startActivity(intent);
     }
 
     private void selectedGender(boolean isMale) {
